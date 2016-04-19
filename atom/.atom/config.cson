@@ -19,6 +19,8 @@
     fontSize: 16
     invisibles: {}
     showIndentGuide: true
+  "exception-reporting":
+    userId: "188e6761-f86f-3622-d2f5-b22a4415300a"
   fonts:
     preview: "@@@@@"
   "git-plus": {}
