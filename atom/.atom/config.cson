@@ -1,0 +1,41 @@
+"*":
+  "autocomplete-plus": {}
+  core:
+    audioBeep: false
+    closeEmptyWindows: false
+    disabledPackages: [
+      "ex-mode"
+      "vim-mode"
+      "markdown-preview"
+      "power-mode"
+    ]
+    projectHome: "/Users/jfchevrette/code"
+    themes: [
+      "nucleus-dark-ui"
+      "monokai"
+    ]
+  editor:
+    fontFamily: "Source Code Pro"
+    fontSize: 16
+    invisibles: {}
+    showIndentGuide: true
+  fonts:
+    preview: "@@@@@"
+  "git-plus": {}
+  "go-plus":
+    goPath: "/Users/jfchevrette/code/go"
+    syntaxCheckOnSave: false
+  linter: {}
+  "markdown-preview-plus":
+    enablePandoc: true
+    pandocPath: "/usr/local/bin/pandoc"
+  "one-dark-ui": {}
+  "todo-show": {}
+  "tool-bar": {}
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  "vim-mode":
+    useClipboardAsDefaultRegister: true
+    wrapLeftRightMotion: true
+  welcome:
+    showOnStartup: false

@@ -3,3 +3,11 @@ vim/.vim/autoload/plug.vim
 vim/.vim/autoload/plug.vim.old
 vim/.vim/plugged
 vim/.vim/tmp
+
+# atom
+atom/.atom/.apm
+atom/.atom/.node-gyp
+atom/.atom/blob-store
+atom/.atom/compile-cache
+atom/.atom/packages
+atom/.atom/storage
