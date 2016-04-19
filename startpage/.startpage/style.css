@@ -1,0 +1,58 @@
+body
+{
+    font-family: Helvetica;
+    font-weight: lighter;
+    background-color: #212121;
+}
+
+h2
+{
+    font-weight: lighter;
+}
+
+.linkSectionsContainer
+{
+    text-align: center;
+    height: 100vh;
+}
+
+.linkSectionContainer
+{
+    display: inline-block;
+    width: 100pt;
+    vertical-align: top;
+    transition-duration: 0.5s;
+    list-style: none;
+    padding-left: 0px;
+    height: 55vh;
+    padding-top: 40vh;
+}
+
+.linkSectionContainer li
+{
+    display: block;
+    padding-top:8px;
+    transition-duration: 0.5s;
+}
+
+.linkSectionContainer.collapsed a
+{
+    pointer-events: none;
+    /*opacity: 0;*/
+}
+
+.linkSectionContainer h2
+{
+    color: #ff9800;
+    transition-duration: 0.5s;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active
+{
+    font-size: 12pt;
+    color: #ff7400;
+    text-decoration:none;
+  }
