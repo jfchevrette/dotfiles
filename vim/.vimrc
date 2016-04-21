@@ -11,6 +11,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'elzr/vim-json'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-nginx'
+Plug 'rust-lang/rust.vim'
 
 " utils
 Plug 'Shougo/unite.vim'
@@ -208,6 +209,9 @@ augroup gocmds
   autocmd FileType go nmap <buffer> <leader>dt <Plug>(go-test-compile)
   autocmd FileType go nmap <buffer> <Leader>d  <Plug>(go-doc)
 augroup END
+
+" ===== rust.vim =====
+let g:rustfmt_autosave = 1
 
 " ===== CtrlP =====
 nnoremap <leader>ff :CtrlP<CR>
