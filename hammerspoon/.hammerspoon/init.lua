@@ -46,6 +46,28 @@ local positions = {
   full        = {x=0, y=0, w=2, h=2},
 }
 
+-- window layout
+local laptopScreen = "Color LCD"
+local matroxScreen = "Display"
+
+-- set up an application watcher and start it
+hs.application.watcher.new(function(name, event, app)
+
+  -- Application launched
+  if event == hs.application.watcher.launched then
+
+    -- Emacs has been launched
+    if string.find(name, "Emacs") then
+      print("Name", name)
+      print("Event", event)
+      print("App", app)
+      hs.grid.set(app:mainWindow(), '2,0 1x2', matroxScreen)
+    end
+
+  end
+
+end):start()
+
 
 ---------------------
 -- Hotkey Bindings --
