@@ -39,6 +39,7 @@ stow
 terraform
 the_silver_searcher
 tig
+tmux
 zsh
 "
 
