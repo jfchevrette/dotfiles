@@ -51,7 +51,7 @@ local laptopScreen = "Color LCD"
 local matroxScreen = "Display"
 
 -- set up an application watcher and start it
-hs.application.watcher.new(function(name, event, app)
+local applicationWatcher = hs.application.watcher.new(function(name, event, app)
 
   -- Application launched
   if event == hs.application.watcher.launched then
@@ -61,12 +61,13 @@ hs.application.watcher.new(function(name, event, app)
       print("Name", name)
       print("Event", event)
       print("App", app)
-      hs.grid.set(app:mainWindow(), '2,0 1x2', matroxScreen)
+      hs.grid.set(app:mainWindow(), '0,0 2x2', matroxScreen)
     end
 
   end
 
-end):start()
+end)
+applicationWatcher:start()
 
 
 ---------------------
