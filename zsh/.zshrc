@@ -35,6 +35,7 @@ alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
 alias vim=nvim
+alias mux="tmuxinator"
 
 # Docker
 dockup() { eval $(docker-machine start $1); }
