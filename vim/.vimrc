@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 " ui/color
 Plug 'tomasr/molokai'
+Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 
@@ -100,7 +101,10 @@ if has('persistent_undo')
 endif
 
 set background=dark
-colorscheme molokai
+"colorscheme molokai
+let g:base16colorspace=256
+colorscheme base16-ocean
+
 
 if has("gui_macvim")
   set guifont=Hack:h16
