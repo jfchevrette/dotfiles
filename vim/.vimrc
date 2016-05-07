@@ -246,6 +246,7 @@ imap <silent><expr> <CR> pumvisible() ? "\<C-y>" : '<Plug>delimitMateCR'
 
 " ===== lightline =====
 let g:lightline = {
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste'],
       \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
@@ -270,6 +271,8 @@ let g:lightline = {
       \   'fugitive': 'LightLineFugitive',
       \   'ctrlpmark': 'CtrlPMark',
       \ },
+		  \ 'separator': { 'left': '', 'right': '' },
+		  \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
 function! LightLineModified()
