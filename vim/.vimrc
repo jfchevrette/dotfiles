@@ -22,14 +22,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
-else
-  Plug 'Shougo/neocomplete.vim'
-  Plug 'Shougo/vimproc' , { 'do': 'make'}
-endif
+Plug 'Shougo/neocomplete.vim'
+Plug 'Shougo/vimproc' , { 'do': 'make'}
 
 call plug#end()
 
@@ -37,25 +31,21 @@ call plug#end()
 " =   Settings   =
 " ================
 
-" I'm still using Vim from time to time. These needs to enabled so we can make
-" Vim usable again (these are default on NeoVim)
-if !has('nvim')
-  set nocompatible
-  filetype off
-  filetype plugin indent on
+set nocompatible
+filetype off
+filetype plugin indent on
 
-  set ttyfast
-  set ttymouse=xterm2
-  set ttyscroll=3
+set ttyfast
+set ttymouse=xterm2
+set ttyscroll=3
 
-  set laststatus=2
-  set encoding=utf-8              " Set default encoding to UTF-8
-  set autoread                    " Automatically reread changed files without asking me anything
-  set autoindent                  
-  set backspace=indent,eol,start  " Makes backspace key more powerful.
-  set incsearch                   " Shows the match while typing
-  set hlsearch                    " Highlight found searches
-endif
+set laststatus=2
+set encoding=utf-8              " Set default encoding to UTF-8
+set autoread                    " Automatically reread changed files without asking me anything
+set autoindent                  
+set backspace=indent,eol,start  " Makes backspace key more powerful.
+set incsearch                   " Shows the match while typing
+set hlsearch                    " Highlight found searches
 
 set noerrorbells             " No beeps
 set number                   " Show line numbers
@@ -91,11 +81,8 @@ set re=1
 syntax sync minlines=256
 set synmaxcol=300
 
-
-if has('persistent_undo')
-  set undofile
-  set undodir=~/.config/nvim/tmp/undo//
-endif
+set undofile
+set undodir=~/.vim/tmp/undo//
 
 set background=dark
 "colorscheme molokai
@@ -126,11 +113,8 @@ endif
 let   mapleader = ","
 let g:mapleader = ","
 
-if has('nvim')
-  nnoremap <leader>a :lclose<CR>
-else
-  nnoremap <leader>a :cclose<CR>
-endif
+" close quickfix window
+nnoremap <leader>a :cclose<CR>
 
 " fast saving
 nnoremap <leader>w :w!<CR>
@@ -166,21 +150,6 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz
-
-" Terminal settings
-if has('nvim')
-  " Leader q to exit terminal mode. Somehow it jumps to the end, so jump to
-  " the top again
-  tnoremap <leader>q <C-\><C-n>gg<cr>
-
-  " Open terminal in vertical, horizontal and new tab
-  nnoremap <leader>tb :below 10sp term://$SHELL<CR>
-
-  " always start terminal in insert mode
-  autocmd BufWinEnter,WinEnter term://* startinsert
-  autocmd BufLeave term://* stopinsert
-endif
-
 
 " ======================
 " =   Plugin configs   =
@@ -370,37 +339,18 @@ let NERDTreeShowHidden=1
 let NERDTreeDirArrows=1
 let NERDTreeMinimalUI=1
 
-" ===== Completion =====
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#ignore_sources = {}
-  let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file']
-  let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
-  let g:deoplete#sources#go#align_class = 1
-
-  " Use partial fuzzy matches like YouCompleteMe
-  call deoplete#custom#set('_', 'matchers', ['matcher_full_fuzzy'])
-  call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
-  call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
-  call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
-else
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-  if !exists('g:neocomplete#sources')
-    let g:neocomplete#sources = {}
-  endif
-  let g:neocomplete#sources._ = ['buffer', 'member', 'tag', 'file', 'dictionary']
-  let g:neocomplete#sources.go = ['omni']
-  call neocomplete#custom#source('_', 'sorters', [])
+" ===== neocomplete =====
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+if !exists('g:neocomplete#sources')
+  let g:neocomplete#sources = {}
 endif
+let g:neocomplete#sources._ = ['buffer', 'member', 'tag', 'file', 'dictionary']
+let g:neocomplete#sources.go = ['omni']
+call neocomplete#custom#source('_', 'sorters', [])
 
 inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-
-if has('conceal')
-  set conceallevel=2 concealcursor=inv
-endif
 
 " ==================== UltiSnips ====================
 function! g:UltiSnips_Complete()

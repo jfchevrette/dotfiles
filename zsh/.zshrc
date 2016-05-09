@@ -34,7 +34,6 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
-alias vim=nvim
 alias mux="tmuxinator"
 
 # Docker
