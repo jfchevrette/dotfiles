@@ -104,8 +104,8 @@ hs.hotkey.bind(mod, 'PAD+', function() moveWindowToNextScreen() end)
 hs.hotkey.bind(mod, 'PAD=', function() hs.grid.toggleShow() end)
 hs.hotkey.bind(mod, 'G', function() hs.grid.toggleShow() end)
 
-hs.hotkey.bind(mod, 'PAD*', function() hs.hints.windowHints() end)
-hs.hotkey.bind(mod, 'H', function() hs.hints.windowHints() end)
+hs.hotkey.bind(mod, 'PAD*', function() hs.hints.windowHints(hs.window.allWindows(), nil, true) end)
+hs.hotkey.bind(mod, 'H', function() hs.hints.windowHints(hs.window.allWindows(), nil, true) end)
 
 hs.hotkey.bind(mod, 'F19', function() hs.timer.doAfter(0.5, hs.caffeinate.startScreensaver):start() end)
 
