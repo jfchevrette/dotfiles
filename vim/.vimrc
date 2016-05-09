@@ -20,7 +20,7 @@ Plug 'fatih/vim-nginx'
 
 " utils
 Plug 'godlygeek/tabular'
-Plug 'Raimondi/delimitMate'
+Plug 'jiangmiao/auto-pairs'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -204,15 +204,6 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ftv'}
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
-
-" ===== delimitmate =====
-let g:delimitMate_expand_cr = 1   
-let g:delimitMate_expand_space = 1    
-let g:delimitMate_smart_quotes = 1    
-let g:delimitMate_expand_inside_quotes = 0    
-let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
-
-imap <silent><expr> <CR> pumvisible() ? "\<C-y>" : '<Plug>delimitMateCR'
 
 " ===== lightline =====
 let g:lightline = {
