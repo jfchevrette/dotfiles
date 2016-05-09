@@ -93,7 +93,6 @@ set background=dark
 let g:base16colorspace=256
 colorscheme base16-ocean
 
-
 if has("gui_macvim")
   set guifont=Hack:h16
   set clipboard+=unnamed
@@ -249,7 +248,6 @@ function! g:UltiSnips_Reverse()
   return ""
 endfunction
 
-
 if !exists("g:UltiSnipsJumpForwardTrigger")
   let g:UltiSnipsJumpForwardTrigger = "<tab>"
 endif
@@ -260,11 +258,6 @@ endif
 
 au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-
-
-" ==================== Other plugins & settings ====================
-nmap - <Plug>(choosewin)
-let g:choosewin_overlay_enable = 1
 
 
 " ====================
