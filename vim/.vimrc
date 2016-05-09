@@ -19,7 +19,6 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-nginx'
 
 " utils
-Plug 'Shougo/unite.vim'
 Plug 'godlygeek/tabular'
 Plug 'Raimondi/delimitMate'
 Plug 'ctrlpvim/ctrlp.vim'
