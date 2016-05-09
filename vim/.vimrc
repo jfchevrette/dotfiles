@@ -184,9 +184,6 @@ augroup gocmds
   autocmd FileType go nmap <buffer> <Leader>d  <Plug>(go-doc)
 augroup END
 
-" ===== rust.vim =====
-let g:rustfmt_autosave = 1
-
 " ===== CtrlP =====
 nnoremap <leader>ff :CtrlP<CR>
 nnoremap <leader>fb :CtrlPBuffer<CR>
