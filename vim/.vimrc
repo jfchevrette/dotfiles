@@ -7,8 +7,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " ui/color
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'chriskempson/base16-vim'
-Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
 
 " syntax/filetypes
@@ -66,7 +67,6 @@ set fileformats=unix,dos,mac " Prefer Unix over Windows over OS9 formats
 set noshowmatch              " Do not show matching brackets
 set nocursorcolumn           " Do not show the column the cursor is on
 set cursorline               " Dont show the line the cursor is on
-set noshowmode               " Do not show the mode. We show it using lightline
 set ignorecase               " Ignore case when searching, typing commands, completing, etc...
 set smartcase                " ...but not if it begins with upper case
 set completeopt=menu,menuone " Autocomplete menu on insert mode
@@ -159,6 +159,10 @@ nnoremap <C-u> <C-u>zz
 " =   Plugin configs   =
 " ======================
 
+" ===== vim-airline =====
+let g:airline_powerline_fonts = 1
+let g:airline_theme='base16'
+
 " ===== vim-go =====
 let g:go_fmt_fail_silently = 0
 let g:go_fmt_command = "goimports"
@@ -187,6 +191,7 @@ augroup END
 " ===== CtrlP =====
 nnoremap <leader>ff :CtrlP<CR>
 nnoremap <leader>fb :CtrlPBuffer<CR>
+nnoremap <leader>fm :CtrlPMixed<CR>
 
 let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_working_path_mode = 'ra'
@@ -201,124 +206,6 @@ let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ftv'}
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
-
-" ===== lightline =====
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste'],
-      \             [ 'filename', 'modified', 'ctrlpmark' ],
-      \             [ 'go'] ],
-      \   'right': [ [ 'lineinfo' ], 
-      \              [ 'percent' ], 
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'inactive': {
-      \   'left': [ ['filename', 'go'] ],
-      \ },
-      \ 'component_function': {
-      \   'lineinfo': 'LightLineInfo',
-      \   'percent': 'LightLinePercent',
-      \   'modified': 'LightLineModified',
-      \   'filename': 'LightLineFilename',
-      \   'go': 'LightLineGo',
-      \   'fileformat': 'LightLineFileformat',
-      \   'filetype': 'LightLineFiletype',
-      \   'fileencoding': 'LightLineFileencoding',
-      \   'mode': 'LightLineMode',
-      \   'ctrlpmark': 'CtrlPMark',
-      \ },
-		  \ 'separator': { 'left': '', 'right': '' },
-		  \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
-
-function! LightLineModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightLineFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! LightLineInfo()
-  return winwidth(0) > 60 ? printf("%3d:%-2d", line('.'), col('.')) : ''
-endfunction
-
-function! LightLinePercent()
-  return &ft =~? 'vimfiler' ? '' : (100 * line('.') / line('$')) . '%'
-endfunction
-
-function! LightLineGo()
-  " return ''
-  return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
-endfunction
-
-function! LightLineMode()
-  let fname = expand('%:t')
-  return fname == 'ControlP' ? 'CtrlP' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-function! LightLineFilename()
-  let fname = expand('%:t')
-  if mode() == 't'
-    return ''
-  endif
-
-  return fname == 'ControlP' ? g:lightline.ctrlp_item :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]')
-endfunction
-
-function! LightLineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP'
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
-
-let g:ctrlp_status_func = {
-      \ 'main': 'CtrlPStatusFunc_1',
-      \ 'prog': 'CtrlPStatusFunc_2',
-      \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
-endfunction
-
 
 " ===== NERDTree =====
 noremap <Leader>n :NERDTreeToggle<cr>
