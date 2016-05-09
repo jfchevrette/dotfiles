@@ -1,7 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
 " ui/color
-Plug 'tomasr/molokai'
 Plug 'chriskempson/base16-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'scrooloose/nerdtree'
@@ -12,7 +11,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'elzr/vim-json'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-nginx'
-Plug 'rust-lang/rust.vim'
 
 " utils
 Plug 'Shougo/unite.vim'
@@ -24,7 +22,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips'
-Plug 't9md/vim-choosewin'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim'
