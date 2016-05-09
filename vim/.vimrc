@@ -24,7 +24,6 @@ Plug 'godlygeek/tabular'
 Plug 'Raimondi/delimitMate'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips'
@@ -221,7 +220,7 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste'],
-      \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
+      \             [ 'filename', 'modified', 'ctrlpmark' ],
       \             [ 'go'] ],
       \   'right': [ [ 'lineinfo' ], 
       \              [ 'percent' ], 
@@ -240,7 +239,6 @@ let g:lightline = {
       \   'filetype': 'LightLineFiletype',
       \   'fileencoding': 'LightLineFileencoding',
       \   'mode': 'LightLineMode',
-      \   'fugitive': 'LightLineFugitive',
       \   'ctrlpmark': 'CtrlPMark',
       \ },
 		  \ 'separator': { 'left': '', 'right': '' },
@@ -277,10 +275,6 @@ endfunction
 
 function! LightLinePercent()
   return &ft =~? 'vimfiler' ? '' : (100 * line('.') / line('$')) . '%'
-endfunction
-
-function! LightLineFugitive()
-  return exists('*fugitive#head') ? fugitive#head() : ''
 endfunction
 
 function! LightLineGo()
