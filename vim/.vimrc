@@ -93,8 +93,8 @@ set background=dark
 let g:base16colorspace=256
 colorscheme base16-ocean
 
-if has("gui_macvim")
-  set guifont=Hack:h16
+if has("gui_running")
+  set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
   set clipboard+=unnamed
   set vb t_vb=
   set guioptions-=m " no menu
