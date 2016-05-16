@@ -37,14 +37,18 @@ alias h="history"
 alias mux="tmuxinator"
 
 # Docker
-dockup() { eval $(docker-machine start $1); }
-dockenv() { eval $(docker-machine env $1); }
-dockenv default > /dev/null
+if hash docker-machine 2>/dev/null; then
+  dockup() { eval $(docker-machine start $1); }
+  dockenv() { eval $(docker-machine env $1); }
+  dockenv default > /dev/null
+fi
 
 # chruby
-source /usr/local/share/chruby/chruby.sh
-source /usr/local/share/chruby/auto.sh
-chruby ruby-2.3.0
+if hash chruby 2>/dev/null; then
+  source /usr/local/share/chruby/chruby.sh
+  source /usr/local/share/chruby/auto.sh
+  chruby ruby-2.3.0
+fi
 
 # Private stuff
 if [[ -e $HOME/.zshrc-private ]]; then
