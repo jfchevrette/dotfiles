@@ -20,6 +20,7 @@ Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-nginx'
 
 " utils
+Plug 'justinmk/vim-sneak'
 Plug 'godlygeek/tabular'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -132,6 +133,8 @@ nnoremap <C-J> :call WinMove('j')<CR>
 nnoremap <C-K> :call WinMove('k')<CR>
 nnoremap <C-L> :call WinMove('l')<CR>
 nnoremap <C-X> :hide<CR>
+nnoremap <leader>x :hide<CR>
+nnoremap <leader>o :only<CR>
 function! WinMove(key)
   let t:curwin = winnr()
   exec "wincmd ".a:key
@@ -157,6 +160,9 @@ nnoremap <C-u> <C-u>zz
 " ======================
 " =   Plugin configs   =
 " ======================
+
+" ===== vim-sneak =====
+let g:sneak#streak = 1
 
 " ===== vim-airline =====
 let g:airline_powerline_fonts = 1
@@ -291,4 +297,3 @@ augroup misc_stuff
   autocmd FileType ruby setlocal   et ts=2 sw=2
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
 augroup END
-
