@@ -48,8 +48,10 @@ atom
 brogue
 dungeon-crawl-stone-soup-console
 dungeon-crawl-stone-soup-tiles
+gpgtools
 steam
 vagrant
+yubikey-neo-manager
 "
 
 # Check if homebrew is installed, otherwise install it
