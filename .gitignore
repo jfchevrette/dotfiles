@@ -18,4 +18,5 @@ gnupg/.gnupg/secring.gpg
 gnupg/.gnupg/trustdb.gpg
 gnupg/.gnupg/S.gpg-agent
 gnupg/.gnupg/private-keys-v1.d
+gnupg/.gnupg/random_seed
 
