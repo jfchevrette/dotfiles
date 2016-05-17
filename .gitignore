@@ -11,3 +11,11 @@ atom/.atom/blob-store
 atom/.atom/compile-cache
 atom/.atom/packages
 atom/.atom/storage
+
+# gnupg
+gnupg/.gnupg/pubring.gpg
+gnupg/.gnupg/secring.gpg
+gnupg/.gnupg/trustdb.gpg
+gnupg/.gnupg/S.gpg-agent
+gnupg/.gnupg/private-keys-v1.d
+
