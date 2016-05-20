@@ -12,3 +12,8 @@ atom/.atom/compile-cache
 atom/.atom/packages
 atom/.atom/storage
 
+# emacs
+emacs/.emacs.d/auto-save-list
+emacs/.emacs.d/elpa
+emacs/.emacs.d/eshell
+emacs/.emacs.d/savehist
