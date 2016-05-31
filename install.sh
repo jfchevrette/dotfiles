@@ -5,7 +5,6 @@ android-platform-tools
 ansible
 bash
 bash-completion
-brew-cask
 chruby
 coreutils
 curl
