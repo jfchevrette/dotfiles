@@ -26,7 +26,6 @@ mtr
 ncftp
 neovim/neovim/neovim
 nmap
-openssh
 pstree
 python
 python3
