@@ -25,7 +25,6 @@ macvim
 mtr
 ncftp
 neovim/neovim/neovim
-ngrok
 nmap
 openssh
 pstree
@@ -48,6 +47,7 @@ atom
 brogue
 dungeon-crawl-stone-soup-console
 dungeon-crawl-stone-soup-tiles
+ngrok
 steam
 vagrant
 "
