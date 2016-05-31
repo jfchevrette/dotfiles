@@ -41,6 +41,7 @@ zsh
 "
 
 CASKAPPS="
+alfred
 atom
 brogue
 dungeon-crawl-stone-soup-console
