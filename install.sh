@@ -29,7 +29,6 @@ nmap
 pstree
 python
 python3
-rsync
 ruby-install
 siege
 ssh-copy-id
