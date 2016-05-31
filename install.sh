@@ -24,7 +24,7 @@ luajit
 macvim
 mtr
 ncftp
-neovim
+neovim/neovim/neovim
 ngrok
 nmap
 openssh
