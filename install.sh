@@ -45,6 +45,7 @@ atom
 brogue
 dungeon-crawl-stone-soup-console
 dungeon-crawl-stone-soup-tiles
+google-chrome
 ngrok
 steam
 vagrant
