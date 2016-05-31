@@ -59,3 +59,7 @@ fi
 # Install Homebrew apps and Cask apps
 brew install $BREWAPPS 2> /dev/null
 brew cask install $CASKAPPS 2> /dev/null
+
+# Install fonts
+brew tap caskroom/fonts
+brew cask install font-source-code-pro
