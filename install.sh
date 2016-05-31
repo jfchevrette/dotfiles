@@ -22,7 +22,6 @@ lua
 luajit
 mtr
 ncftp
-neovim/neovim/neovim
 nmap
 pstree
 python
