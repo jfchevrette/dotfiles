@@ -34,7 +34,7 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
-alias mux="tmuxinator"
+alias emacs='open -a /Applications/Emacs.app $1'
 
 # Docker
 if hash docker-machine 2>/dev/null; then
