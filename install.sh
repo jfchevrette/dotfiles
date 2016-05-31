@@ -45,6 +45,7 @@ brogue
 dungeon-crawl-stone-soup-console
 dungeon-crawl-stone-soup-tiles
 google-chrome
+hammerspoon
 ngrok
 steam
 vagrant
