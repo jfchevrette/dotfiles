@@ -21,7 +21,6 @@ jq
 keybase
 lua
 luajit
-macvim
 mtr
 ncftp
 neovim/neovim/neovim
