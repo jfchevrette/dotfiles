@@ -1,6 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="dracula"
+ZSH_THEME="robbyrussell"
 
 ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
@@ -35,13 +35,6 @@ alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
 alias emacs='open -a /Applications/Emacs.app $1'
-
-# Docker
-if hash docker-machine 2>/dev/null; then
-  dockup() { eval $(docker-machine start $1); }
-  dockenv() { eval $(docker-machine env $1); }
-  dockenv default > /dev/null
-fi
 
 # chruby
 if hash chruby 2>/dev/null; then
