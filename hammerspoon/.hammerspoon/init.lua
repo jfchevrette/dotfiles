@@ -10,9 +10,9 @@ hs.window.animationDuration = 0.1
 local mod = {'cmd', 'alt', 'ctrl'}
 
 -- grid setup
-hs.grid.setGrid('2x2', '1680x1050')
 hs.grid.setGrid('2x2', '1440x900')
-hs.grid.setGrid('4x2', '3840x1080')
+hs.grid.setGrid('2x2', '1920x1080')
+-- hs.grid.setGrid('4x2', '3840x1080')
 hs.grid.MARGINX = 5
 hs.grid.MARGINY = 5
 
@@ -98,8 +98,8 @@ hs.hotkey.bind(mod, 'PADENTER', function() moveWindowTo('full') end)
 
 hs.hotkey.bind(mod, 'PAD5',     function() moveWindowTo('center') end)
 
-hs.hotkey.bind(mod, 'PAD-', function() moveWindowToPreviousScreen() end)
-hs.hotkey.bind(mod, 'PAD+', function() moveWindowToNextScreen() end)
+hs.hotkey.bind(mod, 'PAD-', function() hs.window.focusedWindow():moveOneScreenWest(true, false) end)
+hs.hotkey.bind(mod, 'PAD+', function() hs.window.focusedWindow():moveOneScreenEast(true, false) end)
 
 hs.hotkey.bind(mod, 'PAD=', function() hs.grid.toggleShow() end)
 hs.hotkey.bind(mod, 'G', function() hs.grid.toggleShow() end)
@@ -160,7 +160,7 @@ end
 function moveWindowToPreviousScreen()
   local win = hs.window.focusedWindow()
   if not win then return end
-
+  
   local winframe = win:frame()
   local newframe = winframe
 
