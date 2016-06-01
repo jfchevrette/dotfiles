@@ -47,6 +47,7 @@ emacs
 google-chrome
 hammerspoon
 ngrok
+slack
 steam
 vagrant
 "
