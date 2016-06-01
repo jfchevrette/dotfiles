@@ -45,6 +45,7 @@ dungeon-crawl-stone-soup-console
 dungeon-crawl-stone-soup-tiles
 emacs
 google-chrome
+google-drive
 hammerspoon
 ngrok
 slack
