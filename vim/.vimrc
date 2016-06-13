@@ -9,7 +9,7 @@ endif
 " ui/color
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
+Plug 'dracula/vim'
 Plug 'scrooloose/nerdtree'
 
 " syntax/filetypes
@@ -90,9 +90,7 @@ set undofile
 set undodir=~/.vim/tmp/undo//
 
 set background=dark
-"colorscheme molokai
-let g:base16colorspace=256
-colorscheme base16-ocean
+colorscheme dracula
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
