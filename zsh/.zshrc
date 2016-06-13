@@ -37,6 +37,10 @@ alias h="history"
 alias emacs='open -a /Applications/Emacs.app $1'
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 
+# Rust/cargo
+export PATH=$HOME/.cargo/bin:$PATH
+export RUST_SRC_PATH=$HOME/code/rust/src
+
 # chruby
 if hash chruby 2>/dev/null; then
   source /usr/local/share/chruby/chruby.sh
