@@ -12,14 +12,6 @@ zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_funio
 
 source $ZSH/oh-my-zsh.sh
 
-# Exports
-export LANG=en_US.UTF-8
-export EDITOR='vim'
-export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
-export MANPATH="/usr/local/man:$MANPATH"
-export GOPATH="$HOME/code/go"
-export PATH="$GOPATH/bin:$PATH"
-
 # Generic Colourizer (https://github.com/garabik/grc)
 if [[ -f "/usr/local/etc/grc.bashrc" ]]; then
     source "/usr/local/etc/grc.bashrc"
@@ -36,10 +28,6 @@ alias g="git"
 alias h="history"
 alias emacs='open -a /Applications/Emacs.app $1'
 alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
-
-# Rust/cargo
-export PATH=$HOME/.cargo/bin:$PATH
-export RUST_SRC_PATH=$HOME/code/rust/src
 
 # chruby
 if hash chruby 2>/dev/null; then
