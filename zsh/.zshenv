@@ -4,7 +4,7 @@ export PATH="$HOME/.bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/
 export MANPATH="/usr/local/man:$MANPATH"
 
 # Go
-export GOPATH="$HOME/code/go"
+export GOPATH=$HOME
 export PATH="$GOPATH/bin:$PATH"
 
 # Rust/cargo
