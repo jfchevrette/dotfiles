@@ -163,7 +163,7 @@ let g:sneak#streak = 1
 
 " ===== vim-airline =====
 let g:airline_powerline_fonts = 1
-let g:airline_theme='base16'
+let g:airline_theme='dracula'
 
 " ===== vim-go =====
 let g:go_fmt_fail_silently = 0
