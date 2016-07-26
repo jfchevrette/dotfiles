@@ -7,8 +7,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " ui/color
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+Plug 'felixjung/vim-base16-lightline'
 Plug 'dracula/vim'
 Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/nerdtree'
@@ -27,6 +27,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc' , { 'do': 'make'}
@@ -161,12 +162,111 @@ nnoremap <C-u> <C-u>zz
 " =   Plugin configs   =
 " ======================
 
+" ===== lightline =====
+let g:lightline = {
+  \ 'colorscheme': 'base16_ocean',
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
+  \   'right': [ [ 'syntastic', 'percent', 'lineinfo' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \ },
+  \ 'component': {
+  \   'readline': '%{&readonly?"x":""}'
+  \ },
+  \ 'component_function': {
+  \   'fugitive': 'LightLineFugitive',
+  \   'filename': 'LightLineFilename',
+  \   'fileformat': 'LightLineFileformat',
+  \   'filetype': 'LightLineFiletype',
+  \   'fileencoding': 'LightLineFileencoding',
+  \   'mode': 'LightLineMode',
+  \ },
+  \ 'component_expand': {
+  \   'syntastic': 'SyntasticStatuslineFlag',
+  \ },
+  \ 'component_type': {
+  \   'syntastic': 'error',
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '|', 'right': '|' }
+\ }
+
+function! LightLineModified()
+  return &ft =~ 'help' ? '' : &modified ? '±' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+  return &ft !~? 'help' && &readonly ? '' : ''
+endfunction
+
+function! LightLineFilename()
+  let fname = expand('%:t')
+  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? '' :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ &ft == 'unite' ? unite#get_status_string() :
+        \ &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ' '
+      let _ = fugitive#head()
+      return strlen(_) ? mark._ : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname == '__Gundo__' ? 'Gundo' :
+        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ &ft == 'unite' ? 'Unite' :
+        \ &ft == 'vimfiler' ? 'VimFiler' :
+        \ &ft == 'vimshell' ? 'VimShell' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
+
 " ===== vim-sneak =====
 let g:sneak#streak = 1
-
-" ===== vim-airline =====
-let g:airline_powerline_fonts = 1
-let g:airline_theme='base16_tomorrow'
 
 " ===== vim-go =====
 let g:go_fmt_fail_silently = 0
