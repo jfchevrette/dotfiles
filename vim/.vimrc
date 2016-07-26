@@ -10,6 +10,7 @@ endif
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'dracula/vim'
+Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/nerdtree'
 
 " syntax/filetypes
@@ -88,8 +89,10 @@ set synmaxcol=300
 set undofile
 set undodir=~/.vim/tmp/undo//
 
-set background=dark
-colorscheme dracula
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
@@ -163,7 +166,7 @@ let g:sneak#streak = 1
 
 " ===== vim-airline =====
 let g:airline_powerline_fonts = 1
-let g:airline_theme='dracula'
+let g:airline_theme='base16_tomorrow'
 
 " ===== vim-go =====
 let g:go_fmt_fail_silently = 0
