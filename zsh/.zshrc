@@ -26,8 +26,6 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
-alias emacs='open -a /Applications/Emacs.app $1'
-alias vim="/Applications/MacVim.app/Contents/MacOS/Vim"
 
 # chruby
 if hash chruby 2>/dev/null; then
