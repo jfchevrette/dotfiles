@@ -29,6 +29,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'SirVer/ultisnips'
 Plug 'Shougo/neocomplete.vim'
 Plug 'Shougo/vimproc' , { 'do': 'make'}
 
@@ -119,6 +120,8 @@ let   mapleader = ","
 let g:mapleader = ","
 
 " close quickfix window
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
 " fast saving
@@ -200,7 +203,7 @@ endfunction
 
 function! LightLineFilename()
   let fname = expand('%:t')
-  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
         \ fname == '__Tagbar__' ? '' :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
@@ -269,9 +272,10 @@ endfunction
 let g:sneak#streak = 1
 
 " ===== vim-go =====
-let g:go_fmt_fail_silently = 0
+let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
 let g:go_term_enabled = 1
 let g:go_term_height = 10
 let g:go_highlight_space_tab_error = 1
@@ -280,16 +284,26 @@ let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_operators = 1
 
+
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
 augroup gocmds
   au!
   autocmd FileType go nmap <buffer> <Leader>s  <Plug>(go-def-split)
   autocmd FileType go nmap <buffer> <Leader>v  <Plug>(go-def-vertical)
   autocmd FileType go nmap <buffer> <Leader>i  <Plug>(go-info)
   autocmd FileType go nmap <buffer> <Leader>l  <Plug>(go-metalinter)
-  autocmd FileType go nmap <buffer> <leader>r  <Plug>(go-run-split)
-  autocmd FileType go nmap <buffer> <leader>b  <Plug>(go-build)
+  autocmd FileType go nmap <buffer> <leader>r  <Plug>(go-run)
+  autocmd FileType go nmap <buffer> <leader>b  :<C-u>call <SID>build_go_files()<CR>
+  autocmd FileType go nmap <buffer> <leader>c  <Plug>(go-coverage-toggle)
   autocmd FileType go nmap <buffer> <leader>t  <Plug>(go-test)
-  autocmd FileType go nmap <buffer> <leader>dt <Plug>(go-test-compile)
   autocmd FileType go nmap <buffer> <Leader>d  <Plug>(go-doc)
 augroup END
 
