@@ -8,9 +8,10 @@ endif
 
 " ui/color
 Plug 'itchyny/lightline.vim'
+Plug 'felixjung/vim-base16-lightline'
 Plug 'dracula/vim'
+Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/nerdtree'
-Plug 'morhetz/gruvbox'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
@@ -91,8 +92,10 @@ set synmaxcol=300
 set undofile
 set undodir=~/.vim/tmp/undo//
 
-let g:gruvbox_italic=1
-colorscheme gruvbox
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
@@ -165,7 +168,7 @@ nnoremap <C-u> <C-u>zz
 
 " ===== lightline =====
 let g:lightline = {
-  \ 'colorscheme': 'gruvbox',
+  \ 'colorscheme': 'base16_ocean',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
   \   'right': [ [ 'syntastic', 'percent', 'lineinfo' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
