@@ -8,6 +8,5 @@ export GOPATH=$HOME
 export PATH="$GOPATH/bin:$PATH"
 
 # Rust/cargo
-export RUST_SRC_PATH=$HOME/code/rust/src
+export RUST_SRC_PATH=$HOME/src/rust/src
 export PATH=$HOME/.cargo/bin:$PATH
-

@@ -18,6 +18,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'elzr/vim-json'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-nginx'
+Plug 'rust-lang/rust.vim'
 
 " utils
 Plug 'justinmk/vim-sneak'
