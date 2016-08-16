@@ -63,8 +63,11 @@ set fileencodings=utf-8
 set autoread                    " Automatically reread changed files without asking me anything
 set autoindent                  
 set backspace=indent,eol,start  " Makes backspace key more powerful.
-set incsearch                   " Shows the match while typing
+
 set hlsearch                    " Highlight found searches
+set incsearch                   " Shows the match while typing
+set ignorecase               " Ignore case when searching, typing commands, completing, etc...
+set smartcase                " ...but not if it begins with upper case
 
 set noerrorbells             " No beeps
 set number                   " Show line numbers
@@ -81,8 +84,6 @@ set fileformats=unix,dos,mac " Prefer Unix over Windows over OS9 formats
 set noshowmatch              " Do not show matching brackets
 set nocursorcolumn           " Do not show the column the cursor is on
 set cursorline               " Dont show the line the cursor is on
-set ignorecase               " Ignore case when searching, typing commands, completing, etc...
-set smartcase                " ...but not if it begins with upper case
 set completeopt=menu,menuone " Autocomplete menu on insert mode
 set pumheight=10             " Completion indow max items
 
