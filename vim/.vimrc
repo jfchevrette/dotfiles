@@ -58,6 +58,8 @@ set ttyscroll=3
 
 set laststatus=2
 set encoding=utf-8              " Set default encoding to UTF-8
+set fileencoding=utf-8
+set fileencodings=utf-8
 set autoread                    " Automatically reread changed files without asking me anything
 set autoindent                  
 set backspace=indent,eol,start  " Makes backspace key more powerful.
