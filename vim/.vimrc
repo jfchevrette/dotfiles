@@ -168,7 +168,7 @@ nnoremap <C-u> <C-u>zz
 
 " ===== lightline =====
 let g:lightline = {
-  \ 'colorscheme': 'base16_ocean',
+  \ 'colorscheme': 'base16_oceanicnext',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
   \   'right': [ [ 'syntastic', 'percent', 'lineinfo' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
