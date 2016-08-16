@@ -74,8 +74,10 @@ set number                   " Show line numbers
 set relativenumber
 set showcmd                  " Show me what I'm typing
 set showmode                 " Show current mode.
-set noswapfile               " Don't use swapfile
+
 set nobackup                 " Don't create annoying backup files
+set noswapfile               " Don't use swapfile
+
 set splitright               " Split vertical to the right
 set splitbelow               " split horizontal down
 set autowrite                " Automatically save before switching buffer
