@@ -234,7 +234,7 @@ endfunction
 function! LightLineFugitive()
   try
     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = ' '
+      let mark = '⎇ '
       let _ = fugitive#head()
       return strlen(_) ? mark._ : ''
     endif
