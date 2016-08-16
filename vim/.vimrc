@@ -86,10 +86,10 @@ set smartcase                " ...but not if it begins with upper case
 set completeopt=menu,menuone " Autocomplete menu on insert mode
 set pumheight=10             " Completion indow max items
 
-set expandtab
 set tabstop=2
+set softtabstop=0
 set shiftwidth=2
-set softtabstop=2
+set expandtab
 
 set clipboard^=unnamed
 set clipboard^=unnamedplus
