@@ -1,11 +1,14 @@
-call plug#begin('~/.vim/plugged')
-
+" Bootstrap vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
+  echo "Installing vim-plug..."
+  echo ""
   silent !mkdir -p ~/.vim/autoload
   silent !curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  let g:just_installed_vimplug = "yes"
   autocmd VimEnter * PlugInstall
 endif
 
+call plug#begin('~/.vim/plugged')
 " ui/color
 Plug 'itchyny/lightline.vim'
 Plug 'felixjung/vim-base16-lightline'
@@ -32,9 +35,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips'
 Plug 'Shougo/neocomplete.vim'
-Plug 'Shougo/vimproc' , { 'do': 'make'}
 
-call plug#end()
+let g:make = 'gmake'
+if system('uname -o') =~ '^GNU/'
+  let g:make = 'make'
+endif
+Plug 'Shougo/vimproc' , { 'do': g:make}
+
+call plug#end() 
 
 " ================
 " =   Settings   =
