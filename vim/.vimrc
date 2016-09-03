@@ -12,7 +12,6 @@ call plug#begin('~/.vim/plugged')
 " ui/color
 Plug 'itchyny/lightline.vim'
 Plug 'felixjung/vim-base16-lightline'
-Plug 'dracula/vim'
 Plug 'chriskempson/base16-vim'
 Plug 'scrooloose/nerdtree'
 
@@ -22,12 +21,8 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'elzr/vim-json'
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'fatih/vim-nginx'
-Plug 'rust-lang/rust.vim'
 
 " utils
-Plug 'justinmk/vim-sneak'
-Plug 'godlygeek/tabular'
-Plug 'jiangmiao/auto-pairs'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -35,12 +30,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips'
 Plug 'Shougo/neocomplete.vim'
-
-let g:make = 'gmake'
-if system('uname -o') =~ '^GNU/'
-  let g:make = 'make'
-endif
-Plug 'Shougo/vimproc' , { 'do': g:make}
 
 call plug#end() 
 
