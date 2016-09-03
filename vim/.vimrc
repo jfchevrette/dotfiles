@@ -13,23 +13,31 @@ call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'felixjung/vim-base16-lightline'
 Plug 'chriskempson/base16-vim'
-Plug 'scrooloose/nerdtree'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
 Plug 'vim-ruby/vim-ruby'
-Plug 'elzr/vim-json'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'fatih/vim-nginx'
+Plug 'elzr/vim-json', {'for': 'json'}
+Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
+Plug 'fatih/vim-nginx', {'for': 'nginx'}
 
 " utils
+Plug 'Raimondi/delimitMate'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips'
-Plug 'Shougo/neocomplete.vim'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'zchee/deoplete-go', { 'do': 'make'}
+else
+  Plug 'Shougo/neocomplete.vim'
+endif
 
 call plug#end() 
 
