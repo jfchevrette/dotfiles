@@ -183,61 +183,41 @@ nnoremap <C-u> <C-u>zz
 let g:lightline = {
   \ 'colorscheme': 'base16_oceanicnext',
   \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ],
-  \   'right': [ [ 'syntastic', 'percent', 'lineinfo' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
+  \             [ 'go' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \              [ 'percent' ],
+  \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
   \ },
-  \ 'component': {
-  \   'readline': '%{&readonly?"x":""}'
+  \ 'inactive': {
+  \   'left': [ [ 'go' ] ],
   \ },
   \ 'component_function': {
-  \   'fugitive': 'LightLineFugitive',
+  \   'lineinfo': 'LightLineInfo',
+  \   'percent': 'LightLinePercent',
+  \   'modified': 'LightLineModified',
   \   'filename': 'LightLineFilename',
+  \   'go': 'LightLineGo',
   \   'fileformat': 'LightLineFileformat',
   \   'filetype': 'LightLineFiletype',
   \   'fileencoding': 'LightLineFileencoding',
   \   'mode': 'LightLineMode',
-  \ },
-  \ 'component_expand': {
-  \   'syntastic': 'SyntasticStatuslineFlag',
-  \ },
-  \ 'component_type': {
-  \   'syntastic': 'error',
-  \ },
-  \ 'separator': { 'left': '', 'right': '' },
-  \ 'subseparator': { 'left': '|', 'right': '|' }
+  \   'fugitive': 'LightLineFugitive',
+  \   'ctrlpmark': 'CtrlPMark',
+  \  },
 \ }
 
 function! LightLineModified()
-  return &ft =~ 'help' ? '' : &modified ? '±' : &modifiable ? '' : '-'
-endfunction
-
-function! LightLineReadonly()
-  return &ft !~? 'help' && &readonly ? '' : ''
-endfunction
-
-function! LightLineFilename()
-  let fname = expand('%:t')
-  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? '' :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
-function! LightLineFugitive()
-  try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-      let mark = '⎇ '
-      let _ = fugitive#head()
-      return strlen(_) ? mark._ : ''
-    endif
-  catch
-  endtry
-  return ''
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
 endfunction
 
 function! LightLineFileformat()
@@ -252,34 +232,71 @@ function! LightLineFileencoding()
   return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
 endfunction
 
+function! LightLineInfo()
+  return winwidth(0) > 60 ? printf("%3d:%-2d", line('.'), col('.')) : ''
+endfunction
+
+function! LightLinePercent()
+  return &ft =~? 'vimfiler' ? '' : (100 * line('.') / line('$')) . '%'
+endfunction
+
+function! LightLineFugitive()
+  return exists('*fugitive#head') ? fugitive#head() : ''
+endfunction
+
+function! LightLineGo()
+  " return ''
+  return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
+endfunction
+
 function! LightLineMode()
   let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
-        \ fname == '__Gundo__' ? 'Gundo' :
-        \ fname == '__Gundo_Preview__' ? 'Gundo Preview' :
-        \ fname =~ 'NERD_tree' ? 'NERDTree' :
-        \ &ft == 'unite' ? 'Unite' :
+  return fname == 'ControlP' ? 'CtrlP' :
         \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ &ft == 'vimshell' ? 'VimShell' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-let g:tagbar_status_func = 'TagbarStatusFunc'
+function! LightLineFilename()
+  let fname = expand('%:t')
+  if mode() == 't'
+    return ''
+  endif
 
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-    let g:lightline.fname = a:fname
+  return fname == 'ControlP' ? g:lightline.ctrlp_item :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]')
+endfunction
+
+function! LightLineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! CtrlPMark()
+  if expand('%:t') =~ 'ControlP'
+    call lightline#link('iR'[g:lightline.ctrlp_regex])
+    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+          \ , g:lightline.ctrlp_next], 0)
+  else
+    return ''
+  endif
+endfunction
+
+let g:ctrlp_status_func = {
+      \ 'main': 'CtrlPStatusFunc_1',
+      \ 'prog': 'CtrlPStatusFunc_2',
+      \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
   return lightline#statusline(0)
 endfunction
 
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
-augroup END
-
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
 endfunction
 
 " ===== vim-sneak =====
@@ -344,18 +361,72 @@ let NERDTreeShowHidden=1
 let NERDTreeDirArrows=1
 let NERDTreeMinimalUI=1
 
-" ===== neocomplete =====
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-if !exists('g:neocomplete#sources')
-  let g:neocomplete#sources = {}
-endif
-let g:neocomplete#sources._ = ['buffer', 'member', 'tag', 'file', 'dictionary']
-let g:neocomplete#sources.go = ['omni']
-call neocomplete#custom#source('_', 'sorters', [])
+" ===== Completion =====
+" I use deoplete for Neovim and neocomplete for Vim.
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#ignore_sources = {}
+  let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
+  let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
+  let g:deoplete#sources#go#align_class = 1
 
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+
+  " Use partial fuzzy matches like YouCompleteMe
+  call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
+  call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
+  call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
+else
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+  if !exists('g:neocomplete#sources')
+    let g:neocomplete#sources = {}
+  endif
+  let g:neocomplete#sources._ = ['buffer', 'member', 'tag', 'file', 'dictionary']
+  let g:neocomplete#sources.go = ['omni']
+
+  " disable sorting
+  call neocomplete#custom#source('_', 'sorters', [])
+endif
+
+
+" ===== Ultisnips =====
+function! g:UltiSnips_Complete()
+  call UltiSnips#ExpandSnippet()
+  if g:ulti_expand_res == 0
+    if pumvisible()
+      return "\<C-n>"
+    else
+      call UltiSnips#JumpForwards()
+      if g:ulti_jump_forwards_res == 0
+        return "\<TAB>"
+      endif
+    endif
+  endif
+  return ""
+endfunction
+
+function! g:UltiSnips_Reverse()
+  call UltiSnips#JumpBackwards()
+  if g:ulti_jump_backwards_res == 0
+    return "\<C-P>"
+  endif
+
+  return ""
+endfunction
+
+
+if !exists("g:UltiSnipsJumpForwardTrigger")
+  let g:UltiSnipsJumpForwardTrigger = "<tab>"
+endif
+
+if !exists("g:UltiSnipsJumpBackwardTrigger")
+  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+endif
+
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 
 
 " ====================
