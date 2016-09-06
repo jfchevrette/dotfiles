@@ -33,7 +33,7 @@ Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips'
 
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim'
+  Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
   Plug 'zchee/deoplete-go', { 'do': 'make'}
 else
   Plug 'Shougo/neocomplete.vim'
@@ -45,13 +45,15 @@ call plug#end()
 " =   Settings   =
 " ================
 
-set nocompatible
-filetype off
-filetype plugin indent on
-
-set ttyfast
-set ttymouse=xterm2
-set ttyscroll=3
+if !has('nvim')
+  set nocompatible
+  filetype off
+  filetype plugin indent on
+  
+  set ttyfast
+  set ttymouse=xterm2
+  set ttyscroll=3
+endif
 
 set laststatus=2
 set encoding=utf-8              " Set default encoding to UTF-8
