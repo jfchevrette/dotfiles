@@ -6,7 +6,7 @@ ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(docker git kubectl oc osx ssh-agent z)
+plugins=(docker git osx ssh-agent)
 
 zstyle :omz:plugins:ssh-agent identities id_rsa id_rsa_funio
 
