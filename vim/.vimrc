@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'felixjung/vim-base16-lightline'
 Plug 'chriskempson/base16-vim'
+Plug 'takac/vim-hardtime'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
@@ -301,8 +302,9 @@ function! CtrlPStatusFunc_2(str)
   return lightline#statusline(0)
 endfunction
 
-" ===== vim-sneak =====
-let g:sneak#streak = 1
+
+" ===== HardTime =====
+let g:hardtime_default_on = 1
 
 " ===== vim-go =====
 let g:go_metalinter_autosave = 1
