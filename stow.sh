@@ -1,11 +1,11 @@
 #!/bin/bash
 
-stow -D stow
-stow stow
+stow -t $HOME -D stow
+stow -t $HOME stow
 
 for dir in */; do
   echo Unstowing $dir
-  stow -D $dir
+  stow -t $HOME -D $dir
   echo Restowing $dir
-  stow $dir
+  stow -t $HOME $dir
 done
