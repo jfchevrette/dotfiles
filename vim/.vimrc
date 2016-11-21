@@ -13,7 +13,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'felixjung/vim-base16-lightline'
 Plug 'chriskempson/base16-vim'
-Plug 'takac/vim-hardtime'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
