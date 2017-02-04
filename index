@@ -1,6 +1,6 @@
 git: ~
 hammerspoon: ~
-neovim: ~
+i3: ~/.config/i3
 stow: ~
 vim: ~
 x11: ~/.config/x11
