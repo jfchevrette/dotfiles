@@ -11,8 +11,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " ui/color
 Plug 'itchyny/lightline.vim'
-Plug 'felixjung/vim-base16-lightline'
-Plug 'chriskempson/base16-vim'
+Plug 'nanotech/jellybeans.vim'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
@@ -107,10 +106,7 @@ set undodir=~/.vim/tmp/undo//
 set modeline
 set modelines=10
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+colorscheme jellybeans
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
@@ -183,7 +179,7 @@ nnoremap <C-u> <C-u>zz
 
 " ===== lightline =====
 let g:lightline = {
-  \ 'colorscheme': 'base16_oceanicnext',
+  \ 'colorscheme': 'jellybeans',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
