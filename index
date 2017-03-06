@@ -3,5 +3,5 @@ hammerspoon: ~
 i3: ~/.config/i3
 stow: ~
 vim: ~
-x11: ~/.config/x11
+shell: ~
 zsh: ~
