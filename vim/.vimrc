@@ -11,7 +11,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " ui/color
 Plug 'itchyny/lightline.vim'
-Plug 'nanotech/jellybeans.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
@@ -106,7 +106,7 @@ set undodir=~/.vim/tmp/undo//
 set modeline
 set modelines=10
 
-colorscheme jellybeans
+colorscheme nord
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
@@ -179,7 +179,7 @@ nnoremap <C-u> <C-u>zz
 
 " ===== lightline =====
 let g:lightline = {
-  \ 'colorscheme': 'jellybeans',
+  \ 'colorscheme': 'nord',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
