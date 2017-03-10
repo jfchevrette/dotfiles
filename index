@@ -1,5 +1,6 @@
 git: ~
 hammerspoon: ~
+homepage: ~/.config/homepage
 i3: ~/.config/i3
 stow: ~
 vim: ~
