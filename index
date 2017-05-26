@@ -2,6 +2,7 @@ git: ~
 gtk: ~
 hammerspoon: ~
 herbstluftwm: ~
+polybar: ~
 ranger: ~
 stow: ~
 vim: ~
