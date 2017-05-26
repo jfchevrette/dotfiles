@@ -147,7 +147,11 @@ hc unlock
 herbstclient set tree_style '╾│ ├└╼─┐'
 
 #hc detect_monitors
-pkill polybar; polybar bar
+pkill polybar
+for monitor in $(polybar -m | cut -d: -f1); do
+  MONITOR=$monitor polybar bar &
+done
+
 herbstclient pad 0 40 0 0 0
 herbstclient pad 1 40 0 0 0
 
