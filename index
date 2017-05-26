@@ -1,6 +1,8 @@
+.config/Code: .config/Code
 git: ~
 hammerspoon: ~
 stow: ~
 vim: ~
+vscode: ~
 shell: ~
 zsh: ~
