@@ -4,16 +4,16 @@ vim/.vim/autoload/plug.vim.old
 vim/.vim/plugged
 vim/.vim/tmp
 
-# atom
-atom/.atom/.apm
-atom/.atom/.node-gyp
-atom/.atom/blob-store
-atom/.atom/compile-cache
-atom/.atom/packages
-atom/.atom/storage
-
-# emacs
-emacs/.emacs.d/auto-save-list
-emacs/.emacs.d/elpa
-emacs/.emacs.d/eshell
-emacs/.emacs.d/savehist
+# vscode
+vscode/.config/Code/Backups
+vscode/.config/Code/Cache
+vscode/.config/Code/CachedData
+vscode/.config/Code/Cookies
+vscode/.config/Code/Cookies-journal
+vscode/.config/Code/GPUCache
+vscode/.config/Code/Local\ Storage
+vscode/.config/Code/User/material-icon-theme.json
+vscode/.config/Code/Preferences
+vscode/.config/Code/storage.json
+vscode/.config/Code/User/sync.lock
+vscode/.config/Code/User/syncLocalSettings.json
