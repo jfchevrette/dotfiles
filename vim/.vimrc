@@ -15,7 +15,6 @@ Plug 'arcticicestudio/nord-vim'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
-Plug 'vim-ruby/vim-ruby'
 Plug 'elzr/vim-json', {'for': 'json'}
 Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
 Plug 'fatih/vim-nginx', {'for': 'nginx'}
@@ -34,12 +33,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'SirVer/ultisnips'
 
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
-else
-  Plug 'Shougo/neocomplete.vim'
-endif
+Plug 'Shougo/neocomplete.vim'
 
 call plug#end() 
 
