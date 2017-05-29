@@ -20,6 +20,9 @@ Plug 'elzr/vim-json', {'for': 'json'}
 Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
 Plug 'fatih/vim-nginx', {'for': 'nginx'}
 
+" Linting
+Plug 'w0rp/ale'
+
 " utils
 Plug 'Raimondi/delimitMate'
 Plug 'ctrlpvim/ctrlp.vim'
