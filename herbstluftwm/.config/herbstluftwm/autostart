@@ -151,4 +151,5 @@ PRI=$(xrandr | grep primary | awk '{print $1}')
 pkill polybar
 MONITOR=$PRI polybar bar &
 herbstclient pad 0 40 0 0 0
+herbstclient pad 1 0 0 0 0
 
