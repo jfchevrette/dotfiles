@@ -146,12 +146,9 @@ hc unlock
 
 herbstclient set tree_style '╾│ ├└╼─┐'
 
-#hc detect_monitors
+# detect primary monitor to start polybar there
+PRI=$(xrandr | grep primary | awk '{print $1}')
 pkill polybar
-MONITOR=DP2-1 polybar bar &
-sleep 0.5
-MONITOR=eDP1 polybar bar &
-
+MONITOR=$PRI polybar bar &
 herbstclient pad 0 40 0 0 0
-herbstclient pad 1 40 0 0 0
 
