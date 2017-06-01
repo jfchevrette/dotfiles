@@ -9,6 +9,11 @@ hc() {
 hc emit_hook reload
 
 xrdb -merge ~/.Xresources
+
+# Turn on numlock and disable it
+xmodmap -e 'keycode 77 = NoSymbol Num_Lock'
+numlockx on
+
 setxkbmap -model pc105 -layout ca -variant multix -option ctrl:nocaps
 pgrep compton || compton &
 pgrep urxvt256c-mld || urxvt256c-mld &
