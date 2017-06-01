@@ -12,5 +12,15 @@
     "terraform.formatOnSave": false,
     "workbench.colorTheme": "One Dark Pro",
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.welcome.enabled": false
+    "workbench.welcome.enabled": false,
+    "sync.gist": "cb24aa5810576c3f3a9f5285022ec537",
+    "sync.lastUpload": "2017-05-31T13:07:38.788Z",
+    "sync.autoDownload": false,
+    "sync.autoUpload": false,
+    "sync.lastDownload": "",
+    "sync.forceDownload": false,
+    "sync.anonymousGist": false,
+    "sync.host": "",
+    "sync.pathPrefix": "",
+    "sync.quietSync": false
 }
