@@ -59,9 +59,5 @@ if ! which brew 2>/dev/null 1>/dev/null; then
 fi
 
 # Install Homebrew apps and Cask apps
-brew install $BREWAPPS 2> /dev/null
-brew cask install $CASKAPPS 2> /dev/null
+brew bundle
 
-# Install fonts
-brew tap caskroom/fonts
-brew cask install font-source-code-pro font-sauce-code-powerline
