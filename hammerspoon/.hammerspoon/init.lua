@@ -13,8 +13,7 @@ local mod = {'cmd', 'alt', 'ctrl'}
 hs.grid.setGrid('2x2', '1440x900')
 hs.grid.setGrid('2x2', '1920x1080')
 -- hs.grid.setGrid('4x2', '3840x1080')
-hs.grid.MARGINX = 5
-hs.grid.MARGINY = 5
+hs.grid.setMargins({x=0, y=0})
 
 hs.grid.ui.showExtraKeys = false
 hs.grid.ui.textSize = 100
