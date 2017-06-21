@@ -33,6 +33,7 @@ hc keybind $Mod-Shift-c close
 hc keybind $Mod-Return spawn $TERMAPP
 hc keybind $Mod-space spawn rofi -show drun
 hc keybind $Mod-m spawn $TERMAPP -e ranger --selectfile=$HOME/Documents
+hc keybind $Mod-b spawn qutebrowser --backend webengine
 
 hc keybind XF86AudioMute spawn pactl set-sink-mute @DEFAULT_SINK@ toggle
 hc keybind XF86AudioLowerVolume spawn pactl set-sink-volume @DEFAULT_SINK@ -10%
