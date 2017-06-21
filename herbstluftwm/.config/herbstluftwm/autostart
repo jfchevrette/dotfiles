@@ -17,7 +17,7 @@ numlockx on
 setxkbmap -model pc105 -layout ca -variant multix -option ctrl:nocaps
 pgrep compton || compton &
 pgrep urxvt256c-mld || urxvt256c-mld &
-feh --bg-fill ~/Pictures/Wallpapers/facet2k.jpg
+feh --bg-fill ~/Pictures/Wallpapers/blue-mountains.jpg
 
 # remove all existing keybindings
 hc keyunbind --all
