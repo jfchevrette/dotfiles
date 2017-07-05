@@ -156,10 +156,20 @@ hc unlock
 
 herbstclient set tree_style '╾│ ├└╼─┐'
 
-# detect primary monitor to start polybar there
-PRI=$(xrandr | grep primary | awk '{print $1}')
+# kill all bars
 pkill polybar
-MONITOR=$PRI polybar bar &
+
+# detect primary monitor to start polybar there
+PRI=$(xrandr | grep "connected primary" | cut -d\  -f1)
 herbstclient pad 0 40 0 0 0
-herbstclient pad 1 0 0 0 0
+MONITOR=$PRI polybar bar &
+
+# detect secondary monitors and start the bar there too
+count=1 # start count at 1 (0 being the first monitor)
+SEC_MONITORS=$(xrandr | grep \ connected | grep -v primary | cut -d\  -f1)
+for monitor in $SEC_MONITORS; do
+    herbstclient pad $count 40 0 0 0
+    MONITOR=$monitor polybar bar &
+    COUNT=$(($COUNT + 1))
+done
 
