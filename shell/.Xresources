@@ -42,6 +42,10 @@ URxvt*.color15: nord6
 
 URxvt*.urgentOnBell: true
 URxvt*.scrollBar: false
+URxvt*.saveLines: 1000000
+URxvt*.scrollTtyOutput: false
+URxvt*.scrollWithBuffer: true
+URxvt*.scrollTtyKeypress: true
 URxvt*.font: xft:Fira Mono:size=12:antialias=true:hinting=true
 URxvt*.depth: 32
 URxvt*.internalBorder: 5
