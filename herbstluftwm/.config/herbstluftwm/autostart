@@ -14,6 +14,12 @@ xrdb -merge ~/.Xresources
 xmodmap -e 'keycode 77 = NoSymbol Num_Lock'
 numlockx on
 
+# Tweak touchpad settings
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Drag Enabled" 1
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Drag Lock Enabled" 1
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.7
+
 setxkbmap -model pc105 -layout ca -variant multix -option ctrl:nocaps
 pgrep compton || compton &
 pgrep urxvt256c-mld || urxvt256c-mld &
