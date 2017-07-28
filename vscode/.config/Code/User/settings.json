@@ -14,10 +14,10 @@
     "workbench.iconTheme": "material-icon-theme",
     "workbench.welcome.enabled": false,
     "sync.gist": "cb24aa5810576c3f3a9f5285022ec537",
-    "sync.lastUpload": "2017-06-14T14:55:36.083Z",
+    "sync.lastUpload": "2017-07-26T23:52:28.542Z",
     "sync.autoDownload": false,
     "sync.autoUpload": false,
-    "sync.lastDownload": "",
+    "sync.lastDownload": "2017-07-26T23:52:37.283Z",
     "sync.forceDownload": false,
     "sync.anonymousGist": false,
     "sync.host": "",
@@ -25,5 +25,6 @@
     "sync.quietSync": false,
     "material-icon-theme.showUpdateMessage": false,
     "git.enableSmartCommit": true,
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "sync.askGistName": false
 }

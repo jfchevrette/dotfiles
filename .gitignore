@@ -21,5 +21,6 @@ vscode/.config/Code/User/material-icon-theme.json
 vscode/.config/Code/Preferences
 vscode/.config/Code/storage.json
 vscode/.config/Code/User/sync.lock
+vscode/.config/Code/User/syncSettings.json
 vscode/.config/Code/User/syncLocalSettings.json
 vscode/.config/Code/User/syncSummary.txt
