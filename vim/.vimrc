@@ -11,7 +11,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " ui/color
 Plug 'itchyny/lightline.vim'
-Plug 'arcticicestudio/nord-vim'
+Plug 'tomasr/molokai'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
@@ -103,7 +103,11 @@ set undodir=~/.vim/tmp/undo//
 set modeline
 set modelines=10
 
-colorscheme nord
+set t_Co=256
+colorscheme molokai
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+hi LineNr ctermbg=none
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
@@ -176,7 +180,7 @@ nnoremap <C-u> <C-u>zz
 
 " ===== lightline =====
 let g:lightline = {
-  \ 'colorscheme': 'nord',
+  \ 'colorscheme': 'molokai',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
