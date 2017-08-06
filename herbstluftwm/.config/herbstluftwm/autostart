@@ -25,6 +25,8 @@ pgrep compton || compton &
 pgrep urxvt256c-mld || urxvt256c-mld &
 feh --bg-fill ~/Pictures/Wallpapers/blue-mountains.jpg
 
+pgrep -f watch-tag-change.sh || ~/.config/herbstluftwm/watch-tag-change.sh &
+
 # remove all existing keybindings
 hc keyunbind --all
 
@@ -168,7 +170,7 @@ pkill polybar
 
 # detect primary monitor to start polybar there
 PRI=$(xrandr | grep "connected primary" | cut -d\  -f1)
-herbstclient pad 0 40 0 0 0
+herbstclient pad 0 26 0 0 0
 MONITOR=$PRI polybar bar &
 
 # detect secondary monitors and start the bar there too
