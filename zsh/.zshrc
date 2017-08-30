@@ -34,6 +34,9 @@ if hash chruby 2>/dev/null; then
   chruby ruby-2.3.0
 fi
 
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 # Private stuff
 if [[ -e $HOME/.zshrc-private ]]; then
     source $HOME/.zshrc-private
