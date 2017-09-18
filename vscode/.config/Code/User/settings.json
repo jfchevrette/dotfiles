@@ -26,5 +26,8 @@
     "material-icon-theme.showUpdateMessage": false,
     "git.enableSmartCommit": true,
     "window.zoomLevel": 0,
-    "sync.askGistName": false
+    "sync.askGistName": false,
+    "extensions.autoUpdate": false,
+    "editor.smoothScrolling": true,
+    "telemetry.enableTelemetry": false,
 }
