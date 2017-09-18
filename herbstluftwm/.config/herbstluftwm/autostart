@@ -52,8 +52,8 @@ hc keybind XF86AudioPlay spawn ~/bin/spotify-remote.sh playpause
 hc keybind XF86AudioPrev spawn ~/bin/spotify-remote.sh previous
 hc keybind XF86AudioNext spawn ~/bin/spotify-remote.sh next
 
-hc keybind XF86MonBrightnessDown spawn xbacklight -10%
-hc keybind XF86MonBrightnessUp spawn xbacklight +10%
+hc keybind XF86MonBrightnessDown spawn brightnessctl set 10%-
+hc keybind XF86MonBrightnessUp spawn brightnessctl set +10%
 
 # basic movement
 # focusing clients
