@@ -40,7 +40,7 @@ hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-c close
 hc keybind $Mod-Return spawn $TERMAPP
-hc keybind $Mod-space spawn rofi -show drun
+hc keybind $Mod-space spawn $HOME/.config/rofi/run.sh
 hc keybind $Mod-m spawn $TERMAPP -e ranger --selectfile=$HOME/Documents
 hc keybind $Mod-b spawn qutebrowser --backend webengine
 hc keybind $Mod-e spawn emacs
