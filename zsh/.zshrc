@@ -26,13 +26,12 @@ alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias g="git"
 alias h="history"
+alias wttr='curl -s wttr.in'
+alias bmon='bmon -p wlp3s0,enp0s25 -o "curses:fgchar=S;bgchar=.;nchar=N;uchar=?;details"'
+alias ip='ip -c'
 
-# chruby
-if hash chruby 2>/dev/null; then
-  source /usr/local/share/chruby/chruby.sh
-  source /usr/local/share/chruby/auto.sh
-  chruby ruby-2.3.0
-fi
+cheat() { curl cheat.sh/$1; }
+qrcode() { echo $@ | curl -F-=\<- qrenco.de; }
 
 # Private stuff
 if [[ -e $HOME/.zshrc-private ]]; then
