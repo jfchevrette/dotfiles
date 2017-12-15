@@ -4,7 +4,7 @@
 defaults write -g com.apple.swipescrolldirection -bool false
 
 defaults write -g KeyRepeat -int 2
-defaults write -g InitialKeyRepeat -int 10 
+defaults write -g InitialKeyRepeat -int 25
 
 defaults delete com.apple.dock persistent-apps
 defaults delete com.apple.dock persistent-others
