@@ -11,7 +11,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " ui/color
 Plug 'itchyny/lightline.vim'
-Plug 'tomasr/molokai'
+Plug 'chriskempson/base16-vim'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
@@ -103,11 +103,10 @@ set undodir=~/.vim/tmp/undo//
 set modeline
 set modelines=10
 
-set t_Co=256
-colorscheme molokai
-hi Normal ctermbg=none
-hi NonText ctermbg=none
-hi LineNr ctermbg=none
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
