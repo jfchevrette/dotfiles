@@ -12,6 +12,9 @@ zstyle :omz:plugins:ssh-agent identities id_rsa
 
 source $ZSH/oh-my-zsh.sh
 
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 # Generic Colourizer (https://github.com/garabik/grc)
 if [[ -f "/usr/local/etc/grc.bashrc" ]]; then
     source "/usr/local/etc/grc.bashrc"
