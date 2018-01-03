@@ -13,6 +13,7 @@ vim/.vim/tmp
 vscode/.config/Code/Backups
 vscode/.config/Code/Cache
 vscode/.config/Code/CachedData
+vscode/.config/Code/CachedExtensions
 vscode/.config/Code/Cookies
 vscode/.config/Code/Cookies-journal
 vscode/.config/Code/GPUCache
