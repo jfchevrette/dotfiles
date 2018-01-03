@@ -6,7 +6,7 @@ ENABLE_CORRECTION="false"
 COMPLETION_WAITING_DOTS="true"
 HIST_STAMPS="mm/dd/yyyy"
 
-plugins=(docker git osx ssh-agent)
+plugins=(docker git oc osx ssh-agent)
 
 zstyle :omz:plugins:ssh-agent identities id_rsa
 
