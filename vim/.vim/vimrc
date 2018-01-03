@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
 " ui/color
 Plug 'itchyny/lightline.vim'
 Plug 'chriskempson/base16-vim'
+Plug 'felixjung/vim-base16-lightline'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
@@ -179,7 +180,7 @@ nnoremap <C-u> <C-u>zz
 
 " ===== lightline =====
 let g:lightline = {
-  \ 'colorscheme': 'molokai',
+  \ 'colorscheme': 'base16_tomorrow',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
