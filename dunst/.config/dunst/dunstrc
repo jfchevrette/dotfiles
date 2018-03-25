@@ -49,7 +49,7 @@
 
     # Split notifications into multiple lines if they don't fit into
     # geometry.
-    word_wrap = no
+    word_wrap = yes
 
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
@@ -67,7 +67,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "0x5-30+20"
+    geometry = "300-30+20"
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
@@ -121,7 +121,7 @@
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 2
+    separator_height = 1
 
     # Padding between text and separator.
     padding = 8
@@ -140,13 +140,13 @@
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
-    startup_notification = false
+    startup_notification = true
 
     # dmenu path.
-    dmenu = /usr/bin/dmenu -p dunst:
+    # dmenu = /usr/bin/dmenu -p dunst:
 
     # Browser for opening urls in context menu.
-    browser = /usr/bin/firefox -new-tab
+    # browser = /usr/bin/firefox -new-tab
 
     # Align icons left/right/off
     icon_position = left
@@ -154,9 +154,11 @@
     # Paths to default icons.
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/:/usr/share/icons/hicolor/16x16/apps/
 
+    max_icon_size = 32
+
 [frame]
-    width = 2
-    color = "#4d679a"
+    width = 1
+    color = "#4ec2e8"
 
 [shortcuts]
 
