@@ -20,7 +20,7 @@
     "sync.gist": "cb24aa5810576c3f3a9f5285022ec537",
     "sync.host": "",
     "sync.lastDownload": "2017-07-26T23:52:37.283Z",
-    "sync.lastUpload": "2018-02-14T14:01:18.952Z",
+    "sync.lastUpload": "2018-06-13T15:31:35.447Z",
     "sync.pathPrefix": "",
     "sync.quietSync": false,
     "telemetry.enableTelemetry": false,
@@ -43,4 +43,14 @@
         "suppressWelcomeNotice": true
     },
     "git.confirmSync": false,
+    "terraform.format": {
+        "enable": true,
+        "ignoreExtensionsOnSave": [
+            ".tfsmurf"
+        ],
+        "formatOnSave": false
+    },
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "dart.flutterSdkPath": "/home/jfchevrette/flutter",
 }
