@@ -7,7 +7,6 @@ antigen use oh-my-zsh
 
 antigen bundles <<EOB
   chriskempson/base16-shell
-
   docker
   git
   golang
@@ -21,6 +20,8 @@ antigen bundles <<EOB
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-completions
   zsh-users/zsh-history-substring-search
+
+  mafredri/zsh-async
 EOB
 
 if [[ "$OSTYPE" == "darwin11.0" ]]; then
@@ -38,6 +39,7 @@ function mnml_kubecontext {
   echo -n "$(kubectl config current-context)"
 }
 MNML_RPROMPT=('mnml_cwd 2 0' mnml_git mnml_kubecontext)
+MNML_MAGICENTER=()
 
 # Enable direnv
 eval "$(direnv hook zsh)"
