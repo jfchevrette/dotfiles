@@ -11,8 +11,7 @@ endif
 call plug#begin('~/.vim/plugged')
 " ui/color
 Plug 'itchyny/lightline.vim'
-Plug 'chriskempson/base16-vim'
-Plug 'felixjung/vim-base16-lightline'
+Plug 'arcticicestudio/nord-vim'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
@@ -104,10 +103,7 @@ set undodir=~/.vim/tmp/undo//
 set modeline
 set modelines=10
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+colorscheme nord
 
 if has("gui_running")
   set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
@@ -180,7 +176,7 @@ nnoremap <C-u> <C-u>zz
 
 " ===== lightline =====
 let g:lightline = {
-  \ 'colorscheme': 'base16_tomorrow',
+  \ 'colorscheme': 'nord',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
   \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
