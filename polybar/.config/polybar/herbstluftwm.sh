@@ -1,8 +1,8 @@
 #!/bin/bash
 
-CURRENT="%{F#ffffff B#161616 o#fb2874 +o}"
+CURRENT="%{F#e57373 B#2E3440 o#2E3440 +o}"
 NORMAL="%{F#FFF}"
-OTHERMON="%{F#ffffff B#161616 o#1976d2 +o}"
+OTHERMON="%{F#95C7AE B#2E3440 o#2E3440 +o}"
 EMPTY="%{F#555}"
 UNSET="%{F- B- -o}"
 

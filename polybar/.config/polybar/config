@@ -1,207 +1,67 @@
 [colors]
-background = #222
-background-alt = #444
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+    
+    backgroundColor = #2E3440
+    foregroundColor = #95C7AE
 
+;--------------------------------------------
+; bars                                      ;
+;--------------------------------------------
 [global/wm]
-margin-top = 2
-margin-bottom = 2
+	margin-top = 2
+	margin-bottom = 2
 
 [bar/bar]
-monitor = ${env:MONITOR:eDP-1}
-width = 100%
-height = 22
-offset-x = 0
-offset-y = 0
+    monitor = ${env:MONITOR:eDP-1}
+	dpi      = 192
+	width    = 100%
+	height   = 26
+	offset-x = 0
+	offset-y = 0
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+	bottom = false
 
-overline-size = 1
-overline-color = #f00
-underline-size = 1
-underline-color = #00f
+    foreground = ${colors.foregroundColor}
+	background = ${colors.backgroundColor}
 
-border-bottom-size = 2
-border-bottom-color = #333
+	border-top-size     = 0
+	border-bottom-size  = 0
+	border-top-color    = ${colors.backgroundColor}
+	border-bottom-color = #000f0f0f
 
-padding-left = 3
-padding-right = 3
-module-margin-left = 1
-module-margin-right = 1
+	spacing            = 0
+	padding-left       = 0
+	padding-right      = 0
+	module-margin-left = 3
+    
+    font-N = <fontconfig pattern>;<vertical offset>
+	font-0 = Wuncon Siji:size=4;2
+	font-1 = Iosevka Term:pixelsize=4;2
 
-font-0 = FontAwesome:size8;0
-font-1 = Hack:size=8;0
+	modules-left   = herbstluftwm
+	modules-center = 
+	modules-right  = volume cpu memory eth wlan battery temperature time-utc time-montreal
 
-modules-left = herbstluftwm 
-modules-center = 
-modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date
+	fixed-center = true
 
-tray-position = right
-tray-padding = 2
+	tray-position = right
+	tray-padding = 0
 
-enable-ipc = true
+    enable-ipc = true
 
 [module/herbstluftwm]
 type = custom/ipc
 hook-0 = ~/.config/polybar/herbstluftwm.sh
 initial = 1
 
-[module/xwindow]
-type = internal/xwindow
-#label = %title: 0:30:...%
-label = %title: %
-label-maxlen = 30
-format-background = #555555
-format-foreground = #FFFFFF
-format-padding = 2
-
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
-
-label-layout = %layout%
-label-layout-underline = ${colors.secondary}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${colors.secondary}
-label-indicator-underline = ${colors.secondary}
-
-[module/filesystem]
-type = internal/fs
-interval = 60
-
-mount-0 = /
-mount-1 = /home
-
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.foreground-alt}
-
-[module/mpd]
-type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
-label-song-maxlen = 25
-label-song-ellipsis = true
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
-[module/cpu]
-type = internal/cpu
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
-label = %percentage%%
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
-label = %percentage_used%%
-
-[module/wlan]
-type = internal/network
-interface = wlp3s0
-interval = 3.0
-
-format-connected = <ramp-signal> <label-connected>
-format-connected-underline = #9f78e1
-label-connected = %essid%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
-
-[module/eth]
-type = internal/network
-interface = enp0s25
-interval = 3.0
-
-format-connected-underline = #55aa55
-format-connected-prefix = " "
-format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
-
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
-
-[module/date]
-type = internal/date
-interval = 5
-
-date =
-date-alt = " %Y-%m-%d"
-
-time = %H:%M
-time-alt = %H:%M:%S
-
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
-
-label = %date% %time%
-
 [module/volume]
-type = internal/volume
+type = internal/alsa
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
+format-volume = <bar-volume>
+format-prefix = "V "
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
+format-muted-foregroundd = #e57373
+format-muted-background = ${colors.backgroundColor}
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #55aa55
@@ -214,11 +74,48 @@ bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
 bar-volume-indicator = |
 bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = ${colors.foregroundColor}
+bar-volume-indicator-background = ${colors.backgroundColor}
 bar-volume-fill = ─
 bar-volume-fill-font = 2
+bar-volume-fill-foreground = ${colors.foregroundColor}
+bar-volume-fill-background = ${colors.backgroundColor}
 bar-volume-empty = ─
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+bar-volume-empty-foreground = ${colors.foregroundColor}
+bar-volume-empty-background = ${colors.backgroundColor}
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "C "
+label = %percentage%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "M "
+label = %percentage_used%%
+
+[module/eth]
+type = internal/network
+interface = enp0s25
+interval = 3.0
+
+format-connected-prefix = "E "
+label-connected = %local_ip%
+
+format-disconnected =
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+interval = 3.0
+
+format-connected = <label-connected>
+label-connected = %essid%
+
+format-disconnected =
 
 [module/battery]
 type = internal/battery
@@ -226,51 +123,35 @@ battery = BAT0
 adapter = ADP0
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
+format-charging-prefix = "B "
+format-discharging-prefix = "B "
 
-format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
+format-charging = <label-charging>
+format-discharging = <label-discharging>
 
 [module/temperature]
 type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
-format-warn-underline = ${self.format-underline}
+format = <label>
+format-prefix = "T "
 
-label = %temperature%
-label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
+format-warn = <label-warn>
+format-warn-prefix = "T "
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+label = %temperature-c%
+label-warn = %temperature-c%
+
+[module/time-montreal]
+type = custom/script
+interval = 5
+exec = TZ=America/Montreal date +"%Z: %H:%M"
+
+[module/time-utc]
+type = custom/script
+interval = 5
+exec = TZ=UTC date +"%Z: %H:%M"
 
 [settings]
 screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-
-; vim:ft=dosini
