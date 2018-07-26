@@ -12,6 +12,7 @@ antigen bundles <<EOB
   golang
   rsync
   rust
+  z
 
   gpg-agent
   ssh-agent
