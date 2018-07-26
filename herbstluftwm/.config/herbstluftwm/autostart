@@ -15,6 +15,8 @@ xrdb -merge ~/.Xresources
 xmodmap -e 'keycode 77 = NoSymbol Num_Lock'
 numlockx on
 
+xmodmap -e "keycode 65 = space space space space underscore underscore space space"
+
 # Tweak touchpad settings
 xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
 xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Drag Enabled" 1
@@ -22,11 +24,11 @@ xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Drag Lock Enabled
 xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.7
 
 setxkbmap -model pc105 -layout ca -variant multix -option ctrl:nocaps
-pgrep compton || compton &
-pgrep urxvt256c-mld || urxvt256c-mld &
-feh --bg-fill ~/.config/wallpaper/wall.png
+pgrep compton || compton
+pgrep urxvt256c-mld || urxvt256c-mld
+feh --bg-fill ~/.config/wallpaper/city-synth.jpg
 
-pgrep -f watch-tag-change.sh || ~/.config/herbstluftwm/watch-tag-change.sh &
+pgrep -f watch-tag-change.sh || ~/.config/herbstluftwm/watch-tag-change.sh
 
 # remove all existing keybindings
 hc keyunbind --all
