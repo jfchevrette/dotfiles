@@ -31,16 +31,11 @@ if [[ "$OSTYPE" == "darwin11.0" ]]; then
   antigen bundle osx
 fi
 
-antigen theme subnixr/minimal
+antigen theme sindresorhus/pure
 
 antigen apply
 
-# subnixr/mininal prompt settings
-function mnml_kubecontext {
-  echo -n "$(kubectl config current-context)"
-}
-MNML_RPROMPT=('mnml_cwd 2 0' mnml_git mnml_kubecontext)
-MNML_MAGICENTER=()
+RPROMPT="%F{white}$(kubectl config current-context)"
 
 # Enable direnv
 eval "$(direnv hook zsh)"
