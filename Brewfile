@@ -46,6 +46,7 @@ cask "mattermost"
 cask "ngrok"
 cask "slack"
 cask "steam"
+cask "tunnelblick"
 cask "vagrant"
 cask "visual-studio-code"
 
