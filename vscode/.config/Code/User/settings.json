@@ -18,7 +18,7 @@
     "sync.gist": "cb24aa5810576c3f3a9f5285022ec537",
     "sync.host": "",
     "sync.lastDownload": "2017-07-26T23:52:37.283Z",
-    "sync.lastUpload": "2018-06-13T15:31:35.447Z",
+    "sync.lastUpload": "2018-09-30T19:05:42.573Z",
     "sync.pathPrefix": "",
     "sync.quietSync": false,
     "telemetry.enableTelemetry": false,
@@ -42,10 +42,9 @@
     "materialTheme.fixIconsRunning": false,
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1000,
-    "go.useLanguageServer": true,
-    "go.languageServerExperimentalFeatures": {
-        "format": true,
-        "autoComplete": true
-    },
     "files.insertFinalNewline": true,
+    "breadcrumbs.enabled": true,
+    "terraform.codelens.enabled": false,
+    "editor.codeLens": false,
+    "go.useLanguageServer": true,
 }
