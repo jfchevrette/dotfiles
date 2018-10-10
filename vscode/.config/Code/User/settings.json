@@ -24,7 +24,7 @@
     "telemetry.enableTelemetry": false,
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Material Theme Palenight High Contrast",
-    "workbench.iconTheme": "eq-material-theme-icons-palenight",
+    "workbench.iconTheme": "material-icon-theme",
     "docker.showExplorer": false,
     "workbench.startupEditor": "newUntitledFile",
     "terminal.integrated.fontSize": 16,
@@ -47,4 +47,5 @@
     "terraform.codelens.enabled": false,
     "editor.codeLens": false,
     "go.useLanguageServer": true,
+    "git.autofetch": true,
 }
