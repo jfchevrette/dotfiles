@@ -35,7 +35,11 @@ antigen theme sindresorhus/pure
 
 antigen apply
 
-RPROMPT="%F{white}$(kubectl config current-context)"
+# Right prompt that shows kube context
+function kube_prompt() {
+  RPROMPT="%F{white}$(kubectl config current-context)"
+}
+precmd_functions+=kube_prompt
 
 # Enable direnv
 eval "$(direnv hook zsh)"
