@@ -1,3 +1,4 @@
+zmodload zsh/zprof
 [[ ! -d $HOME/.zsh.d ]] && mkdir $HOME/.zsh.d
 [[ ! -f $HOME/.zsh.d/antigen.zsh ]] && curl -sL -o $HOME/.zsh.d/antigen.zsh https://git.io/antigen
 
@@ -13,6 +14,8 @@ antigen bundles <<EOB
   rsync
   rust
   z
+
+  taskwarrior
 
   gpg-agent
   ssh-agent
@@ -41,12 +44,8 @@ function kube_prompt() {
 }
 precmd_functions+=kube_prompt
 
-# Enable direnv
-eval "$(direnv hook zsh)"
-
-# History substring search plugin settings
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+# Taskwarrior config file
+export TASKRC=$HOME/.config/task/config
 
 # Private stuff
 if [[ -e $HOME/.zshrc-private ]]; then
@@ -56,3 +55,19 @@ fi
 alias k=kubectl
 alias kc=kubectx
 alias kcp='kubectx -'
+
+alias time=/usr/bin/time
+export TIME="\t%e real\t%U user\t%S sys"
+
+function todo() {
+  # Print taskwarrior todos
+  if hash task 2>/dev/null; then
+    task next
+  fi
+
+  # Print today's CalDav appointments
+  #if hash khal 2>/dev/null; then
+  #  khal agenda
+  #fi
+}
+todo
