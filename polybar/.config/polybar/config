@@ -39,7 +39,7 @@
 
 	modules-left   = herbstluftwm
 	modules-center = 
-	modules-right  = volume cpu memory eth wlan battery temperature time-utc time-montreal
+	modules-right  = playerctl volume cpu memory eth wlan battery temperature time-utc time-montreal
 
 	fixed-center = true
 
@@ -52,6 +52,16 @@
 type = custom/ipc
 hook-0 = ~/.config/polybar/herbstluftwm.sh
 initial = 1
+
+[module/kubectx]
+type = custom/script
+exec = ~/.config/polybar/kubectx.sh
+interval = 1
+
+[module/playerctl]
+type = custom/script
+exec = ~/.config/polybar/playerctl.sh
+interval = 1
 
 [module/volume]
 type = internal/alsa
