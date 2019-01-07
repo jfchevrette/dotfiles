@@ -39,7 +39,7 @@
 
 	modules-left   = herbstluftwm
 	modules-center = 
-	modules-right  = playerctl volume cpu memory eth wlan battery temperature time-utc time-montreal
+	modules-right  = playerctl volume cpu memory eth wlan battery temperature time-utc time-pst time-montreal
 
 	fixed-center = true
 
@@ -152,6 +152,11 @@ format-warn-prefix = "T "
 
 label = %temperature-c%
 label-warn = %temperature-c%
+
+[module/time-pst]
+type = custom/script
+interval = 5
+exec = TZ=PST8PDT date +"%Z: %H:%M"
 
 [module/time-montreal]
 type = custom/script
