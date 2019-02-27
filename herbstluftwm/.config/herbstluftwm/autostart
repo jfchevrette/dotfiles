@@ -171,9 +171,5 @@ hc unlock
 
 herbstclient chain "${cmds[@]}" &
 
-# kill all bars
-pkill polybar
-
-# detect primary monitor to start polybar there
-PRI=$(xrandr | grep "connected primary" | cut -d\  -f1)
-MONITOR=$PRI polybar bar &
+# Run polybar
+$HOME/.config/polybar/launch.sh
