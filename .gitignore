@@ -20,8 +20,10 @@ vscode/.config/Code/GPUCache
 vscode/.config/Code/Local\ Storage
 vscode/.config/Code/logs
 vscode/.config/Code/machineid
+vscode/.config/Code/Network Persistent State
 vscode/.config/Code/Preferences
 vscode/.config/Code/storage.json
+vscode/.config/Code/User/globalStorage/state.vscdb*
 vscode/.config/Code/User/material-icon-theme.json
 vscode/.config/Code/User/sync.lock
 vscode/.config/Code/User/syncSettings.json
