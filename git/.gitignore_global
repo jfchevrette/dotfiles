@@ -1,2 +1,5 @@
 *~
 .DS_Store
+# Direnv stuff
+.direnv
+.envrc

@@ -9,13 +9,12 @@ antigen use oh-my-zsh
 antigen bundles <<EOB
   chriskempson/base16-shell
   docker
+  fzf
   git
   golang
   rsync
   rust
   z
-
-  taskwarrior
 
   gpg-agent
   ssh-agent
@@ -44,14 +43,6 @@ function kube_prompt() {
 }
 precmd_functions+=kube_prompt
 
-# Taskwarrior config file
-export TASKRC=$HOME/.config/task/config
-
-# Private stuff
-if [[ -e $HOME/.zshrc-private ]]; then
-  source $HOME/.zshrc-private
-fi
-
 alias k=kubectl
 alias kc=kubectx
 alias kcp='kubectx -'
@@ -59,19 +50,34 @@ alias kcp='kubectx -'
 alias time=/usr/bin/time
 export TIME="\t%e real\t%U user\t%S sys"
 
-function todo() {
-  # Print taskwarrior todos
-  if hash task 2>/dev/null; then
-    task next
-  fi
-
-  # Print today's CalDav appointments
-  #if hash khal 2>/dev/null; then
-  #  khal agenda
-  #fi
-}
-todo
-
 # asdf - https://github.com/asdf-vm/asdf
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
+
+# Linuxbrew.sh
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# fzf
+# Auto-completion
+[[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh" 2> /dev/null
+# Key bindings
+source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh"
+# Use fd instead of find
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+h() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
+# Private stuff
+if [[ -e $HOME/.zshrc-private ]]; then
+  source $HOME/.zshrc-private
+fi
+
