@@ -26,6 +26,7 @@ xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.7
 setxkbmap -model pc105 -layout ca -variant multix -option ctrl:nocaps &
 pgrep compton || compton &
 pgrep urxvt256c-mld || urxvt256c-mld &
+pgrep syncthing-gtk || syncthing-gtk -m &
 feh --bg-fill ~/.config/wallpaper/city-synth.jpg &
 
 pgrep -f watch-tag-change.sh || ~/.config/herbstluftwm/watch-tag-change.sh &
