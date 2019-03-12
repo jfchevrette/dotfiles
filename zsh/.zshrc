@@ -1,51 +1,55 @@
 zmodload zsh/zprof
-[[ ! -d $HOME/.zsh.d ]] && mkdir $HOME/.zsh.d
-[[ ! -f $HOME/.zsh.d/antigen.zsh ]] && curl -sL -o $HOME/.zsh.d/antigen.zsh https://git.io/antigen
+[[ ! -d $HOME/.zgen ]] && git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen" 
 
-source $HOME/.zsh.d/antigen.zsh
+export ZGEN_RESET_ON_CHANGE=($HOME/.zshrc)
+source "${HOME}/.zgen/zgen.zsh"
 
-antigen use oh-my-zsh
-
-antigen bundles <<EOB
-  chriskempson/base16-shell
-  docker
-  fzf
-  git
-  golang
-  rsync
-  rust
-  z
-
-  gpg-agent
-  ssh-agent
-
-  zsh-users/zsh-syntax-highlighting
-  zsh-users/zsh-autosuggestions
-  zsh-users/zsh-completions
-  zsh-users/zsh-history-substring-search
-
-  mafredri/zsh-async
-EOB
-
-if [[ "$OSTYPE" == "darwin11.0" ]]; then
-  antigen bundle brew
-  antigen bundle iterm2
-  antigen bundle osx
+if ! zgen saved; then
+  zgen load mafredri/zsh-async
+  zgen load peterhurford/git-it-on.zsh
+  zgen load rupa/z
+  #zgen load sindresorhus/pure
+  zgen load unixorn/autoupdate-zgen
+  zgen load zdharma/fast-syntax-highlighting
+  zgen load zsh-users/zsh-autosuggestions
+  zgen save
 fi
 
-antigen theme sindresorhus/pure
+# Prompt
+setopt prompt_subst
+PROMPT='$(~/bin/prompt) \$ '
+RPROMPT="%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
 
-antigen apply
+# History
+alias history='history -i'
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=50000
+SAVEHIST=10000
+setopt extended_history       # record timestamp of command in HISTFILE
+setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_space      # ignore commands that start with space
+setopt hist_verify            # show command with history expansion to user before running it
+setopt inc_append_history     # add commands to HISTFILE in order of execution
+setopt share_history          # share command history data
 
-# Right prompt that shows kube context
-function kube_prompt() {
-  RPROMPT="%F{white}$(kubectl config current-context)"
-}
-precmd_functions+=kube_prompt
+# Fix Home/End/Delete
+bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
+bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
+bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
 
+# exa
+if hash exa 2> /dev/null; then alias ls='exa -alghH --git'; fi
+
+# colored cat
+if hash ccat 2> /dev/null; then alias cat=ccat; fi
+
+# prefer GNU sed b/c BSD sed doesn't handle whitespace the same
+if hash gsed 2> /dev/null; then alias sed=gsed; fi
+
+alias o=oc
 alias k=kubectl
 alias kc=kubectx
-alias kcp='kubectx -'
 
 alias time=/usr/bin/time
 export TIME="\t%e real\t%U user\t%S sys"
@@ -54,30 +58,20 @@ export TIME="\t%e real\t%U user\t%S sys"
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
-# Linuxbrew.sh
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
 # direnv
-eval "$(direnv hook zsh)"
+#eval "$(direnv hook zsh)"
+_direnv_hook() {
+  eval "$(direnv export zsh)";
+}
+typeset -ag precmd_functions;
+if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
+  precmd_functions+=_direnv_hook;
+fi
 
 # fzf
-# Auto-completion
-[[ $- == *i* ]] && source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/completion.zsh" 2> /dev/null
-# Key bindings
-source "/home/linuxbrew/.linuxbrew/opt/fzf/shell/key-bindings.zsh"
-# Use fd instead of find
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
-h() {
-  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
-}
+[[ -f /usr/share/fzf/shell/key-bindings.zsh ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
 
 # Private stuff
 if [[ -e $HOME/.zshrc-private ]]; then
   source $HOME/.zshrc-private
 fi
-
