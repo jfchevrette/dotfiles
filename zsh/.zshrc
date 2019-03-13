@@ -18,7 +18,9 @@ fi
 # Prompt
 setopt prompt_subst
 PROMPT='$(~/bin/prompt) \$ '
-RPROMPT="%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
+if [[ -f ~/.kube/config ]]; then
+  RPROMPT="%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
+fi
 
 # History
 alias history='history -i'
@@ -60,8 +62,10 @@ _direnv_hook() {
   eval "$(direnv export zsh)";
 }
 typeset -ag precmd_functions;
-if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
-  precmd_functions+=_direnv_hook;
+if hash direnv 2> /dev/null; then
+  if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
+    precmd_functions+=_direnv_hook;
+  fi
 fi
 
 # fzf
