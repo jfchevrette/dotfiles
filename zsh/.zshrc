@@ -54,10 +54,6 @@ alias kc=kubectx
 alias time=/usr/bin/time
 export TIME="\t%e real\t%U user\t%S sys"
 
-# asdf - https://github.com/asdf-vm/asdf
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-
 # direnv
 #eval "$(direnv hook zsh)"
 _direnv_hook() {
