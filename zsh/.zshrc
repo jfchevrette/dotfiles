@@ -40,6 +40,14 @@ bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning o
 bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
 bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
 
+# SSH agent
+if [[ -z "${SSH_AGENT_PID}" ]]; then
+  if ! [[ -e /tmp/ssh-agent-$USER ]]; then
+    ssh-agent 2>/dev/null >/tmp/ssh-agent-$USER
+  fi
+  . /tmp/ssh-agent-$USER >/dev/null
+fi
+
 # exa
 if hash exa 2> /dev/null; then alias ls='exa -alghH --git'; fi
 
