@@ -49,7 +49,7 @@ input "1739:0:Synaptics_TM3053-003" {
     bindsym $mod+Return exec $term
     
     # kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+Shift+c kill
     
     # start your launcher
     bindsym $mod+space exec rofi -show run -matching fuzzy -location 1 -lines 10 -width 100 -padding 2 -sidebar-mode -terminal alacritty -parse-known-hosts -sorting-method fzf -color-normal "#323232,#ffffff,#323232" -color-window "#323232,#323232,#323232"
@@ -185,17 +185,7 @@ bindsym $mod+ctrl+$down resize shrink height 20px
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+    swaybar_command waybar
 }
 
 exec mako --default-timeout 5000
