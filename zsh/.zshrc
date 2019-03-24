@@ -17,7 +17,12 @@ fi
 
 # Prompt
 setopt prompt_subst
-PROMPT='$(~/bin/prompt) \$ '
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  PROMPT='$(~/bin/prompt-darwin) \$ '
+else
+  PROMPT='$(~/bin/prompt-linux) \$ '
+fi
+
 if [[ -f ~/.kube/config ]]; then
   RPROMPT="%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
 fi
