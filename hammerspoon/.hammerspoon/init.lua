@@ -7,12 +7,12 @@ require('hs.ipc')
 hs.window.animationDuration = 0.1
 
 -- modifier keys
-local mod = {'cmd', 'alt', 'ctrl'}
+local mod = {'control', 'option', 'cmd'}
 
 -- grid setup
 hs.grid.setGrid('2x2', '1440x900')
 hs.grid.setGrid('2x2', '1920x1080')
--- hs.grid.setGrid('4x2', '3840x1080')
+hs.grid.setGrid('2x2', '2560x1080')
 hs.grid.setMargins({x=0, y=0})
 
 hs.grid.ui.showExtraKeys = false
@@ -25,6 +25,7 @@ hs.grid.ui.cellStrokeColor = {1,1,1,0.5}
 hs.grid.ui.selectedColor = {1,1,1,0.1}
 hs.grid.ui.highlightColor = {1,1,1,0.1}
 hs.grid.ui.highlightStrokeColor = {1,1,1,0.5}
+
 
 -- application hints
 hs.hints.showTitleThresh = 0
@@ -125,9 +126,9 @@ function moveWindowTo(pos)
   if not position then return end
 
   -- If we're on the second physical screen
-  if (win:frame().x >= 3600) then
-    position.x = position.x + 2
-  end
+  --if (win:frame().x >= 3600) then
+  --  position.x = position.x + 2
+  --end
 
   hs.grid.set(win, position, screen)
 end
