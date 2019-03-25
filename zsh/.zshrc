@@ -83,3 +83,8 @@ fi
 if [[ -e $HOME/.zshrc-private ]]; then
   source $HOME/.zshrc-private
 fi
+
+# If running from tty1 start sway
+if [ "$(tty)" = "/dev/tty1" ]; then
+  exec dbus-launch --sh-syntax --exit-with-session sway
+fi
