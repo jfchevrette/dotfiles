@@ -24,11 +24,55 @@ else
 fi
 
 if [[ -f ~/.kube/config ]]; then
-  RPROMPT="%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
 fi
 
+function kube_prompt() {
+  echo "%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
+}
+function git_prompt() {
+  local ok_color=2
+  local err_color=1
+  local white_color=7
+  local statc="%{\e[0;3${ok_color}m%}" # assume clean
+  local bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+
+  if [ -n "$bname" ]; then
+    local rs="$(git status --porcelain -b)"
+    if $(echo "$rs" | grep -v '^##' &> /dev/null); then # is dirty
+      statc="%{\e[0;3${err_color}m%}"
+    elif $(echo "$rs" | grep '^## .*diverged' &> /dev/null); then # has diverged
+      statc="%{\e[0;3${err_color}m%}"
+    elif $(echo "$rs" | grep '^## .*behind' &> /dev/null); then # is behind
+      statc="%{\e[0;3${white_color}m%}"
+    elif $(echo "$rs" | grep '^## .*ahead' &> /dev/null); then # is ahead
+      statc="%{\e[0;3${white_color}m%}"
+    else # is clean
+      statc="%{\e[0;3${ok_color}m%}"
+    fi
+    echo -n "$statc$bname%{\e[0m%}"
+  fi
+}
+PROMPT='$(~/bin/prompt) \$ '
+RPROMPT='$(git_prompt) $(kube_prompt)'
+
 # History
-alias history='history -i'
+function myhistory {
+  local clear list
+  zparseopts -E c=clear l=list
+
+  if [[ -n "$clear" ]]; then
+    # if -c provided, clobber the history file
+    echo -n >| "$HISTFILE"
+    echo >&2 History file deleted. Reload the session to see its effects.
+  elif [[ -n "$list" ]]; then
+    # if -l provided, run as if calling `fc' directly
+    builtin fc "$@"
+  else
+    # unless a number is provided, show all history events (starting from 1)
+    [[ ${@[-1]} = *[0-9]* ]] && builtin fc -l "$@" || builtin fc -l "$@" 1
+  fi
+}
+alias history='myhistory'
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=10000
@@ -52,6 +96,10 @@ if [[ -z "${SSH_AGENT_PID}" ]]; then
   fi
   . /tmp/ssh-agent-$USER >/dev/null
 fi
+
+# Copy/Paste
+alias pbcopy=xclip -i -selection clipboard
+alias pbpaste=xclip -o -selection clipboard
 
 # exa
 if hash exa 2> /dev/null; then alias ls='exa -alghH --git'; fi

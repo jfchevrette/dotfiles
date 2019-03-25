@@ -67,13 +67,12 @@ URxvt*.depth: 32
 URxvt*.internalBorder: 5
 URxvt*.externalBorder: 0
 URxvt*.termName: rxvt-unicode
+URxvt.perl-ext-common: selection-to-clipboard
 
 ! Rofi
-! rofi.color-enabled: true
-! rofi.color-window: #2f343f, #2f343f, #2f343f
-! rofi.color-normal: #2f343f, #d8dee8, #2f343f, #2f343f, #81a1c1
-! rofi.color-active: #2f343f, #b48ead, #2f343f, #2f343f, #81a1c1
-! rofi.color-urgent: #2f343f, #ebcb8b, #2f343f, #2f343f, #BF616A 
+rofi.color-enabled: true
+rofi.color-window: #323232, #323232, #323232
+rofi.color-normal: #323232, #ffffff, #323232
 
 ! XFT Font Config
 Xft.autohint: 0
