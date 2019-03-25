@@ -27,7 +27,8 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 exec swayidle \
     timeout 300 'swaylock -c 000000' \
     timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"'
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock -c 000000'
 
 ### Input configuration
 input * {
@@ -54,9 +55,15 @@ input "1739:0:Synaptics_TM3053-003" {
     # start your launcher
     bindsym $mod+space exec rofi -show run -matching fuzzy -location 1 -lines 10 -width 100 -padding 2 -sidebar-mode -terminal alacritty -parse-known-hosts -sorting-method fzf -color-normal "#323232,#ffffff,#323232" -color-window "#323232,#323232,#323232"
 
-    # Bightness
-    bindsym XF86MonBrightnessUp exec light -A 10
-    bindsym XF86MonBrightnessDown exec light -U 10
+    # Media controls
+    bindsym XF86AudioPrev         exec --no-startup-id playerctl prev
+    bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
+    bindsym XF86AudioNext         exec --no-startup-id playerctl next
+    bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5%
+    bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +5%
+    bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle
+    bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
+    bindsym XF86MonBrightnessUp   exec --no-startup-id light -A 5
 
     # Lock screen
     bindsym $mod+ctrl+alt+l exec swaylock -c 333333
@@ -179,6 +186,20 @@ bindsym $mod+ctrl+$left resize shrink width 20px
 bindsym $mod+ctrl+$right resize grow width 20px
 bindsym $mod+ctrl+$up resize grow height 20px
 bindsym $mod+ctrl+$down resize shrink height 20px
+
+
+#
+# Looks
+#
+# turns off gaps and borders when there's only one window
+smart_borders on
+smart_gaps on
+hide_edge_borders smart
+
+# borders
+default_border pixel 3
+default_floating_border pixel 3
+gaps inner 6
 
 #
 # Status Bar:
