@@ -16,16 +16,6 @@ if ! zgen saved; then
 fi
 
 # Prompt
-setopt prompt_subst
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  PROMPT='$(~/bin/prompt-darwin) \$ '
-else
-  PROMPT='$(~/bin/prompt-linux) \$ '
-fi
-
-if [[ -f ~/.kube/config ]]; then
-fi
-
 function kube_prompt() {
   echo "%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
 }
@@ -52,7 +42,13 @@ function git_prompt() {
     echo -n "$statc$bname%{\e[0m%}"
   fi
 }
-PROMPT='$(~/bin/prompt) \$ '
+
+setopt prompt_subst
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  PROMPT='$(~/bin/prompt-darwin) \$ '
+else
+  PROMPT='$(~/bin/prompt-linux) \$ '
+fi
 RPROMPT='$(git_prompt) $(kube_prompt)'
 
 # History
