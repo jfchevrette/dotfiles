@@ -21,7 +21,7 @@ output eDP-1 pos 0 0 res 1920x1080
 output DP-4 pos 1920 0 res 1920x1080
 output DP-3 pos 3840 0 res 2560x1080
 
-output * bg $HOME/.config/wallpaper/mountain.png fill
+output * bg $HOME/.config/wallpaper/nord-arch.png fill
 
 ### Idle configuration
 exec swayidle \
