@@ -21,7 +21,7 @@ output eDP-1 pos 0 0 res 1920x1080
 output DP-4 pos 1920 0 res 1920x1080
 output DP-3 pos 3840 0 res 2560x1080
 
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg $HOME/.config/wallpaper/mountain.png fill
 
 ### Idle configuration
 exec swayidle \
@@ -42,6 +42,19 @@ input "1739:0:Synaptics_TM3053-003" {
     middle_emulation enabled
 }
 
+set $w1 "1:1"
+set $w2 "2:2"
+set $w3 "3:3"
+set $w4 "4:4"
+set $w5 "5:5"
+set $w6 "6:6"
+set $w7 "7:7"
+set $w8 "8:8"
+set $w9 "9:9"
+set $w0 "0:0"
+
+workspace 1 1
+
 ### Key bindings
 #
 # Basics:
@@ -53,7 +66,7 @@ input "1739:0:Synaptics_TM3053-003" {
     bindsym $mod+Shift+c kill
     
     # start your launcher
-    bindsym $mod+space exec rofi -show run -matching fuzzy -location 1 -lines 10 -width 100 -padding 2 -sidebar-mode -terminal alacritty -parse-known-hosts -sorting-method fzf -color-normal "#323232,#ffffff,#323232" -color-window "#323232,#323232,#323232"
+    bindsym $mod+space exec rofi -show run -matching fuzzy -lines 10 -width 60 -padding 2 -sidebar-mode -terminal alacritty -parse-known-hosts -sorting-method fzf -color-normal "#323232,#ffffff,#323232" -color-window "#323232,#323232,#323232"
 
     # Media controls
     bindsym XF86AudioPrev         exec --no-startup-id playerctl prev
@@ -97,28 +110,39 @@ input "1739:0:Synaptics_TM3053-003" {
 #
 # Workspaces:
 #
+    # Move workspace to active output
+    bindsym $mod+1 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w1"
+    bindsym $mod+2 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w2"
+    bindsym $mod+3 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w3"
+    bindsym $mod+4 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w4"
+    bindsym $mod+5 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w5"
+    bindsym $mod+6 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w6"
+    bindsym $mod+7 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w7"
+    bindsym $mod+8 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w8"
+    bindsym $mod+9 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w9"
+    bindsym $mod+0 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w0"
     # switch to workspace
-    bindsym $mod+1 workspace 1
-    bindsym $mod+2 workspace 2
-    bindsym $mod+3 workspace 3
-    bindsym $mod+4 workspace 4
-    bindsym $mod+5 workspace 5
-    bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace 7
-    bindsym $mod+8 workspace 8
-    bindsym $mod+9 workspace 9
-    bindsym $mod+0 workspace 10
+    #bindsym $mod+1 workspace $w1
+    #bindsym $mod+2 workspace $w2
+    #bindsym $mod+3 workspace $w3
+    #bindsym $mod+4 workspace $w4
+    #bindsym $mod+5 workspace $w5
+    #bindsym $mod+6 workspace $w6
+    #bindsym $mod+7 workspace $w7
+    #bindsym $mod+8 workspace $w8
+    #bindsym $mod+9 workspace $w9
+    #bindsym $mod+0 workspace $w0
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace 1
-    bindsym $mod+Shift+2 move container to workspace 2
-    bindsym $mod+Shift+3 move container to workspace 3
-    bindsym $mod+Shift+4 move container to workspace 4
-    bindsym $mod+Shift+5 move container to workspace 5
-    bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace 7
-    bindsym $mod+Shift+8 move container to workspace 8
-    bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
+    bindsym $mod+Shift+1 move container to workspace $w1
+    bindsym $mod+Shift+2 move container to workspace $w2
+    bindsym $mod+Shift+3 move container to workspace $w3
+    bindsym $mod+Shift+4 move container to workspace $w4
+    bindsym $mod+Shift+5 move container to workspace $w5
+    bindsym $mod+Shift+6 move container to workspace $w6
+    bindsym $mod+Shift+7 move container to workspace $w7
+    bindsym $mod+Shift+8 move container to workspace $w8
+    bindsym $mod+Shift+9 move container to workspace $w9
+    bindsym $mod+Shift+0 move container to workspace $w0
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -192,14 +216,25 @@ bindsym $mod+ctrl+$down resize shrink height 20px
 # Looks
 #
 # turns off gaps and borders when there's only one window
-smart_borders on
-smart_gaps on
-hide_edge_borders smart
+#smart_borders on
+#smart_gaps off
+#hide_edge_borders smart
 
 # borders
+
+gaps inner 5
+gaps outer 0
+new_window pixel 3
+new_float pixel 3
 default_border pixel 3
 default_floating_border pixel 3
-gaps inner 6
+focus_follows_mouse no
+mouse_warping none
+
+client.focused		#ff6e67 #ff6e67 #ff6e67 #ffc1bd #ff6e67
+client.unfocused	#4d4d4d #4d4d4d #c2c2c2 #4d4d4d #4d4d4d
+client.focused_inactive	#4d4d4d #4d4d4d #c2c2c2 #4d4d4d #4d4d4d
+
 
 #
 # Status Bar:
