@@ -1,9 +1,14 @@
 {
     "layer": "top",
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    "modules-center": ["tray" ],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "battery", "battery#bat2", "clock"],
+    "position": "top",
+    "height": 38,
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/spotify"],
+    "modules-center": ["sway/window" ],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "battery", "battery#bat2", "custom/utc", "custom/eastern", "tray"],
 
+    "sway/workspaces": {
+        "format": "{index}"
+    },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
@@ -23,22 +28,28 @@
         "icon-size": 21,
         "spacing": 10
     },
-    "clock": {
-        "tooltip-format": "{:%Y-%m-%d | %H:%M}",
-        "format-alt": "{:%Y-%m-%d}"
+    "custom/eastern": {
+	"format": " {}",
+	"exec": "TZ=America/Montreal date +'%H:%M %Z'",
+	"interval": 60
+    },
+    "custom/utc": {
+	"format": " {}",
+	"exec": "TZ=UTC date +'%H:%M %Z'",
+	"interval": 60
     },
     "cpu": {
-        "format": "{usage}% "
+        "format": " {usage}%"
     },
     "memory": {
-        "format": "{}% "
+        "format": " {}%"
     },
     "temperature": {
         "critical-threshold": 80,
-        "format": "{temperatureC}°C "
+        "format": " {temperatureC}°C"
     },
     "backlight": {
-        "format": "{percent}% {icon}",
+        "format": "{icon} {percent}%",
         "format-icons": ["", ""]
     },
     "battery": {
@@ -47,20 +58,20 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
+        "format": "{icon} {capacity}%",
         "format-icons": ["", "", "", "", ""]
     },
     "battery#bat2": {
         "bat": "BAT2"
     },
     "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-disconnected": "Disconnected ⚠"
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": " {ifname}: {ipaddr}/{cidr}",
+        "format-disconnected": "⚠ Disconnected"
     },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
         "format-muted": "",
         "format-icons": {
             "headphones": "",
@@ -72,5 +83,13 @@
             "default": ["", ""]
         },
         "on-click": "pavucontrol"
+    },
+    "custom/spotify": {
+        "interval": 1,
+        "format": " {}",
+        "max-length": 40,
+        "escape": true,
+        "exec": "playerctl metadata --format '{{ artist }} - {{ title }}' 2> /dev/null"
     }
+
 }
