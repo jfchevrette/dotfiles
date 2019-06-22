@@ -25,10 +25,10 @@ output * bg $HOME/.config/wallpaper/nord-arch.png fill
 
 ### Idle configuration
 exec swayidle \
-    timeout 300 'swaylock -c 000000' \
+    timeout 300 'swaylock -f -c 000000' \
     timeout 600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock -c 000000'
+    before-sleep 'swaylock -f -c 000000'
 
 ### Input configuration
 input * {
@@ -67,6 +67,9 @@ workspace 1 1
 #
     # start a terminal
     bindsym $mod+Return exec $term
+
+    # start ranger
+    bindsym $mod+m exec $term -e ranger --selectfile=$HOME/Downloads
     
     # kill focused window
     bindsym $mod+Shift+c kill
@@ -78,11 +81,15 @@ workspace 1 1
     bindsym XF86AudioPrev         exec --no-startup-id playerctl prev
     bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
     bindsym XF86AudioNext         exec --no-startup-id playerctl next
-    bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume 0 -5%
-    bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume 0 +5%
-    bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute 0 toggle
+    bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
     bindsym XF86MonBrightnessDown exec --no-startup-id light -U 10
     bindsym XF86MonBrightnessUp   exec --no-startup-id light -A 5
+
+    # Screenshots
+    bindsym --release Print exec grim $HOME/Pictures/screenshot_$(date +'%Y-%m-%d_%H-%M-%S.png'); exec notify-send "Screenshot taken!"
+    bindsym --release Shift+Print exec grim -g "$(slurp)" $HOME/Pictures/screenshot_$(date +'%Y-%m-%d_%H-%M-%S.png'); exec notify-send "Screenshot taken!"
 
     # Lock screen
     bindsym $mod+ctrl+alt+l exec swaylock -c 333333
@@ -117,27 +124,16 @@ workspace 1 1
 # Workspaces:
 #
     # Move workspace to active output
-    bindsym $mod+1 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w1"
-    bindsym $mod+2 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w2"
-    bindsym $mod+3 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w3"
-    bindsym $mod+4 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w4"
-    bindsym $mod+5 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w5"
-    bindsym $mod+6 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w6"
-    bindsym $mod+7 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w7"
-    bindsym $mod+8 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w8"
-    bindsym $mod+9 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w9"
-    bindsym $mod+0 exec $HOME/.config/sway/move-workspace-to-active-output.py --create-if-absent "$w0"
-    # switch to workspace
-    #bindsym $mod+1 workspace $w1
-    #bindsym $mod+2 workspace $w2
-    #bindsym $mod+3 workspace $w3
-    #bindsym $mod+4 workspace $w4
-    #bindsym $mod+5 workspace $w5
-    #bindsym $mod+6 workspace $w6
-    #bindsym $mod+7 workspace $w7
-    #bindsym $mod+8 workspace $w8
-    #bindsym $mod+9 workspace $w9
-    #bindsym $mod+0 workspace $w0
+    bindsym $mod+1 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w1"
+    bindsym $mod+2 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w2"
+    bindsym $mod+3 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w3"
+    bindsym $mod+4 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w4"
+    bindsym $mod+5 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w5"
+    bindsym $mod+6 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w6"
+    bindsym $mod+7 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w7"
+    bindsym $mod+8 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w8"
+    bindsym $mod+9 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w9"
+    bindsym $mod+0 exec $HOME/.config/sway/move-workspace-to-active-output.py "$w0"
     # move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace $w1
     bindsym $mod+Shift+2 move container to workspace $w2
@@ -223,15 +219,15 @@ bindsym $mod+ctrl+$down resize shrink height 20px
 #
 # turns off gaps and borders when there's only one window
 #smart_borders on
-#smart_gaps off
+#smart_gaps on
 #hide_edge_borders smart
 
 # borders
 
 gaps inner 5
 gaps outer 0
-new_window pixel 3
-new_float pixel 3
+#new_window pixel 3
+#new_float pixel 3
 default_border pixel 3
 default_floating_border pixel 3
 focus_follows_mouse no
@@ -240,6 +236,12 @@ mouse_warping none
 client.focused		#ff6e67 #ff6e67 #ff6e67 #ffc1bd #ff6e67
 client.unfocused	#4d4d4d #4d4d4d #c2c2c2 #4d4d4d #4d4d4d
 client.focused_inactive	#4d4d4d #4d4d4d #c2c2c2 #4d4d4d #4d4d4d
+
+for_window [window_type="normal"] inhibit_idle fullscreen
+for_window [class="mpv"] floating enable, sticky enable
+
+assign [class="Chromium"] workspace $w1
+assign [class="Firefox"] workspace $w1
 
 
 #

@@ -11,19 +11,26 @@ def swaymsg(cmd):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--create-if-absent", help='Create workspace if absent', default=False, action='store_true')
     parser.add_argument("workspace_name")
     args = parser.parse_args()
 
     active_output = None
     active_workspace = None
     target_output = None
+    workspace_name = args.workspace_name
+
+    # Find active output, active workspace and target output 
     for w in swaymsg("-t get_workspaces"):
         if w['focused']:
             active_output = w['output']
             active_workspace = w['name']
         if w['name'] == args.workspace_name:
             target_output = w['output']
+
+    # Find what is the currently active workspace on the target output
+    for output in swaymsg("-t get_outputs"):
+        if output["name"] == target_output:
+            target_output_current_workspace = output["current_workspace"]
 
     if not active_output:
         print("ERROR: Could not find active output.")
@@ -33,21 +40,17 @@ def main():
         print("ERROR: Could not find active workspace.")
         sys.exit(1)
 
+    # If workspace not found on any target, just create it, otherwise do the move dance
     if not target_output:
-        if args.create_if_absent:
-            swaymsg("'workspace {}'".format(args.workspace_name))
-        else:
-            print("ERROR: Could not find workspace {}.".format(args.workspace_name))
-            sys.exit(1)
-
-    #print("Move workspace {} to output {}".format(active_workspace, target_output))
-    #print("Move workspace {} to output {}".format(args.workspace_name, active_output))
-
-    swaymsg("'workspace {}; move workspace to output {}; workspace {}; move workspace to output {}; workspace {}'".format(
-        active_workspace, target_output,
-        args.workspace_name, active_output,
-        args.workspace_name
-    ))
+        swaymsg("'workspace {}'".format(args.workspace_name))
+    else:
+        msg = "'workspace {}; move workspace to output {}; workspace {}; move workspace to output {}; workspace {}; workspace {}'".format(
+            workspace_name, active_output,
+            active_workspace, target_output,
+            target_output_current_workspace,
+            workspace_name
+        )
+        swaymsg(msg)
 
 if __name__ == "__main__":
     main()
