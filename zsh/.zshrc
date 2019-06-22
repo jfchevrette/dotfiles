@@ -76,10 +76,13 @@ SAVEHIST=10000
 setopt extended_history       # record timestamp of command in HISTFILE
 setopt hist_expire_dups_first # delete duplicates first when HISTFILE size exceeds HISTSIZE
 setopt hist_ignore_dups       # ignore duplicated commands history list
+setopt hist_ignore_all_dups   # deleteold recorded entry if new entry is a duplicate
+setopt hist_save_no_dups      # don't write duplicate entries in the history file
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt inc_append_history     # add commands to HISTFILE in order of execution
 setopt share_history          # share command history data
+setopt hist_reduce_blanks     # remove superfluous blanks before recording entry
 
 # Fix Home/End/Delete
 bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
@@ -100,9 +103,10 @@ alias pbpaste=xclip -o -selection clipboard
 
 # exa
 if hash exa 2> /dev/null; then alias ls='exa -alghH --git'; fi
+alias ll=ls -alsnew
 
-# colored cat
-if hash ccat 2> /dev/null; then alias cat=ccat; fi
+# bat instead of cat
+if hash bat 2> /dev/null; then alias cat=bat; fi
 
 # prefer GNU sed b/c BSD sed doesn't handle whitespace the same
 if hash gsed 2> /dev/null; then alias sed=gsed; fi
@@ -127,7 +131,7 @@ if hash direnv 2> /dev/null; then
 fi
 
 # fzf
-[[ -f /usr/share/fzf/shell/key-bindings.zsh ]] && source "/usr/share/fzf/shell/key-bindings.zsh"
+[[ -f /usr/share/fzf/key-bindings.zsh ]] && source "/usr/share/fzf/key-bindings.zsh"
 
 # Private stuff
 if [[ -e $HOME/.zshrc-private ]]; then
@@ -137,4 +141,40 @@ fi
 # If running from tty1 start sway
 if [ "$(tty)" = "/dev/tty1" ]; then
   exec dbus-launch --sh-syntax --exit-with-session sway
+fi
+
+# Fix escape sequences from terminfo
+typeset -A key
+key[Home]="$terminfo[khome]"
+key[End]="$terminfo[kend]"
+key[Insert]="$terminfo[kich1]"
+key[Backspace]="$terminfo[kbs]"
+key[Delete]="$terminfo[kdch1]"
+key[Up]="$terminfo[kcuu1]"
+key[Down]="$terminfo[kcud1]"
+key[Left]="$terminfo[kcub1]"
+key[Right]="$terminfo[kcuf1]"
+key[PageUp]="$terminfo[kpp]"
+key[PageDown]="$terminfo[knp]"
+
+# setup key accordingly
+[[ -n "$key[Home]"      ]] && bindkey -- "$key[Home]"      beginning-of-line
+[[ -n "$key[End]"       ]] && bindkey -- "$key[End]"       end-of-line
+[[ -n "$key[Insert]"    ]] && bindkey -- "$key[Insert]"    overwrite-mode
+[[ -n "$key[Backspace]" ]] && bindkey -- "$key[Backspace]" backward-delete-char
+[[ -n "$key[Delete]"    ]] && bindkey -- "$key[Delete]"    delete-char
+[[ -n "$key[Up]"        ]] && bindkey -- "$key[Up]"        up-line-or-history
+[[ -n "$key[Down]"      ]] && bindkey -- "$key[Down]"      down-line-or-history
+[[ -n "$key[Left]"      ]] && bindkey -- "$key[Left]"      backward-char
+[[ -n "$key[Right]"     ]] && bindkey -- "$key[Right]"     forward-char
+
+if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
+    function zle-line-init () {
+        echoti smkx
+    }
+    function zle-line-finish () {
+        echoti rmkx
+    }
+    zle -N zle-line-init
+    zle -N zle-line-finish
 fi
