@@ -3,3 +3,4 @@
 # Direnv stuff
 .direnv
 .envrc
+/.vscode
