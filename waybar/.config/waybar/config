@@ -4,7 +4,7 @@
     "height": 38,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/spotify"],
     "modules-center": ["sway/window" ],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "battery", "battery#bat2", "custom/utc", "custom/eastern", "tray"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "battery", "custom/utc", "custom/eastern", "tray"],
 
     "sway/workspaces": {
         "format": "{index}"
@@ -60,9 +60,6 @@
         },
         "format": "{icon} {capacity}%",
         "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT2"
     },
     "network": {
         "format-wifi": " {essid} ({signalStrength}%)",
