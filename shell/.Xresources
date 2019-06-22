@@ -53,21 +53,21 @@
 *color20:      base04
 *color21:      base06
 
-URxvt*fading:        50
-URxvt*fadeColor:     #000000
+XTerm*fading:        50
+XTerm*fadeColor:     #000000
 
-URxvt*.urgentOnBell: true
-URxvt*.scrollBar: false
-URxvt*.saveLines: 1000000
-URxvt*.scrollTtyOutput: false
-URxvt*.scrollWithBuffer: true
-URxvt*.scrollTtyKeypress: true
-URxvt*.font: xft:Hack:size=14:antialias=true:hinting=true
-URxvt*.depth: 32
-URxvt*.internalBorder: 5
-URxvt*.externalBorder: 0
-URxvt*.termName: rxvt-unicode
-URxvt.perl-ext-common: selection-to-clipboard
+XTerm*.urgentOnBell: true
+XTerm*.scrollBar: false
+XTerm*.saveLines: 1000000
+XTerm*.scrollTtyOutput: false
+XTerm*.scrollWithBuffer: true
+XTerm*.scrollTtyKeypress: true
+XTerm*.font: xft:Hack:size=14:antialias=true:hinting=true
+XTerm*.depth: 32
+XTerm*.internalBorder: 5
+XTerm*.externalBorder: 0
+XTerm*.termName: rxvt-unicode
+XTerm.perl-ext-common: selection-to-clipboard
 
 ! Rofi
 rofi.color-enabled: true
