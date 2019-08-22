@@ -95,10 +95,6 @@ if [[ -z "${SSH_AGENT_PID}" ]]; then
   . /tmp/ssh-agent-$USER >/dev/null
 fi
 
-# Copy/Paste
-alias pbcopy=xclip -i -selection clipboard
-alias pbpaste=xclip -o -selection clipboard
-
 # exa
 if hash exa 2> /dev/null; then alias ls='exa -alghH --git'; fi
 alias ll=ls -alsnew
@@ -115,18 +111,6 @@ alias kc=kubectx
 
 alias time=/usr/bin/time
 export TIME="\t%e real\t%U user\t%S sys"
-
-# direnv
-#eval "$(direnv hook zsh)"
-_direnv_hook() {
-  eval "$(direnv export zsh)";
-}
-typeset -ag precmd_functions;
-if hash direnv 2> /dev/null; then
-  if [[ -z ${precmd_functions[(r)_direnv_hook]} ]]; then
-    precmd_functions+=_direnv_hook;
-  fi
-fi
 
 # fzf
 [[ -f /usr/share/fzf/key-bindings.zsh ]] && source "/usr/share/fzf/key-bindings.zsh"
