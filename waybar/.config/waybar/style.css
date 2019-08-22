@@ -44,7 +44,7 @@ window > box {
     border-bottom: 2px solid #ffffff;
 }
 
-#clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-spotify, #tray, #mode, #idle_inhibitor, #custom-eastern, #custom-utc {
+#custom-kubectx, #clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-spotify, #tray, #mode, #idle_inhibitor, #custom-eastern, #custom-utc {
     padding: 0 2px;
     margin: 0 5px;
     background: transparent;
@@ -53,6 +53,10 @@ window > box {
 
 #clock, #custom-eastern, #custom-utc {
     border-bottom: 2px solid #bd93f9;
+}
+
+#custom-kubectx {
+    border-bottom: 2px solid #3371e3;
 }
 
 #battery {
