@@ -8,7 +8,6 @@ if ! zgen saved; then
   zgen load mafredri/zsh-async
   zgen load peterhurford/git-it-on.zsh
   zgen load rupa/z
-  #zgen load sindresorhus/pure
   zgen load unixorn/autoupdate-zgen
   zgen load zdharma/fast-syntax-highlighting
   zgen load zsh-users/zsh-autosuggestions
