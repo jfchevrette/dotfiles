@@ -45,11 +45,10 @@ function git_prompt() {
 
 setopt prompt_subst
 if [[ "$(uname -s)" == "Darwin" ]]; then
-  PROMPT='$(~/bin/prompt-darwin) \$ '
+	PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
 else
-  PROMPT='$(~/bin/prompt-linux) \$ '
+	PROMPT='$(~/bin/prompt-linux) $(git_prompt) \$ '
 fi
-RPROMPT='$(git_prompt) $(kube_prompt)'
 
 # History
 function myhistory {
