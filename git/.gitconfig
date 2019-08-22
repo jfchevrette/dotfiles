@@ -1,6 +1,7 @@
 [user]
   name = Jean-Francois Chevrette
   email = jfchevrette@gmail.com
+  signingkey = B61296A9498EEECDD5E9C0F067A0585801290DC6
 
 [push]
 	default = matching
