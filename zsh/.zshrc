@@ -1,7 +1,10 @@
-zmodload zsh/zprof
-[[ ! -d $HOME/.zgen ]] && git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen" 
+# ~/.zshrc
+#
+#
+# shellcheck disable=SC1090,SC2148
 
-export ZGEN_RESET_ON_CHANGE=($HOME/.zshrc)
+[[ ! -d $HOME/.zgen ]] && git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen" 
+export ZGEN_RESET_ON_CHANGE=("${HOME}/.zshrc" "${HOME}/.zshenv")
 source "${HOME}/.zgen/zgen.zsh"
 
 if ! zgen saved; then
@@ -24,17 +27,20 @@ function git_prompt() {
   local err_color=1
   local white_color=7
   local statc="%{\e[0;3${ok_color}m%}" # assume clean
-  local bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-
+  local bname
+  
+  bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
   if [ -n "$bname" ]; then
-    local rs="$(git status --porcelain -b)"
-    if $(echo "$rs" | grep -v '^##' &> /dev/null); then # is dirty
+    local rs
+
+    rs="$(git status --porcelain -b)"
+    if echo "$rs" | grep -v '^##' &> /dev/null; then # is dirty
       statc="%{\e[0;3${err_color}m%}"
-    elif $(echo "$rs" | grep '^## .*diverged' &> /dev/null); then # has diverged
+    elif echo "$rs" | grep '^## .*diverged' &> /dev/null; then # has diverged
       statc="%{\e[0;3${err_color}m%}"
-    elif $(echo "$rs" | grep '^## .*behind' &> /dev/null); then # is behind
+    elif echo "$rs" | grep '^## .*behind' &> /dev/null; then # is behind
       statc="%{\e[0;3${white_color}m%}"
-    elif $(echo "$rs" | grep '^## .*ahead' &> /dev/null); then # is ahead
+    elif echo "$rs" | grep '^## .*ahead' &> /dev/null; then # is ahead
       statc="%{\e[0;3${white_color}m%}"
     else # is clean
       statc="%{\e[0;3${ok_color}m%}"
@@ -44,10 +50,9 @@ function git_prompt() {
 }
 
 setopt prompt_subst
+PROMPT='$(~/bin/prompt-linux) $(git_prompt) \$ '
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
-else
-	PROMPT='$(~/bin/prompt-linux) $(git_prompt) \$ '
 fi
 
 # History
@@ -100,7 +105,10 @@ if hash exa 2> /dev/null; then alias ls='exa -alghH --git'; fi
 alias ll=ls -alsnew
 
 # bat instead of cat
-if hash bat 2> /dev/null; then alias cat=bat; fi
+if hash bat 2> /dev/null; then
+  alias cat=bat
+  export MANPAGER="sh -c 'col -b | bat -l man -p'"
+fi
 
 # prefer GNU sed b/c BSD sed doesn't handle whitespace the same
 if hash gsed 2> /dev/null; then alias sed=gsed; fi
@@ -160,3 +168,17 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-init
     zle -N zle-line-finish
 fi
+
+# Work related aliases
+alias daily='/bin/cat ~/work/daily/daily-$(date "+%Y%m%d").txt'
+alias vidaily='/usr/bin/vim ~/work/daily/daily-$(date "+%Y%m%d").txt'
+alias todo='/bin/cat ~/work/todo.txt'
+
+# Bitwarden
+function bwunlock() {
+  export BW_SESSION=$(bw unlock --raw)
+}
+
+# asdf
+. /opt/asdf-vm/asdf.sh
+. /opt/asdf-vm/completions/asdf.bash
