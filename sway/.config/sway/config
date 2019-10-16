@@ -218,6 +218,20 @@ bindsym $mod+ctrl+$up resize grow height 20px
 bindsym $mod+ctrl+$down resize shrink height 20px
 
 
+### Screen sharing mode
+for_window [class=ffplay] floating enable, sticky enable
+set $mode_adjust "Sway screen sharing: (s)tart; s(t)op; st(a)tus"
+bindsym $mod+Shift+s mode $mode_adjust
+mode $mode_adjust {
+	bindsym s exec ~/bin/sway-screen-share.sh start, mode "default"
+	bindsym t exec ~/bin/sway-screen-share.sh stop, mode "default"
+	bindsym a exec ~/bin/sway-screen-share.sh is-recording, mode "default"
+
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+
 #
 # Looks
 #
