@@ -4,7 +4,7 @@
     "height": 38,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/spotify", "custom/sway-screen-share"],
     "modules-center": [],
-    "modules-right": ["idle_inhibitor", "custom/kubectx", "pulseaudio", "network", "backlight", "battery", "custom/utc", "custom/eastern", "tray"],
+    "modules-right": ["idle_inhibitor", "custom/kubectx", "pulseaudio", "network", "backlight", "battery", "custom/utc", "custom/eastern", "custom/pst", "tray"],
 
     "sway/workspaces": {
         "format": "{index}"
@@ -36,6 +36,11 @@
     "custom/eastern": {
 	"format": " {}",
 	"exec": "TZ=America/Montreal date +'%H:%M %Z'",
+	"interval": 60
+    },
+    "custom/pst": {
+	"format": " {}",
+	"exec": "TZ=PST8PDT date +'%H:%M %Z'",
 	"interval": 60
     },
     "custom/utc": {
