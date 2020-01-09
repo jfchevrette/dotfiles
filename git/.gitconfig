@@ -11,6 +11,12 @@
 	excludesfile = ~/.gitignore_global
 	whitespace = space-before-tab,trailing-space
 
+[log]
+	date = relative
+
+[format]
+	pretty = %C(bold red)%h%Creset %C(white)%ad%Creset %Cgreen%aN%Creset %C(bold normal)%s%Creset %C(auto)%d%Creset
+
 [alias]
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
