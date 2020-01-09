@@ -52,7 +52,7 @@ function git_prompt() {
 setopt prompt_subst
 PROMPT='$(~/bin/prompt-linux) $(git_prompt) \$ '
 if [[ "$(uname -s)" == "Darwin" ]]; then
-	PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
+  PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
 fi
 
 # History
@@ -128,11 +128,6 @@ if [[ -e $HOME/.zshrc-private ]]; then
   source $HOME/.zshrc-private
 fi
 
-# If running from tty1 start sway
-if [ "$(tty)" = "/dev/tty1" ]; then
-  exec dbus-launch --sh-syntax --exit-with-session sway
-fi
-
 # Fix escape sequences from terminfo
 typeset -A key
 key[Home]="$terminfo[khome]"
@@ -180,5 +175,7 @@ function bwunlock() {
 }
 
 # asdf
-. /opt/asdf-vm/asdf.sh
-. /opt/asdf-vm/completions/asdf.bash
+source /opt/asdf-vm/asdf.sh
+source /opt/asdf-vm/completions/asdf.bash
+
+source /home/jfchevrette/.config/broot/launcher/bash/br
