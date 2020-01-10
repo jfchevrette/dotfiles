@@ -36,17 +36,12 @@ input * {
   xkb_layout ca
   xkb_variant multix
 }
-input "1739:0:Synaptics_TM3053-003" {
+input "1267:47:Elan_Touchpad" {
     dwt enabled
     tap enabled
     natural_scroll disabled
-    middle_emulation enabled
-}
-input "1452:782:jfchevrette’s_Trackpad" {
-    tap enabled
     drag enabled
     drag_lock enabled
-    dwt enabled
 }
 
 set $w1 "1:1"
