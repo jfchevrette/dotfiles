@@ -174,8 +174,4 @@ function bwunlock() {
   export BW_SESSION=$(bw unlock --raw)
 }
 
-# asdf
-source /opt/asdf-vm/asdf.sh
-source /opt/asdf-vm/completions/asdf.bash
-
 source /home/jfchevrette/.config/broot/launcher/bash/br
