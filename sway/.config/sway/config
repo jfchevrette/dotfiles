@@ -268,6 +268,6 @@ bar {
     swaybar_command waybar
 }
 
-exec_always killall mako; exec mako --background-color "#282a36" --default-timeout 5000 --icons 1 --max-visible 5 --ignore-timeout 1
+exec_always killall mako; exec mako -c ~/.config/mako/config
 
 exec_always notify-send 'Sway is ready to dance!'
