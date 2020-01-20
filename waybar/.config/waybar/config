@@ -1,13 +1,13 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 38,
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/spotify", "custom/sway-screen-share"],
+    "height": 24,
+    "modules-left": ["sway/workspaces", "sway/mode", "custom/sway-screen-share", "custom/spotify"],
     "modules-center": [],
-    "modules-right": ["idle_inhibitor", "custom/kubectx", "pulseaudio", "network", "backlight", "battery", "custom/utc", "custom/eastern", "custom/pst", "tray"],
+    "modules-right": ["custom/kubectx", "pulseaudio", "network", "backlight", "temperature", "battery", "disk", "custom/utc", "custom/eastern", "custom/pst"],
 
     "sway/workspaces": {
-        "format": "{index}"
+        "format": "{name}"
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -28,25 +28,30 @@
         "icon-size": 21,
         "spacing": 10
     },
+    "disk": {
+        "interval": 30,
+        "format": "{path}: {free}",
+        "path": "/"
+    },
     "custom/kubectx": {
-	"format": "\u2638{}",
-	"exec": "kubectl config current-context",
-	"interval": 1
+        "format": "\u2638{}",
+        "exec": "kubectl config current-context",
+        "interval": 1
     },
     "custom/eastern": {
-	"format": " {}",
-	"exec": "TZ=America/Montreal date +'%H:%M %Z'",
-	"interval": 60
+        "format": " {}",
+        "exec": "TZ=America/Montreal date +'%H:%M %Z'",
+        "interval": 60
     },
     "custom/pst": {
-	"format": " {}",
-	"exec": "TZ=PST8PDT date +'%H:%M %Z'",
-	"interval": 60
+        "format": " {}",
+        "exec": "TZ=PST8PDT date +'%H:%M %Z'",
+        "interval": 60
     },
     "custom/utc": {
-	"format": " {}",
-	"exec": "TZ=UTC date +'%H:%M %Z'",
-	"interval": 60
+        "format": " {}",
+        "exec": "TZ=UTC date +'%H:%M %Z'",
+        "interval": 60
     },
     "cpu": {
         "format": " {usage}%"
@@ -63,13 +68,17 @@
         "format-icons": ["", ""]
     },
     "battery": {
+        "tooltip": false,
+        "bat": "BAT0",
+        "interval": 10,
         "states": {
-            "good": 95,
             "warning": 30,
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-icons": ["", "", "", "", ""]
+        "format-charging": " {capacity}%",
+        "format-icons": ["", "", "", "", ""],
+        "max-length": 25
     },
     "network": {
         "format-wifi": " {essid} ({signalStrength}%)",

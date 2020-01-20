@@ -1,153 +1,84 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: RobotoMono NerdFont, Roboto, Noto ans CJK JP, sans-serif;
-    font-weight: bold;
-    font-size: 13px;
+    font-family: Hack, DejaVu Sans Mono, Arial;
+    font-size: 15px;
     min-height: 0;
-}
-
-window#waybar {
+  }
+  
+  #waybar {
+    background: rgba(50, 50, 50, 0.5);
+    color: #BBBBBB;
+  }
+  
+  #workspaces button {
+    padding: 0 5px;
     background: transparent;
-    color: #ffffff;
-}
-
-window > box {
-    margin: 5 5 0 5px;
-    background: #282a36;
-    border: 3px solid #4d4d4d;
     color: white;
-}
-
-#workspaces {
-    margin-left: 10px;
-}
-
-#workspaces button {
-    padding: 0 3px;
-    margin: 0px;
-    background: transparent;
-    color: #ffffff;
-    border-bottom: 2px solid transparent;
     border-top: 2px solid transparent;
-}
-
-#workspaces button.focused {
-    padding: 0 3px;
-    background: transparent;
-    border-bottom: 2px solid #ff676e;
-    border-top: 2px solid transparent;
-}
-
-#mode {
-    background: #64727D;
-    border-bottom: 2px solid #ffffff;
-}
-
-#custom-kubectx, #clock, #battery, #cpu, #memory, #temperature, #backlight, #network, #pulseaudio, #custom-spotify, #custom-sway-screen-share, #tray, #mode, #idle_inhibitor, #custom-eastern, #custom-utc {
-    padding: 0 2px;
-    margin: 0 5px;
-    background: transparent;
-    border-top: 2px solid transparent;
-}
-
-#clock, #custom-eastern, #custom-utc {
-    border-bottom: 2px solid #bd93f9;
-}
-
-#custom-kubectx {
-    border-bottom: 2px solid #3371e3;
-}
-
-#battery {
-    border-bottom: 2px solid #e6e6e6;
-}
-
-#battery.charging {
-    border-bottom: 2px solid #5af78e;
-}
-
-@keyframes blink {
+  }
+  
+  #workspaces button.focused {
+    color: #7995a1;
+    border-top: 2px solid #7995a1;
+  }
+  
+  #mode {
+    background: darkred;
+  }
+  
+  @keyframes blink {
     to {
-        border-bottom: 2px solid transparent;
+      color: red;
     }
-}
-
-#battery.critical:not(.charging) {
+  }
+  
+  #pulseaudio.muted {
+    color: orange;
+  }
+  
+  #network.disconnected {
+    color: orange;
+  }
+  
+  #battery.charging {
+    color: chartreuse;
+  }
+  
+  #custom-disk.warning,
+  #battery.warning,
+  #battery.warning:not(.charging) {
+    color: orange;
+  }
+  
+  #temperature.critical,
+  #custom-disk.critical,
+  #battery.critical,
+  #battery.critical:not(.charging) {
     animation-name: blink;
-    animation-duration: 0.7s;
+    animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-}
+  }
 
-#cpu {
-    border-bottom: 2px solid #50fa7b;
-}
-
-#memory {
-    border-bottom: 2px solid #ff79c6;
-}
-
-#backlight {
-    border-bottom: 2px solid #90b1b1;
-}
-
-#network {
-    border-bottom: 2px solid #8be9fd;
-}
-
-#network.disconnected {
-    border-bottom: 2px solid #ff676e;
-}
-
-#pulseaudio {
-    border-bottom: 2px solid #f1fa8c;
-}
-
-#pulseaudio.muted {
-    border-bottom: 2px solid #90b1b1;
-}
-
-#custom-spotify {
-    border-bottom: 2px solid #66cc99;
-}
-
-#custom-sway-screen-share {
-    padding: 0 10px;
-    background: #e53935;
-    color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-@keyframes blink {
-    to {
-        background-color: #b71c1c;
-        color: white;
-    }
-}
-
-#temperature {
-    border-bottom: 2px solid #f0932b;
-}
-
-#temperature.critical {
-    border-bottom: 2px solid #eb4d4b;
-}
-
-#tray {
-    border-bottom: 2px solid #6d93f9;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
-}
+  #custom-spotify {
+      border-top: 2px solid #1DB954;
+  }
+  
+  @define-color col_border_solid rgba(120, 120, 120, 1);
+  @define-color col_border_trans rgba(120, 120, 120, 0);
+  
+  #waybar > box:nth-child(2) > box:nth-child(3) > * > label {
+    padding: 0 15px;
+  }
+  
+  #waybar > box:nth-child(2) > box:nth-child(3) > *:not(:first-child) > label {
+    background-image:
+      linear-gradient(@col_border_trans, @col_border_solid 45%, @col_border_solid 55%, @col_border_trans)
+    ;
+    background-size:1px 20%;
+    background-position:0 50%;
+    background-repeat:no-repeat;
+  }
+  
