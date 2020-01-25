@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # ~/.zshrc
 #
 #
@@ -15,6 +22,7 @@ if ! zgen saved; then
   zgen load zdharma/fast-syntax-highlighting
   zgen load zsh-users/zsh-autosuggestions
   zgen load jfchevrette/zsh-titles
+  zgen load romkatv/powerlevel10k powerlevel10k
   zgen save
 fi
 
@@ -49,11 +57,11 @@ function git_prompt() {
   fi
 }
 
-setopt prompt_subst
-PROMPT='$(~/bin/prompt-linux) $(git_prompt) \$ '
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
-fi
+#setopt prompt_subst
+#PROMPT='$(~/bin/prompt-linux) $(git_prompt) \$ '
+#if [[ "$(uname -s)" == "Darwin" ]]; then
+#  PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
+#fi
 
 # History
 function myhistory {
@@ -120,9 +128,6 @@ alias kc=kubectx
 alias time=/usr/bin/time
 export TIME="\t%e real\t%U user\t%S sys"
 
-# fzf
-[[ -f /usr/share/fzf/key-bindings.zsh ]] && source "/usr/share/fzf/key-bindings.zsh"
-
 # Private stuff
 if [[ -e $HOME/.zshrc-private ]]; then
   source $HOME/.zshrc-private
@@ -174,4 +179,13 @@ function bwunlock() {
   export BW_SESSION=$(bw unlock --raw)
 }
 
-source /home/jfchevrette/.config/broot/launcher/bash/br
+# FZF
+export FZF_DEFAULT_COMMAND="rg --one-file-system --files"
+export FZF_DEFAULT_OPTS="--ansi --inline-info"
+source /usr/share/fzf/key-bindings.zsh
+
+# Rust
+source $HOME/.cargo/env
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
