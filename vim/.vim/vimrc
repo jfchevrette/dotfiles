@@ -6,24 +6,24 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+
 " ui/color
-Plug 'itchyny/lightline.vim'
-Plug 'arcticicestudio/nord-vim'
+Plug 'joshdick/onedark.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdtree'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " syntax/filetypes
-Plug 'fatih/vim-go'
-Plug 'elzr/vim-json', {'for': 'json'}
-Plug 'ekalinin/Dockerfile.vim', {'for': 'Dockerfile'}
-Plug 'fatih/vim-nginx', {'for': 'nginx'}
+Plug 'sheerun/vim-polyglot'
+Plug 'vim-syntastic/syntastic'
 
-" Linting
-Plug 'w0rp/ale'
+" Languages
+Plug 'fatih/vim-go'
 
 " utils
-Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'ConradIrwin/vim-bracketed-paste'
 
 call plug#end() 
@@ -94,22 +94,13 @@ set undodir=~/.vim/tmp/undo//
 set modeline
 set modelines=10
 
-colorscheme nord
-
-if has("gui_running")
-  set guifont=Source\ Code\ Pro\ for\ Powerline\ 14
-  set clipboard+=unnamed
-  set vb t_vb=
-  set guioptions-=m " no menu
-  set guioptions-=T " no toolbar
-  set guioptions-=l " no left scrollbar
-  set guioptions-=L " no left scrollbar on vsplit
-  set guioptions-=r " no right scrollbar
-  set guioptions-=R " no right scrollbar on hsplit
-
-  let macvim_skip_colorscheme=1
-  highlight SignColumn guibg=#232c31
-endif
+set termguicolors
+let g:onedark_hide_endofbuffer=1
+let g:onedark_terminal_italics=1
+let g:onedark_color_overrides = {
+\ "black": {"gui": "#1E2127", "cterm": "235", "cterm16": "0" },
+\}
+colorscheme onedark
 
 " ================
 " =   Mappings   =
@@ -165,141 +156,15 @@ nnoremap <C-u> <C-u>zz
 " =   Plugin configs   =
 " ======================
 
-" ===== lightline =====
-let g:lightline = {
-  \ 'colorscheme': 'nord',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'fugitive', 'filename', 'modified', 'ctrlpmark' ],
-  \             [ 'linterstatus' ],
-  \             [ 'go' ] ],
-  \   'right': [ [ 'lineinfo' ],
-  \              [ 'percent' ],
-  \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-  \ },
-  \ 'inactive': {
-  \   'left': [ [ 'go' ] ],
-  \ },
-  \ 'component_function': {
-  \   'lineinfo': 'LightLineInfo',
-  \   'percent': 'LightLinePercent',
-  \   'modified': 'LightLineModified',
-  \   'filename': 'LightLineFilename',
-  \   'go': 'LightLineGo',
-  \   'fileformat': 'LightLineFileformat',
-  \   'filetype': 'LightLineFiletype',
-  \   'fileencoding': 'LightLineFileencoding',
-  \   'mode': 'LightLineMode',
-  \   'fugitive': 'LightLineFugitive',
-  \   'ctrlpmark': 'CtrlPMark',
-  \   'linterstatus': 'LinterStatus',
-  \  },
-\ }
+" Vim-Airline
+let g:airline#extensions#syntastic#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme ='onedark'
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1
 
-function! LightLineModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! LinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
-
-    return l:counts.total == 0 ? 'OK' : printf(
-    \   '%dW %dE',
-    \   all_non_errors,
-    \   all_errors
-    \)
-endfunction
-
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? &fileformat : ''
-endfunction
-
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
-endfunction
-
-function! LightLineFileencoding()
-  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
-endfunction
-
-function! LightLineInfo()
-  return winwidth(0) > 60 ? printf("%3d:%-2d", line('.'), col('.')) : ''
-endfunction
-
-function! LightLinePercent()
-  return &ft =~? 'vimfiler' ? '' : (100 * line('.') / line('$')) . '%'
-endfunction
-
-function! LightLineFugitive()
-  return exists('*fugitive#head') ? fugitive#head() : ''
-endfunction
-
-function! LightLineGo()
-  " return ''
-  return exists('*go#jobcontrol#Statusline') ? go#jobcontrol#Statusline() : ''
-endfunction
-
-function! LightLineMode()
-  let fname = expand('%:t')
-  return fname == 'ControlP' ? 'CtrlP' :
-        \ &ft == 'vimfiler' ? 'VimFiler' :
-        \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-function! LightLineFilename()
-  let fname = expand('%:t')
-  if mode() == 't'
-    return ''
-  endif
-
-  return fname == 'ControlP' ? g:lightline.ctrlp_item :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]')
-endfunction
-
-function! LightLineReadonly()
-  return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-function! CtrlPMark()
-  if expand('%:t') =~ 'ControlP'
-    call lightline#link('iR'[g:lightline.ctrlp_regex])
-    return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-          \ , g:lightline.ctrlp_next], 0)
-  else
-    return ''
-  endif
-endfunction
-
-let g:ctrlp_status_func = {
-      \ 'main': 'CtrlPStatusFunc_1',
-      \ 'prog': 'CtrlPStatusFunc_2',
-      \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
-endfunction
-
+" Syntastic
+let g:syntastic_go_checkers = ['gofmt']
 
 " ===== HardTime =====
 let g:hardtime_default_on = 1
