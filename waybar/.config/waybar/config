@@ -1,7 +1,7 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 24,
+    "height": 32,
     "modules-left": ["sway/workspaces", "sway/mode", "custom/sway-screen-share", "custom/spotify"],
     "modules-center": [],
     "modules-right": ["custom/kubectx", "pulseaudio", "network", "backlight", "temperature", "battery", "disk", "custom/utc", "custom/eastern", "custom/pst"],
@@ -13,9 +13,9 @@
         "format": "<span style=\"italic\">{}</span>"
     },
     "sway/window": {
-    	//"format": " {}",
-    	"format": "{}",
-    	"max-length": 50
+      //"format": " {}",
+      "format": "{}",
+      "max-length": 50
     },
     "idle_inhibitor": {
         "format": "{icon}",
@@ -77,8 +77,7 @@
         },
         "format": "{icon} {capacity}%",
         "format-charging": " {capacity}%",
-        "format-icons": ["", "", "", "", ""],
-        "max-length": 25
+        "format-icons": ["", "", "", "", ""]
     },
     "network": {
         "format-wifi": " {essid} ({signalStrength}%)",

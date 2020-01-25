@@ -1,3 +1,20 @@
+@define-color base00 #282c34;
+@define-color base01 #353b45;
+@define-color base02 #3e4451;
+@define-color base03 #545862;
+@define-color base04 #565c64;
+@define-color base05 #abb2bf;
+@define-color base06 #b6bdca;
+@define-color base07 #c8ccd4;
+@define-color base08 #e06c75;
+@define-color base09 #d19a66;
+@define-color base0A #e5c07b;
+@define-color base0B #98c379;
+@define-color base0C #56b6c2;
+@define-color base0D #61afef;
+@define-color base0E #c678dd;
+@define-color base0F #be5046;
+
 * {
     border: none;
     border-radius: 0;
@@ -7,48 +24,48 @@
   }
   
   #waybar {
-    background: rgba(50, 50, 50, 0.5);
-    color: #BBBBBB;
+    background: @base00;
+    color: @base05;
   }
   
   #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: white;
+    color: @base07;
     border-top: 2px solid transparent;
   }
   
   #workspaces button.focused {
-    color: #7995a1;
-    border-top: 2px solid #7995a1;
+    color: @base0B;
+    border-top: 2px solid @base0B;
   }
   
   #mode {
-    background: darkred;
+    background: @base08;
   }
   
   @keyframes blink {
     to {
-      color: red;
+      color:@base08;
     }
   }
   
   #pulseaudio.muted {
-    color: orange;
+    color: @base09;
   }
   
   #network.disconnected {
-    color: orange;
+    color: @base09;
   }
   
   #battery.charging {
-    color: chartreuse;
+    color: @base0B;
   }
   
   #custom-disk.warning,
   #battery.warning,
   #battery.warning:not(.charging) {
-    color: orange;
+    color: @base09;
   }
   
   #temperature.critical,
@@ -63,11 +80,11 @@
   }
 
   #custom-spotify {
-      border-top: 2px solid #1DB954;
+      border-top: 2px solid @base0B;
   }
   
-  @define-color col_border_solid rgba(120, 120, 120, 1);
-  @define-color col_border_trans rgba(120, 120, 120, 0);
+  @define-color col_border_solid @base05;
+  @define-color col_border_trans @base05;
   
   #waybar > box:nth-child(2) > box:nth-child(3) > * > label {
     padding: 0 15px;
