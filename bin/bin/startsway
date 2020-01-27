@@ -2,4 +2,4 @@
 
 export MOZ_ENABLE_WAYLAND=1
 
-dbus-launch --sh-syntax --exit-with-session sway -D noatomic
+dbus-launch --sh-syntax --exit-with-session sway -V
