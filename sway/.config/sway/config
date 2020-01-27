@@ -235,9 +235,9 @@ mode $mode_adjust {
 # Looks
 #
 # turns off gaps and borders when there's only one window
-#smart_borders on
-#smart_gaps on
-#hide_edge_borders smart
+smart_borders on
+smart_gaps on
+hide_edge_borders smart
 
 # borders
 
@@ -266,8 +266,7 @@ set $base09 #d19a66
 set $base0A #e5c07b
 set $base0B #98c379
 set $base0C #56b6c2
-#set $base0D #61afef
-set $base0D #ffc1bd
+set $base0D #61afef
 set $base0E #c678dd
 set $base0F #be5046
 client.focused          $base05 $base0D $base00 $base0D $base0D
