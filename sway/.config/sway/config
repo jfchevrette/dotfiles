@@ -230,6 +230,17 @@ mode $mode_adjust {
   bindsym Escape mode "default"
 }
 
+### Shutdown menu mode
+set $mode_shutdown "What do you want to do? shut(d)own, (s)uspend, (l)ock"
+bindsym $mod+ctrl+alt+q mode $mode_shutdown
+mode $mode_shutdown {
+  bindsym d exec systemctl poweroff, mode "default"
+  bindsym s exec systemctl suspend, mode "default"
+  bindsym l exec swaylock -c 000000, mode "default"
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
 
 #
 # Looks
