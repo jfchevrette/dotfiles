@@ -68,8 +68,8 @@ workspace 1 1
 
     bindsym $mod+Shift+b exec firefox
 
-    # start ranger
-    bindsym $mod+m exec $term -e ranger --selectfile=$HOME/Downloads
+    # start nnn
+    bindsym $mod+m exec $term -e nnn $HOME
 
     # kill focused window
     bindsym $mod+Shift+c kill
