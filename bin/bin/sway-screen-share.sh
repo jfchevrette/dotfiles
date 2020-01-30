@@ -9,7 +9,7 @@ fi
 
 # Check v4l2loopback is loaded
 if ! lsmod | grep v4l2loopback > /dev/null; then
-    echo >&2 "ERROR v42loopback is not loaded!"
+    echo >&2 "ERROR v4l2loopback is not loaded!"
     exit 1
 fi
 
