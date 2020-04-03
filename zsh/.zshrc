@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # ~/.zshrc
 #
 #
@@ -22,7 +15,6 @@ if ! zgen saved; then
   zgen load zdharma/fast-syntax-highlighting
   zgen load zsh-users/zsh-autosuggestions
   zgen load jfchevrette/zsh-titles
-  zgen load romkatv/powerlevel10k powerlevel10k
   zgen save
 fi
 
@@ -57,11 +49,11 @@ function git_prompt() {
   fi
 }
 
-#setopt prompt_subst
-#PROMPT='$(~/bin/prompt-linux) $(git_prompt) \$ '
-#if [[ "$(uname -s)" == "Darwin" ]]; then
-#  PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
-#fi
+setopt prompt_subst
+PROMPT='$(~/bin/prompt-linux) $(git_prompt) \$ '
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
+fi
 
 # History
 function myhistory {
@@ -169,6 +161,15 @@ if (( ${+terminfo[smkx]} )) && (( ${+terminfo[rmkx]} )); then
     zle -N zle-line-finish
 fi
 
+export EDITOR=vim
+
+# GPG stuff
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# GO
+export GOROOT=$(go env GOROOT)
+
 # Work related aliases
 alias daily='/bin/cat ~/work/daily/daily-$(date "+%Y%m%d").txt'
 alias vidaily='/usr/bin/vim ~/work/daily/daily-$(date "+%Y%m%d").txt'
@@ -186,6 +187,3 @@ source /usr/share/fzf/key-bindings.zsh
 
 # Rust
 source $HOME/.cargo/env
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
