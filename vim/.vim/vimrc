@@ -7,16 +7,16 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+" sensible defaults
+Plug 'tpope/vim-sensible'
+
 " ui/color
 Plug 'joshdick/onedark.vim'
-Plug 'junegunn/limelight.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-" syntax/filetypes
-Plug 'sheerun/vim-polyglot'
-Plug 'vim-syntastic/syntastic'
+" start page
+Plug 'mhinz/vim-startify'
 
 " Languages
 Plug 'fatih/vim-go'
@@ -32,67 +32,25 @@ call plug#end()
 " =   Settings   =
 " ================
 
-if !has('nvim')
-  set nocompatible
-  filetype off
-  filetype plugin indent on
-  
-  set ttyfast
-  set ttymouse=xterm2
-  set ttyscroll=3
-endif
-
-set laststatus=2
-set encoding=utf-8              " Set default encoding to UTF-8
-set fileencoding=utf-8
-set fileencodings=utf-8
-set autoread                    " Automatically reread changed files without asking me anything
-set autoindent                  
-set backspace=indent,eol,start  " Makes backspace key more powerful.
-
-set hlsearch                    " Highlight found searches
-set incsearch                   " Shows the match while typing
-set ignorecase               " Ignore case when searching, typing commands, completing, etc...
-set smartcase                " ...but not if it begins with upper case
+set hlsearch                 " Highlight search results
+set ignorecase		     " Search is case insensitive
 
 set noerrorbells             " No beeps
+
 set number                   " Show line numbers
-set relativenumber
-set showcmd                  " Show me what I'm typing
-set showmode                 " Show current mode.
+set relativenumber           " Show relative line numbers
 
 set nobackup                 " Don't create annoying backup files
 set noswapfile               " Don't use swapfile
+set autowrite                " Automatically save before switching buffer
 
 set splitright               " Split vertical to the right
 set splitbelow               " split horizontal down
-set autowrite                " Automatically save before switching buffer
-set hidden                   " Hide buffers when abandonning it instead of unloading it
-set fileformats=unix,dos,mac " Prefer Unix over Windows over OS9 formats
-set noshowmatch              " Do not show matching brackets
-set nocursorcolumn           " Do not show the column the cursor is on
+
 set cursorline               " Dont show the line the cursor is on
-set completeopt=menu,menuone " Autocomplete menu on insert mode
+
+set completeopt=menuone,longest,noinsert,noselect,popup " Autocomplete menu on insert mode
 set pumheight=10             " Completion indow max items
-
-set tabstop=2
-set softtabstop=0
-set shiftwidth=2
-set expandtab
-
-set clipboard^=unnamed
-set clipboard^=unnamedplus
-
-set lazyredraw " Do not redraw screen when executing macros or commands that have not been typed
-set re=1
-syntax sync minlines=256
-set synmaxcol=300
-
-set undofile
-set undodir=~/.vim/tmp/undo//
-
-set modeline
-set modelines=10
 
 set termguicolors
 let g:onedark_hide_endofbuffer=1
@@ -109,15 +67,6 @@ colorscheme onedark
 " use a mapleader variable 
 let   mapleader = ","
 let g:mapleader = ","
-
-" close quickfix window
-nnoremap <C-n> :cnext<CR>
-nnoremap <C-m> :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
-
-" fast saving
-nnoremap <leader>w :w!<CR>
-nnoremap <silent> <leader>q :q!<CR>
 
 " center the screen
 nnoremap <space> zz
@@ -143,55 +92,19 @@ function! WinMove(key)
   endif
 endfunction
 
-" source/reload configuration
-nnoremap <silent> <leader><F5> :source $MYVIMRC<CR>
-
-" center on searching when going to the next match
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap <C-d> <C-d>zz
-nnoremap <C-u> <C-u>zz
+" omnicomplete - pressing enter to select an item
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " ======================
 " =   Plugin configs   =
 " ======================
 
 " Vim-Airline
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme ='onedark'
-let g:hybrid_custom_term_colors = 1
 let g:hybrid_reduced_contrast = 1
 
-" Syntastic
-let g:syntastic_go_checkers = ['gofmt']
-
-" ===== HardTime =====
-let g:hardtime_default_on = 1
-
 " ===== vim-go =====
-let g:go_metalinter_autosave = 1
 let g:go_fmt_command = "goimports"
-let g:go_autodetect_gopath = 1
-let g:go_list_type = "quickfix"
-let g:go_term_enabled = 1
-let g:go_term_height = 10
-let g:go_highlight_space_tab_error = 1
-let g:go_highlight_array_whitespace_error = 1
-let g:go_highlight_trailing_whitespace_error = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_operators = 1
-
-
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#cmd#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
+let g:go_auto_type_info = 1
 augroup gocmds
   au!
   autocmd FileType go nmap <buffer> <Leader>s  <Plug>(go-def-split)
@@ -205,27 +118,8 @@ augroup gocmds
   autocmd FileType go nmap <buffer> <Leader>d  <Plug>(go-doc)
 augroup END
 
-" ===== CtrlP =====
-nnoremap <leader>ff :CtrlP<CR>
-nnoremap <leader>fb :CtrlPBuffer<CR>
-nnoremap <leader>fm :CtrlPMixed<CR>
-
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_switch_buffer = 'et'  " jump to a file if it's open already
-let g:ctrlp_mruf_max=450    " number of recently opened files
-let g:ctrlp_max_files=0     " do not limit the number of searchable files
-let g:ctrlp_use_caching = 1
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp'
-let g:ctrlp_match_window = 'bottom,order:btt,min:10,max:10,results:10'
-let g:ctrlp_buftag_types = {'go' : '--language-force=go --golang-types=ftv'}
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
 " ===== NERDTree =====
 noremap <Leader>n :NERDTreeToggle<cr>
-let NERDTreeShowHidden=1
-let NERDTreeDirArrows=1
 let NERDTreeMinimalUI=1
 
 " ====================
@@ -255,7 +149,7 @@ augroup misc_stuff
   autocmd BufNewFile,BufRead *.go   setlocal noet ts=4 sw=4 sts=4
   autocmd BufNewFile,BufRead *.vim  setlocal noet ts=2 sw=2 sts=2
   autocmd BufNewFile,BufRead *.md   setlocal noet ts=4 sw=4
+  autocmd FileType vim  setlocal noet ts=2 sw=2 sts=2
   autocmd FileType json setlocal   et ts=2 sw=2
-  autocmd FileType ruby setlocal   et ts=2 sw=2
   autocmd BufNewFile,BufRead .nginx.conf*,nginx.conf* setf nginx
 augroup END
