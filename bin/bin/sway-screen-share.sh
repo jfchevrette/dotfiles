@@ -41,10 +41,10 @@ else
         )
         geometry=$(slurp -b "#45858820" -c "#45858880" -w 3 -d <<< "$windowGeometries") || exit $?
 
-        wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video4 --geometry="$geometry" &
+        wf-recorder --muxer=v4l2 --codec=rawvideo --file=/dev/video6 --geometry="$geometry" &
     fi
     if ! pgrep ffplay; then
-        ffplay /dev/video4 &
+        ffplay /dev/video6 &
         sleep 0.5
         # a hack so FPS is not dropping
         swaymsg [class=ffplay] move position 1915 1050
