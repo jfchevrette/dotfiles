@@ -1,7 +1,13 @@
 [user]
   name = Jean-Francois Chevrette
   email = jfchevrette@gmail.com
-  signingkey = B61296A9498EEECDD5E9C0F067A0585801290DC6
+
+[transfer]
+	fsckobjects = true
+[fetch]
+	fsckobjects = true
+[receive]
+	fsckobjects = true
 
 [push]
 	default = matching
@@ -39,4 +45,3 @@
 	# Interactive rebase with the given number of latest commits
 	reb = "!r() { git rebase -i HEAD~$1; }; r"
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-
