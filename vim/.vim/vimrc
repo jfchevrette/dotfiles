@@ -12,6 +12,7 @@ Plug 'tpope/vim-sensible'
 
 " ui/color
 Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree'
 
@@ -58,7 +59,7 @@ let g:onedark_terminal_italics=1
 let g:onedark_color_overrides = {
 \ "black": {"gui": "#1E2127", "cterm": "235", "cterm16": "0" },
 \}
-colorscheme onedark
+colorscheme nord
 
 " ================
 " =   Mappings   =
