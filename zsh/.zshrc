@@ -20,7 +20,8 @@ fi
 
 # Prompt
 function kube_prompt() {
-  echo "%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
+  #echo "%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
+  echo "%F{white}$(kubectl config current-context)"
 }
 function git_prompt() {
   local ok_color=2
@@ -50,7 +51,7 @@ function git_prompt() {
 }
 
 setopt prompt_subst
-PROMPT='$(~/bin/prompt-linux) $(git_prompt) \$ '
+PROMPT='$(~/bin/prompt-linux) ($(kube_prompt))$(git_prompt) \$ '
 if [[ "$(uname -s)" == "Darwin" ]]; then
   PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
 fi
@@ -103,12 +104,6 @@ fi
 # exa
 if hash exa 2> /dev/null; then alias ls='exa -alghH --git'; fi
 alias ll=ls -alsnew
-
-# bat instead of cat
-if hash bat 2> /dev/null; then
-  alias cat=bat
-  export MANPAGER="sh -c 'col -b | bat -l man -p'"
-fi
 
 # prefer GNU sed b/c BSD sed doesn't handle whitespace the same
 if hash gsed 2> /dev/null; then alias sed=gsed; fi
