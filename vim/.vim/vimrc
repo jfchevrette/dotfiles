@@ -8,7 +8,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " ui
-Plug 'morhetz/gruvbox'
+Plug 'arcticicestudio/nord-vim'
 
 " syntax/filetypes
 Plug 'fatih/vim-go'
@@ -103,7 +103,7 @@ set undodir=~/.vim/tmp/undo//
 set modeline
 set modelines=10
 
-colorscheme gruvbox
+colorscheme nord
 
 " ================
 " =   Mappings   =
