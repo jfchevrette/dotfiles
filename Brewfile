@@ -46,6 +46,6 @@ cask "slack"
 cask "tunnelblick"
 cask "visual-studio-code"
 
-tap "caskroom/fonts"
+tap "homebrew/cask-fonts"
 cask "font-fira-mono"
 cask "font-source-code-pro"
