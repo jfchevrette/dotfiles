@@ -183,5 +183,8 @@ source /usr/share/fzf/key-bindings.zsh
 # Rust
 source $HOME/.cargo/env
 
+# asdf
+. $HOME/.asdf/asdf.sh
+
 # nvim
 alias vim=nvim
