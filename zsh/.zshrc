@@ -182,3 +182,6 @@ source /usr/share/fzf/key-bindings.zsh
 
 # Rust
 source $HOME/.cargo/env
+
+# nvim
+alias vim=nvim
