@@ -51,7 +51,7 @@ function git_prompt() {
 }
 
 setopt prompt_subst
-PROMPT='$(~/bin/prompt-linux) ($(kube_prompt))$(git_prompt) \$ '
+PROMPT='$(~/bin/prompt-linux) ($(kube_prompt)) $(git_prompt) \$ '
 if [[ "$(uname -s)" == "Darwin" ]]; then
   PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
 fi
