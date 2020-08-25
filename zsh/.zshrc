@@ -178,7 +178,8 @@ function bwunlock() {
 # FZF
 export FZF_DEFAULT_COMMAND="rg --one-file-system --files"
 export FZF_DEFAULT_OPTS="--ansi --inline-info"
-source /usr/share/fzf/key-bindings.zsh
+test -f /usr/share/fzf/key-bindings.zsh && source /usr/share/fzf/key-bindings.zsh
+test -f /usr/local/opt/fzf//shell/key-bindings.zsh && source /usr/local/opt/fzf//shell/key-bindings.zsh
 
 # Rust
 source $HOME/.cargo/env
@@ -186,5 +187,5 @@ source $HOME/.cargo/env
 # asdf
 . $HOME/.asdf/asdf.sh
 
-# nvim
-alias vim=nvim
+# Neovim
+if hash nvim 2> /dev/null; then alias vim=nvim; fi
