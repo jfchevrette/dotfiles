@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Fix java problems with Wayland
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Firefox wayland support
 export MOZ_ENABLE_WAYLAND=1
 
 dbus-launch --sh-syntax --exit-with-session sway -d 2> ~/sway.log
