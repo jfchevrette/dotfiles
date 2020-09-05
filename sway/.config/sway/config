@@ -20,9 +20,9 @@ set $term alacritty
 output eDP-1 pos 0 0 res 1920x1080
 output DP-5 pos 1920 0 res 3440x1440@120Hz subpixel rgb
 
-#output * bg $HOME/.config/wallpaper/cityscape-snow-winter-morning.jpg fill
+output * bg $HOME/.config/wallpaper/x_tile.png tile
 #output * bg #3b84c0 solid_color
-output * bg #3a3f4b solid_color
+# output * bg #3a3f4b solid_color
 
 ### Idle configuration
 exec swayidle \
