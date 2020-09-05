@@ -48,6 +48,7 @@ set number
 set relativenumber
 set nowrap
 set smartcase
+set ignorecase
 set noswapfile
 set nobackup
 if has('nvim')
@@ -84,7 +85,8 @@ function! LightlineFugitive()
     return ''
 endfunction
 
-let mapleader=' '
+let mapleader=','
+
 
 nnoremap <leader>t :FloatermNew --autoclose=1<CR>
 
@@ -96,6 +98,7 @@ nnoremap <leader>gd :Gdiff<CR>
 nnoremap <leader>of :Files<CR>
 nnoremap <leader>og :GFiles<CR>
 
+nnoremap <leader>ec :e $MYVIMRC<CR>
 nnoremap <leader>rc :w<CR>:so %<CR>
 
 nnoremap <leader>x <C-w>c
