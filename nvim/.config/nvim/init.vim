@@ -18,7 +18,6 @@ else
     call plug#begin('~/.vim/plugged')
 end
 
-Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -29,12 +28,13 @@ Plug 'voldikss/vim-floaterm'
 Plug 'justinmk/vim-sneak'
 Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
+Plug 'AndrewRadev/switch.vim'
+Plug 'sainnhe/sonokai'
+Plug 'ap/vim-css-color'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
 call plug#end()
-
-if !has('nvim')
-    set noerrorbells
-end
 
 set updatetime=100
 
@@ -58,18 +58,24 @@ else
 end
 set undofile
 set incsearch
+set scrolloff=7
 
-if has('termguicolors')
-  set termguicolors
-endif
+set list
+set showbreak=↪\
+set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+
+set completeopt=menuone,noinsert,noselect
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 set colorcolumn=80
-let g:onedark_hide_endofbuffer=1
-let g:onedark_terminal_italics=1
-colorscheme onedark
+if has('termguicolors')
+    set termguicolors
+endif
+let g:sonokai_enable_italic = 1
+colorscheme sonokai
 
 let g:lightline = {
-  \ 'colorscheme': 'onedark',
+  \ 'colorscheme': 'sonokai',
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' },
   \ }
@@ -99,7 +105,7 @@ nnoremap <leader>of :Files<CR>
 nnoremap <leader>og :GFiles<CR>
 
 nnoremap <leader>ec :e $MYVIMRC<CR>
-nnoremap <leader>rc :w<CR>:so %<CR>
+nnoremap <leader>rc :w<CR>:so $MYVIMRC<CR>
 
 nnoremap <leader>x <C-w>c
 nnoremap <leader>h <C-w>h
@@ -112,6 +118,22 @@ nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 nnoremap <leader>bd :bdelete<CR>
 
+nnoremap <leader>a :Switch<CR>
+let g:switch_custom_definitions =
+    \ [
+    \   ['yes', 'no'],
+    \   ['on',  'off']
+    \ ]
+
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
+
+autocmd BufEnter * silent! lcd %:p:h
+autocmd FileType fish setlocal sw=2 sts=2 et
+
+lua <<EOF
+require'nvim_lsp'.pyls.setup{
+    on_attach=require'completion'.on_attach
+}
+EOF
 
