@@ -135,5 +135,8 @@ lua <<EOF
 require'nvim_lsp'.pyls.setup{
     on_attach=require'completion'.on_attach
 }
+require'nvim_lsp'.gopls.setup{
+    on_attach=require'completion'.on_attach
+}
 EOF
 
