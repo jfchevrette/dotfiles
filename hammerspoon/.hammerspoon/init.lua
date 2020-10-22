@@ -13,6 +13,7 @@ local mod = {'control', 'option', 'cmd'}
 hs.grid.setGrid('2x2', '1440x900')
 hs.grid.setGrid('2x2', '1920x1080')
 hs.grid.setGrid('2x2', '2560x1080')
+hs.grid.setGrid('2x2', '3440x1440')
 hs.grid.setMargins({x=0, y=0})
 
 hs.grid.ui.showExtraKeys = false
@@ -46,33 +47,29 @@ local positions = {
   full        = {x=0, y=0, w=2, h=2},
 }
 
--- window layout
-local laptopScreen = "Color LCD"
-local matroxScreen = "Display"
-
--- set up an application watcher and start it
-local applicationWatcher = hs.application.watcher.new(function(name, event, app)
-
-  -- Application launched
-  if event == hs.application.watcher.launched then
-
-    -- Emacs has been launched
-    if string.find(name, "Emacs") then
-      print("Name", name)
-      print("Event", event)
-      print("App", app)
-      hs.grid.set(app:mainWindow(), '0,0 2x2', matroxScreen)
-    end
-
-  end
-
-end)
-applicationWatcher:start()
-
-
 ---------------------
 -- Hotkey Bindings --
 ---------------------
+
+-- move window to a specific position
+--    i use a matrox dualhead-to-go and my second screen is actually two
+--    monitors that OSX sees as a single one. this is why i check for
+--    the window position and if it's >= 3600 this means the window is
+--    on the second physical monitor and have to offset it on the grid
+local function moveWindowTo(pos)
+  local win = hs.window.focusedWindow()
+  if not win then return end
+  local screen = win:screen()
+  local position = hs.fnutils.copy(positions[pos])
+  if not position then return end
+
+  -- If we're on the second physical screen
+  --if (win:frame().x >= 3600) then
+  --  position.x = position.x + 2
+  --end
+
+  hs.grid.set(win, position, screen)
+end
 
 -- window management
 hs.hotkey.bind(mod, 'PAD7', function() moveWindowTo('topLeft') end)
@@ -104,84 +101,13 @@ hs.hotkey.bind(mod, 'PAD+', function() hs.window.focusedWindow():moveOneScreenEa
 hs.hotkey.bind(mod, 'PAD=', function() hs.grid.toggleShow() end)
 hs.hotkey.bind(mod, 'G', function() hs.grid.toggleShow() end)
 
-hs.hotkey.bind(mod, 'PAD*', function() hs.hints.windowHints(hs.window.allWindows(), nil, true) end)
-hs.hotkey.bind(mod, 'H', function() hs.hints.windowHints(hs.window.allWindows(), nil, true) end)
-
-hs.hotkey.bind(mod, 'F19', function() hs.timer.doAfter(0.5, hs.caffeinate.startScreensaver):start() end)
-
 -----------------------
 -- Utility functions --
 -----------------------
 
--- move window to a specific position
---    i use a matrox dualhead-to-go and my second screen is actually two
---    monitors that OSX sees as a single one. this is why i check for
---    the window position and if it's >= 3600 this means the window is
---    on the second physical monitor and have to offset it on the grid
-function moveWindowTo(pos)
-  local win = hs.window.focusedWindow()
-  if not win then return end
-  local screen = win:screen()
-  local position = hs.fnutils.copy(positions[pos])
-  if not position then return end
-
-  -- If we're on the second physical screen
-  --if (win:frame().x >= 3600) then
-  --  position.x = position.x + 2
-  --end
-
-  hs.grid.set(win, position, screen)
-end
-
--- move window to the next screen
-function moveWindowToNextScreen()
-  local win = hs.window.focusedWindow()
-  if not win then return end
-
-  local winframe = win:frame()
-  local newframe = winframe
-
-  -- check current window location
-  --    check if we're on the laptop display or on one of the two
-  --    physical display connected to the matrox box which makes OSX
-  --    see a single ultrawide display
-  if (winframe.x < 1680) then
-    newframe.x = newframe.x + 1680
-  elseif (winframe.x >= 1680 and winframe.x < 3600) then
-    newframe.x = newframe.x + 1920
-  elseif (winframe.x >= 3600) then
-    newframe.x = newframe.x - 3600
-  end
-
-  win:setFrame(newframe)
-end
-
--- move window to the next screen
-function moveWindowToPreviousScreen()
-  local win = hs.window.focusedWindow()
-  if not win then return end
-  
-  local winframe = win:frame()
-  local newframe = winframe
-
-  -- check current window location
-  --    check if we're on the laptop display or on one of the two
-  --    physical display connected to the matrox box which makes OSX
-  --    see a single ultrawide display
-  if (winframe.x < 1680) then
-    newframe.x = newframe.x + 3600
-  elseif (winframe.x >= 1680 and winframe.x < 3600) then
-    newframe.x = newframe.x - 1680
-  elseif (winframe.x >= 3600) then
-    newframe.x = newframe.x - 1920
-  end
-
-  win:setFrame(newframe)
-end
-
 -- Reload automatically on config changes
-function reloadConfig(paths)
-  doReload = false
+local function reloadConfig(paths)
+  local doReload = false
   for _, file in pairs(paths) do
     if file:sub(-4) == ".lua" then
       print("A lua file changed, doing reload")
@@ -195,7 +121,7 @@ function reloadConfig(paths)
 
   hs.reload()
 end
-configFileWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
+local configFileWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig)
 configFileWatcher:start()
 
 hs.notify.new({
