@@ -8,6 +8,13 @@ vim/.vim/autoload/plug.vim.old
 vim/.vim/plugged
 vim/.vim/tmp
 
+# nvim & vim-plug
+nvim/.config/nvim/autoload/plug.vim
+nvim/.config/nvim/autoload/plug.vim.old
+nvim/.config/nvim/plugged
+nvim/.config/nvim/tmp
+nvim/.config/nvim/undodir
+
 # vscode
 vscode/.config/Code/Backups
 vscode/.config/Code/Cache
