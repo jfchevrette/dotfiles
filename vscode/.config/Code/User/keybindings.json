@@ -1,7 +1,0 @@
-// Empty
-[
-    {
-        "key": "ctrl+shift+numpad_divide",
-        "command": "workbench.action.terminal.toggleTerminal"
-    }
-]

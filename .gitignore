@@ -14,26 +14,3 @@ nvim/.config/nvim/autoload/plug.vim.old
 nvim/.config/nvim/plugged
 nvim/.config/nvim/tmp
 nvim/.config/nvim/undodir
-
-# vscode
-vscode/.config/Code/Backups
-vscode/.config/Code/Cache
-vscode/.config/Code/CachedData
-vscode/.config/Code/CachedExtensions
-vscode/.config/Code/Cookies
-vscode/.config/Code/Cookies-journal
-vscode/.config/Code/GPUCache
-vscode/.config/Code/Local\ Storage
-vscode/.config/Code/logs
-vscode/.config/Code/machineid
-vscode/.config/Code/Network Persistent State
-vscode/.config/Code/Preferences
-vscode/.config/Code/storage.json
-vscode/.config/Code/User/globalStorage/state.vscdb*
-vscode/.config/Code/User/material-icon-theme.json
-vscode/.config/Code/User/sync.lock
-vscode/.config/Code/User/syncSettings.json
-vscode/.config/Code/User/syncLocalSettings.json
-vscode/.config/Code/User/syncSummary.txt
-vscode/.config/Code/User/workspaceStorage
-vscode/.config/Code/Workspaces
