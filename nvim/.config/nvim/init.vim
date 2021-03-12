@@ -33,6 +33,7 @@ Plug 'sainnhe/sonokai'
 Plug 'ap/vim-css-color'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'ayu-theme/ayu-vim'
 
 call plug#end()
 
@@ -71,11 +72,11 @@ set colorcolumn=80
 if has('termguicolors')
     set termguicolors
 endif
-let g:sonokai_enable_italic = 1
-colorscheme sonokai
+let ayucolor="mirage"
+colorscheme ayu
 
 let g:lightline = {
-  \ 'colorscheme': 'sonokai',
+  \ 'colorscheme': 'ayu',
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' },
   \ }
