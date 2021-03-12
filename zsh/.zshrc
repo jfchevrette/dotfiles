@@ -3,7 +3,7 @@
 #
 # shellcheck disable=SC1090,SC2148
 
-[[ ! -d $HOME/.zgen ]] && git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen" 
+[[ ! -d $HOME/.zgen ]] && git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
 export ZGEN_RESET_ON_CHANGE=("${HOME}/.zshrc" "${HOME}/.zshenv")
 source "${HOME}/.zgen/zgen.zsh"
 
@@ -19,42 +19,42 @@ if ! zgen saved; then
 fi
 
 # Prompt
-function kube_prompt() {
-  #echo "%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
-  echo "%F{white}$(kubectl config current-context)"
-}
-function git_prompt() {
-  local ok_color=2
-  local err_color=1
-  local white_color=7
-  local statc="%{\e[0;3${ok_color}m%}" # assume clean
-  local bname
-  
-  bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-  if [ -n "$bname" ]; then
-    local rs
+#function kube_prompt() {
+#  #echo "%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
+#  echo "%F{white}$(kubectl config current-context)"
+#}
+#function git_prompt() {
+#  local ok_color=2
+#  local err_color=1
+#  local white_color=7
+#  local statc="%{\e[0;3${ok_color}m%}" # assume clean
+#  local bname
+#
+#  bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
+#  if [ -n "$bname" ]; then
+#    local rs
+#
+#    rs="$(git status --porcelain -b)"
+#    if echo "$rs" | grep -v '^##' &> /dev/null; then # is dirty
+#      statc="%{\e[0;3${err_color}m%}"
+#    elif echo "$rs" | grep '^## .*diverged' &> /dev/null; then # has diverged
+#      statc="%{\e[0;3${err_color}m%}"
+#    elif echo "$rs" | grep '^## .*behind' &> /dev/null; then # is behind
+#      statc="%{\e[0;3${white_color}m%}"
+#    elif echo "$rs" | grep '^## .*ahead' &> /dev/null; then # is ahead
+#      statc="%{\e[0;3${white_color}m%}"
+#    else # is clean
+#      statc="%{\e[0;3${ok_color}m%}"
+#    fi
+#    echo -n "$statc$bname%{\e[0m%} "
+#  fi
+#}
 
-    rs="$(git status --porcelain -b)"
-    if echo "$rs" | grep -v '^##' &> /dev/null; then # is dirty
-      statc="%{\e[0;3${err_color}m%}"
-    elif echo "$rs" | grep '^## .*diverged' &> /dev/null; then # has diverged
-      statc="%{\e[0;3${err_color}m%}"
-    elif echo "$rs" | grep '^## .*behind' &> /dev/null; then # is behind
-      statc="%{\e[0;3${white_color}m%}"
-    elif echo "$rs" | grep '^## .*ahead' &> /dev/null; then # is ahead
-      statc="%{\e[0;3${white_color}m%}"
-    else # is clean
-      statc="%{\e[0;3${ok_color}m%}"
-    fi
-    echo -n "$statc$bname%{\e[0m%}"
-  fi
-}
-
-setopt prompt_subst
-PROMPT='$(~/bin/prompt-linux) ($(kube_prompt)) $(git_prompt) \$ '
-if [[ "$(uname -s)" == "Darwin" ]]; then
-  PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
-fi
+#setopt prompt_subst
+#PROMPT='$(~/bin/prompt-linux) $(git_prompt)\$ '
+#if [[ "$(uname -s)" == "Darwin" ]]; then
+#  PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
+#fi
 
 # History
 function myhistory {
@@ -166,9 +166,9 @@ export GPG_TTY
 export GOROOT=$(go env GOROOT)
 
 # Work related aliases
-alias daily='/bin/cat ~/work/daily/daily-$(date "+%Y%m%d").txt'
-alias vidaily='/usr/bin/vim ~/work/daily/daily-$(date "+%Y%m%d").txt'
-alias todo='/bin/cat ~/work/todo.txt'
+alias daily='cat ~/work/daily/daily-$(date "+%Y%m%d").txt'
+alias vidaily='vim ~/work/daily/daily-$(date "+%Y%m%d").txt'
+alias todo='cat ~/work/todo.txt'
 
 # Bitwarden
 function bwunlock() {
@@ -189,3 +189,6 @@ source $HOME/.cargo/env
 
 # Neovim
 if hash nvim 2> /dev/null; then alias vim=nvim; fi
+
+# Starship prompt
+eval "$(starship init zsh)"
