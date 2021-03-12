@@ -133,7 +133,16 @@ autocmd BufEnter * silent! lcd %:p:h
 autocmd FileType fish setlocal sw=2 sts=2 et
 
 lua <<EOF
-require'nvim_lsp'.pyls.setup{
+require'lspconfig'.pyls.setup{
+    on_attach=require'completion'.on_attach
+}
+require'lspconfig'.sumneko_lua.setup{
+    enable = true,
+    Lua = {
+        runtime = {
+            path = { "/usr/share/awesome/lib" }
+        }
+    },
     on_attach=require'completion'.on_attach
 }
 require'nvim_lsp'.gopls.setup{
