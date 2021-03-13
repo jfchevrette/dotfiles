@@ -145,7 +145,7 @@ require'lspconfig'.sumneko_lua.setup{
     },
     on_attach=require'completion'.on_attach
 }
-require'nvim_lsp'.gopls.setup{
+require'lspconfig'.gopls.setup{
     on_attach=require'completion'.on_attach
 }
 EOF
