@@ -184,9 +184,6 @@ test -f /usr/local/opt/fzf//shell/key-bindings.zsh && source /usr/local/opt/fzf/
 # Rust
 source $HOME/.cargo/env
 
-# asdf
-. $HOME/.asdf/asdf.sh
-
 # Neovim
 if hash nvim 2> /dev/null; then alias vim=nvim; fi
 
