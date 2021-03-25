@@ -2,12 +2,6 @@
 ssh/.ssh/id_rsa
 ssh/.ssh/known_hosts
 
-# vim & vim-plug
-vim/.vim/autoload/plug.vim
-vim/.vim/autoload/plug.vim.old
-vim/.vim/plugged
-vim/.vim/tmp
-
 # nvim & vim-plug
 nvim/.config/nvim/autoload/plug.vim
 nvim/.config/nvim/autoload/plug.vim.old
