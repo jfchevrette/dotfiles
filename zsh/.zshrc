@@ -198,5 +198,8 @@ source $HOME/.cargo/env
 # Neovim
 if hash nvim 2> /dev/null; then alias vim=nvim; fi
 
+# Direnv
+eval "$(direnv hook zsh)"
+
 # Starship prompt
 eval "$(starship init zsh)"
