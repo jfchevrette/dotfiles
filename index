@@ -15,6 +15,7 @@ shell: ~
 ssh: ~
 stow: ~
 sway: ~
+tmux: ~
 vim: ~
 wallpaper: ~
 waybar: ~
