@@ -109,8 +109,19 @@ alias ll=ls -alsnew
 if hash gsed 2> /dev/null; then alias sed=gsed; fi
 
 alias o=oc
-alias k=kubectl
-alias kc=kubectx
+
+if hash kubectl 2> /dev/null; then
+  alias k=kubectl
+  alias kc=kubectx
+fi
+
+if hash oc 2> /dev/null; then
+  alias o="oc"
+  alias og="oc get --show-kind=true"
+  alias ol="oc logs"
+  alias od="oc describe"
+  alias or="oc rsh -it"
+fi
 
 alias time=/usr/bin/time
 export TIME="\t%e real\t%U user\t%S sys"
