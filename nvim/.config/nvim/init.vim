@@ -19,21 +19,22 @@ else
 end
 
 Plug 'tpope/vim-fugitive'
-Plug 'mbbill/undotree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-startify'
 Plug 'mhinz/vim-signify'
 Plug 'voldikss/vim-floaterm'
-Plug 'justinmk/vim-sneak'
-Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
 Plug 'AndrewRadev/switch.vim'
-Plug 'sainnhe/sonokai'
 Plug 'ap/vim-css-color'
+Plug 'ayu-theme/ayu-vim'
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
-Plug 'ayu-theme/ayu-vim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'}
+Plug 'nvim-treesitter/playground'
+
+Plug 'LnL7/vim-nix'
 
 call plug#end()
 
@@ -72,14 +73,26 @@ set colorcolumn=80
 if has('termguicolors')
     set termguicolors
 endif
+
 let ayucolor="mirage"
 colorscheme ayu
+hi Normal guibg=NONE ctermbg=NONE
 
 let g:lightline = {
   \ 'colorscheme': 'ayu',
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' },
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'readonly', 'filename', 'modified' ] ]
+  \ },
+  \ 'compoment_function': {
+  \   'filename': 'LightlineFilename',
+  \ },
   \ }
+function! LightlineFilename()
+  return expand('%:t') !=# '' ? @% : '[No Name]'
+endfunction
 
 function! LightlineReadonly()
     return &readonly ? '' : ''
@@ -96,8 +109,6 @@ let mapleader=','
 
 
 nnoremap <leader>t :FloatermNew --autoclose=1<CR>
-
-nnoremap <leader>ud :UndotreeToggle<CR>
 
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
@@ -119,7 +130,7 @@ nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 nnoremap <leader>bd :bdelete<CR>
 
-nnoremap <leader>a :Switch<CR>
+nnoremap <leader>s :Switch<CR>
 let g:switch_custom_definitions =
     \ [
     \   ['yes', 'no'],
@@ -129,20 +140,11 @@ let g:switch_custom_definitions =
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
-autocmd BufEnter * silent! lcd %:p:h
-autocmd FileType fish setlocal sw=2 sts=2 et
-
 lua <<EOF
-require'lspconfig'.pyls.setup{
+require'lspconfig'.rust_analyzer.setup{
     on_attach=require'completion'.on_attach
 }
-require'lspconfig'.sumneko_lua.setup{
-    enable = true,
-    Lua = {
-        runtime = {
-            path = { "/usr/share/awesome/lib" }
-        }
-    },
+require'lspconfig'.pyls.setup{
     on_attach=require'completion'.on_attach
 }
 require'lspconfig'.gopls.setup{
