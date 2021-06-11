@@ -28,6 +28,9 @@ Plug 'itchyny/lightline.vim'
 Plug 'AndrewRadev/switch.vim'
 Plug 'ap/vim-css-color'
 Plug 'ayu-theme/ayu-vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'ziglang/zig.vim'
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
@@ -74,12 +77,11 @@ if has('termguicolors')
     set termguicolors
 endif
 
-let ayucolor="mirage"
-colorscheme ayu
+colorscheme nord
 hi Normal guibg=NONE ctermbg=NONE
 
 let g:lightline = {
-  \ 'colorscheme': 'ayu',
+  \ 'colorscheme': 'nord',
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' },
   \ 'active': {
@@ -140,15 +142,23 @@ let g:switch_custom_definitions =
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
+let g:completion_confirm_key = ""
+inoremap <expr> <cr>    pumvisible() ? "\<Plug>(completion_confirm_completion)" : "\<cr>"
+
 lua <<EOF
-require'lspconfig'.rust_analyzer.setup{
-    on_attach=require'completion'.on_attach
-}
-require'lspconfig'.pyls.setup{
-    on_attach=require'completion'.on_attach
-}
-require'lspconfig'.gopls.setup{
-    on_attach=require'completion'.on_attach
+local nvim_lsp = require('lspconfig')
+local nvim_completion = require('completion')
+local servers = { "gopls", "pyls", "rust_analyzer", "zls" }
+for _, lsp in ipairs(servers) do
+    nvim_lsp[lsp].setup { on_attach = nvim_completion.on_attach }
+end
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = {},  -- list of language that will be disabled
+  },
 }
 EOF
 
