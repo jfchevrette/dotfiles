@@ -180,6 +180,7 @@ export GOROOT=$(go env GOROOT)
 alias daily='cat ~/work/daily/daily-$(date "+%Y%m%d").txt'
 alias vidaily='vim ~/work/daily/daily-$(date "+%Y%m%d").txt'
 alias todo='cat ~/work/todo.txt'
+alias cal='cal -3'
 
 # Bitwarden
 function bwunlock() {
