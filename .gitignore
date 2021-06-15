@@ -5,9 +5,8 @@ Brewfile.lock.json
 ssh/.ssh/id_rsa
 ssh/.ssh/known_hosts
 
-# nvim & vim-plug
-nvim/.config/nvim/autoload/plug.vim
-nvim/.config/nvim/autoload/plug.vim.old
-nvim/.config/nvim/plugged
+# nvim 
+nvim/.config/nvim/.netrwhist
+nvim/.config/nvim/plugin/
 nvim/.config/nvim/tmp
 nvim/.config/nvim/undodir
