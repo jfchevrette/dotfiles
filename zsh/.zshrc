@@ -199,7 +199,10 @@ source $HOME/.cargo/env
 if hash nvim 2> /dev/null; then alias vim=nvim; fi
 
 # Direnv
-eval "$(direnv hook zsh)"
+if hash direnv 2> /dev/null; then eval "$(direnv hook zsh)"; fi
 
 # Starship prompt
-eval "$(starship init zsh)"
+if hash starship 2> /dev/null; then eval "$(starship init zsh)"; fi
+
+#  Zoxide
+if hash zoxide 2> /dev/null; then eval "$(zoxide init zsh)"; fi
