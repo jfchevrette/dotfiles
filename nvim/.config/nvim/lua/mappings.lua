@@ -28,6 +28,7 @@ keymap("n", "<leader>fgb", [[<Cmd>Telescope git_branches<CR>]], opts)
 keymap("n", "<leader>fgs", [[<Cmd>Telescope git_status<CR>]], opts)
 keymap("n", "<leader>ft", [[<Cmd>Telescope treesitter<CR>]], opts)
 keymap("n", "<leader>fp", [[<Cmd>lua require('telescope').extensions.project.project{display_type='full'}<CR>]], opts)
+keymap("n", "<leader>fz", [[<Cmd>lua require'telescope'.extensions.zoxide.list{}<CR>]], opts)
 
 -- Toggle line numbers
 keymap("n", "<leader>n", [[<Cmd> set nu!<CR>]], opts)

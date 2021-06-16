@@ -31,8 +31,12 @@ return require("packer").startup {
     	requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
     use "nvim-telescope/telescope-media-files.nvim"
     use 'nvim-telescope/telescope-project.nvim'
+    use 'jvgrootveld/telescope-zoxide'
 
     -- terminal
     use 'voldikss/vim-floaterm'
+
+    -- Misc
+    use 'tjdevries/train.nvim'
   end
 }
