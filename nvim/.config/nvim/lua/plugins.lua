@@ -28,8 +28,11 @@ return require("packer").startup {
     use 'folke/trouble.nvim'
 
     use {'nvim-telescope/telescope.nvim',
-    	requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-}
+    	requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
     use "nvim-telescope/telescope-media-files.nvim"
+    use 'nvim-telescope/telescope-project.nvim'
+
+    -- terminal
+    use 'voldikss/vim-floaterm'
   end
 }
