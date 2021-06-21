@@ -14,12 +14,15 @@ return require("packer").startup {
 
     -- colors
     use 'marko-cerovac/material.nvim'
+    use 'folke/tokyonight.nvim'
 
     -- lang stuff
     use 'nvim-treesitter/nvim-treesitter'
     use 'nvim-treesitter/playground'
     use 'neovim/nvim-lspconfig'
     use 'windwp/nvim-autopairs'
+
+    use 'LnL7/vim-nix'
 
     -- visual
     use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons'}}
@@ -32,6 +35,9 @@ return require("packer").startup {
     use "nvim-telescope/telescope-media-files.nvim"
     use 'nvim-telescope/telescope-project.nvim'
     use 'jvgrootveld/telescope-zoxide'
+    use {'kyazdani42/nvim-tree.lua', requires = {'kyazdani42/nvim-web-devicons'}}
+
+    use 'hrsh7th/nvim-compe'
 
     -- terminal
     use 'voldikss/vim-floaterm'

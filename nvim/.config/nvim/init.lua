@@ -6,10 +6,14 @@ require('options')
 require('plugins')
 require('mappings')
 require('lsp/lua')
+require('lsp/rust')
+
+require('compe-config')
 
 -- colorscheme
-vim.g.material_style = 'deep ocean'
-require('material').set()
+vim.g.tokyonight_style = "night"
+vim.g.tokyonight_colors = { hint = "orange", error = "#ff0000" }
+vim.cmd[[colorscheme tokyonight]]
 
 require('gitsigns').setup {}
 require('trouble').setup {}
@@ -26,7 +30,7 @@ require('bufferline').setup {
 }
 require('lualine').setup {
   options = {
-    theme = 'material-nvim',
+    theme = 'tokyonight',
   },
 }
 require('nvim-autopairs').setup {}

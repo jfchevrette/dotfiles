@@ -16,7 +16,7 @@ keymap("n", "<leader>bk", [[<Cmd>bdelete<CR>]], opts)
 
 -- Open stuff
 keymap("n", "<leader>ec", [[:e $MYVIMRC <CR>]], opts) -- vim config
-keymap("n", "<leader>ee", [[:Explore <CR>]], opts) -- Explore
+keymap("n", "<leader>t", [[<Cmd>NvimTreeToggle<CR>]], opts)
 
 -- Telescope
 keymap("n", "<leader>ff", [[<Cmd>lua require('telescope-config').project_files()<CR>]], opts)
