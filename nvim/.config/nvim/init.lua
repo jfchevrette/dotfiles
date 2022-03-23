@@ -98,3 +98,4 @@ vim.opt.wildignore = {
 require "jfc.plugins"
 require "jfc.keymaps"
 require "jfc.lsp"
+require "jfc.colors"
