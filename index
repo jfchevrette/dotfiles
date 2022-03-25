@@ -15,6 +15,7 @@ ranger: ~
 rofi: ~
 shell: ~
 ssh: ~
+starship: ~
 stow: ~
 sway: ~
 wallpaper: ~
