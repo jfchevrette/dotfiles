@@ -1,5 +1,6 @@
 brew "awscli"
 brew "bash"
+brew "bat"
 brew "coreutils"
 brew "curl"
 brew "fd"
