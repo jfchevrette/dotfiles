@@ -166,9 +166,6 @@ if hash zoxide 2> /dev/null; then eval "$(zoxide init zsh)"; fi
 # Bat
 if hash bat 2> /dev/null; then alias cat=bat; fi
 
-# List files after changing directory
-cd() { builtin cd "$@" && ls; }
-
 # Change dir with fuzzy finding
 cf() {
   dir=$(fd . ''${1:-$HOME} --type d 2> /dev/null | fzf )
