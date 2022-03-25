@@ -1,3 +1,4 @@
+-- Disable builtin plugins
 vim.g.loaded_gzip = 1
 vim.g.loaded_zip = 1
 vim.g.loaded_zipPlugin = 1
@@ -18,3 +19,20 @@ vim.g.loaded_rrhelper = 1
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
+
+-- Handy P function to inspect and print lua variables
+P = function(v)
+  print(vim.inspect(v))
+  return v
+end
+
+-- Handy RELOAD function to reload a lua file
+RELOAD = function(...)
+  return require("plenary.reload").reload_module(...)
+end
+
+R = function(name)
+  RELOAD(name)
+  return require(name)
+end
+
