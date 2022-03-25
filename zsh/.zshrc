@@ -17,62 +17,10 @@ if ! zgen saved; then
   zgen save
 fi
 
-# Prompt
-#function kube_prompt() {
-#  #echo "%F{white}$(awk '/^current-context:/ {print $2}' ~/.kube/config)"
-#  echo "%F{white}$(kubectl config current-context)"
-#}
-#function git_prompt() {
-#  local ok_color=2
-#  local err_color=1
-#  local white_color=7
-#  local statc="%{\e[0;3${ok_color}m%}" # assume clean
-#  local bname
-#
-#  bname="$(git rev-parse --abbrev-ref HEAD 2> /dev/null)"
-#  if [ -n "$bname" ]; then
-#    local rs
-#
-#    rs="$(git status --porcelain -b)"
-#    if echo "$rs" | grep -v '^##' &> /dev/null; then # is dirty
-#      statc="%{\e[0;3${err_color}m%}"
-#    elif echo "$rs" | grep '^## .*diverged' &> /dev/null; then # has diverged
-#      statc="%{\e[0;3${err_color}m%}"
-#    elif echo "$rs" | grep '^## .*behind' &> /dev/null; then # is behind
-#      statc="%{\e[0;3${white_color}m%}"
-#    elif echo "$rs" | grep '^## .*ahead' &> /dev/null; then # is ahead
-#      statc="%{\e[0;3${white_color}m%}"
-#    else # is clean
-#      statc="%{\e[0;3${ok_color}m%}"
-#    fi
-#    echo -n "$statc$bname%{\e[0m%} "
-#  fi
-#}
+export EDITOR=nvim
+export MANPAGER="col -bx | bat -l man -p"
 
-#setopt prompt_subst
-#PROMPT='$(~/bin/prompt-linux) $(git_prompt)\$ '
-#if [[ "$(uname -s)" == "Darwin" ]]; then
-#  PROMPT='$(~/bin/prompt-darwin) $(git_prompt) \$ '
-#fi
-
-# History
-function myhistory {
-  local clear list
-  zparseopts -E c=clear l=list
-
-  if [[ -n "$clear" ]]; then
-    # if -c provided, clobber the history file
-    echo -n >| "$HISTFILE"
-    echo >&2 History file deleted. Reload the session to see its effects.
-  elif [[ -n "$list" ]]; then
-    # if -l provided, run as if calling `fc' directly
-    builtin fc "$@"
-  else
-    # unless a number is provided, show all history events (starting from 1)
-    [[ ${@[-1]} = *[0-9]* ]] && builtin fc -l "$@" || builtin fc -l "$@" 1
-  fi
-}
-alias history='myhistory'
+history() { fc -Drlim "*$@*" 1 }
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=10000
@@ -100,14 +48,23 @@ if [[ -z "${SSH_AGENT_PID}" ]]; then
   . /tmp/ssh-agent-$USER >/dev/null
 fi
 
+# git aliases
+alias gap="git add -p";
+alias gc="git commit";
+alias gca="git commit -a";
+alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat";
+alias gl="git log --oneline --color=always | fzf --ansi --preview=\"echo {} | cut -d ' ' -f 1 | xargs -I @ sh -c 'git log --pretty=medium -n 1 @; git diff @^ @' | bat --color=always\" | cut -d ' ' -f 1 | xargs git log --pretty=short -n 1";
+alias gp="git pull";
+alias gs="git status -sb";
+
 # exa
 if hash exa 2> /dev/null; then alias ls='exa -alghH --git'; fi
 alias ll=ls -alsnew
 
-# prefer GNU sed b/c BSD sed doesn't handle whitespace the same
-if hash gsed 2> /dev/null; then alias sed=gsed; fi
-
-alias o=oc
+# prefer GNU utilisies sed b/c BSD ones are weird
+for util in grep sed; do
+    if hash $util 2> /dev/null; then alias $util=g$util; fi
+done
 
 if hash kubectl 2> /dev/null; then
   alias k=kubectl
@@ -205,3 +162,27 @@ if hash starship 2> /dev/null; then eval "$(starship init zsh)"; fi
 
 #  Zoxide
 if hash zoxide 2> /dev/null; then eval "$(zoxide init zsh)"; fi
+
+# Bat
+if hash bat 2> /dev/null; then alias cat=bat; fi
+
+# List files after changing directory
+cd() { builtin cd "$@" && ls; }
+
+# Change dir with fuzzy finding
+cf() {
+  dir=$(fd . ''${1:-$HOME} --type d 2> /dev/null | fzf )
+  cd "$dir"
+}
+
+# Search files and edit
+fe() {
+  rg --files ''${1:-.} | fzf --preview 'bat -f {}' | xargs nvim
+}
+
+# Search content and Edit
+se() {
+  fileline=$(rg -n ''${1:-.} | fzf | awk '{print $1}' | sed 's/.$//')
+  nvim ''${fileline%%:*} +''${fileline##*:}
+}
+
