@@ -10,7 +10,6 @@ source "${HOME}/.zgen/zgen.zsh"
 if ! zgen saved; then
   zgen load mafredri/zsh-async
   zgen load peterhurford/git-it-on.zsh
-  zgen load rupa/z
   zgen load unixorn/autoupdate-zgen
   zgen load zdharma/fast-syntax-highlighting
   zgen load zsh-users/zsh-autosuggestions
@@ -190,7 +189,7 @@ function bwunlock() {
 export FZF_DEFAULT_COMMAND="rg --one-file-system --files"
 export FZF_DEFAULT_OPTS="--ansi --inline-info"
 test -f /usr/share/fzf/key-bindings.zsh && source /usr/share/fzf/key-bindings.zsh
-test -f /usr/local/opt/fzf//shell/key-bindings.zsh && source /usr/local/opt/fzf//shell/key-bindings.zsh
+test -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 
 # Rust
 source $HOME/.cargo/env
