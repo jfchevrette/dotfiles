@@ -3,18 +3,19 @@
 #
 # shellcheck disable=SC1090,SC2148
 
-[[ ! -d $HOME/.zgen ]] && git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+[[ ! -d $HOME/.zgenom ]] && git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"
 export ZGEN_RESET_ON_CHANGE=("${HOME}/.zshrc" "${HOME}/.zshenv")
-source "${HOME}/.zgen/zgen.zsh"
+source "${HOME}/.zgenom/zgenom.zsh"
 
-if ! zgen saved; then
-  zgen load mafredri/zsh-async
-  zgen load peterhurford/git-it-on.zsh
-  zgen load unixorn/autoupdate-zgen
-  zgen load zdharma/fast-syntax-highlighting
-  zgen load zsh-users/zsh-autosuggestions
-  zgen load jfchevrette/zsh-titles
-  zgen save
+zgenom autoupdate
+
+if ! zgenom saved; then
+  zgenom load zdharma/fast-syntax-highlighting
+  zgenom load zsh-users/zsh-autosuggestions
+  zgenom load zsh-users/zsh-completions
+  zgenom load jfchevrette/zsh-titles
+  zgenom save
+  zgenom compile "$HOME/.zshrc"
 fi
 
 export EDITOR=nvim
@@ -182,4 +183,3 @@ se() {
   fileline=$(rg -n ''${1:-.} | fzf | awk '{print $1}' | sed 's/.$//')
   nvim ''${fileline%%:*} +''${fileline##*:}
 }
-
