@@ -11,6 +11,9 @@
 	editor = nvim
 	whitespace = space-before-tab,trailing-space
 
+[diff]
+	external = difft
+
 [filter "lfs"]
     clean = "git-lfs clean -- %f"
 	process = "git-lfs filter-process"
@@ -26,10 +29,6 @@
 
 [log]
 	date = relative
-
-[merge]
-    conflictstyle = "diff3"
-    tool = "vimdiff"
 
 [pull]
 	rebase = true
@@ -59,3 +58,4 @@
 
 [includeIf "gitdir:~/src/dev/"]
 	path = "~/.config/git/work"
+
