@@ -21,7 +21,8 @@ fi
 export EDITOR=nvim
 export MANPAGER="col -bx | bat -l man -p"
 
-history() { fc -Drlim "*$@*" 1 }
+myhistory() { fc -Drlim "*$@*" 1 }
+alias history=myhistory
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=10000
@@ -40,14 +41,6 @@ setopt hist_reduce_blanks     # remove superfluous blanks before recording entry
 bindkey "${terminfo[khome]}" beginning-of-line      # [Home] - Go to beginning of line
 bindkey "${terminfo[kend]}"  end-of-line            # [End] - Go to end of line
 bindkey "${terminfo[kdch1]}" delete-char            # [Delete] - delete forward
-
-# SSH agent
-if [[ -z "${SSH_AGENT_PID}" ]]; then
-  if ! [[ -e /tmp/ssh-agent-$USER ]]; then
-    ssh-agent 2>/dev/null >/tmp/ssh-agent-$USER
-  fi
-  . /tmp/ssh-agent-$USER >/dev/null
-fi
 
 # git aliases
 alias gap="git add -p";
@@ -149,9 +142,6 @@ export FZF_DEFAULT_OPTS="--ansi --inline-info"
 test -f /usr/share/fzf/key-bindings.zsh && source /usr/share/fzf/key-bindings.zsh
 test -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 
-# Rust
-source $HOME/.cargo/env
-
 # Neovim
 if hash nvim 2> /dev/null; then alias vim=nvim; fi
 
@@ -183,3 +173,6 @@ se() {
   fileline=$(rg -n ''${1:-.} | fzf | awk '{print $1}' | sed 's/.$//')
   nvim ''${fileline%%:*} +''${fileline##*:}
 }
+
+# asdf-vm
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
