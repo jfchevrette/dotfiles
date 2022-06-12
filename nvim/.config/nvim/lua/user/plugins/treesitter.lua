@@ -3,8 +3,15 @@ if not ok then
   return
 end
 
+
+-- Workaround for compiler issue on Darwin
+if vim.loop.os_uname().sysname == "Darwin" then
+  require'nvim-treesitter.install'.compilers = { "gcc-11" }
+end
+
+
 configs.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = { "bash", "lua", "python", "rust" },
   sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
   ignore_install = { "" }, -- List of parsers to ignore installing
   autopairs = {

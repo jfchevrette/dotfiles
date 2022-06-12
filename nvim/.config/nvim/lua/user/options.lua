@@ -13,6 +13,8 @@ local options = {
   swapfile = false,             -- no swap file yo
   undofile = true,              -- persistent undo
   writebackup = false,          -- don't write a backup file
+  laststatus = 3,
+  winbar = "%F",
 
   -- line numbers
   number = true,                -- enable line numbers
