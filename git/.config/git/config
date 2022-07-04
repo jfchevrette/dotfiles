@@ -54,7 +54,7 @@
 	fsckobjects = true
 
 [url "git@github.com:"]
-	insteadOf = "https://github.com/"
+	pushInsteadOf = "https://github.com/"
 
 [includeIf "gitdir:~/src/dev/"]
 	path = "~/.config/git/work"
