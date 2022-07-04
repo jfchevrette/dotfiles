@@ -57,7 +57,7 @@ alias ll=ls -alsnew
 
 # prefer GNU utilisies sed b/c BSD ones are weird
 for util in grep sed; do
-    if hash $util 2> /dev/null; then alias $util=g$util; fi
+    if hash g$util 2> /dev/null; then alias $util=g$util; fi
 done
 
 if hash kubectl 2> /dev/null; then
