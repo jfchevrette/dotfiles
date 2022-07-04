@@ -1,24 +1,35 @@
 local options = {
-  updatetime = 1000,            -- make neovim update faster
+  conceallevel = 0,             -- some text can be concealed
+  fileencoding = "utf-8",       -- default file encoding
+  updatetime = 300,            -- make neovim update faster
   cursorline = true,            -- highlight whole line where cursor is
   equalalways = false,          -- don't resize all windows when splitting
   splitright = true,            -- split windows right
   splitbelow = true,            -- split windows below
   showmatch = true,             -- show matching opening paren when closing
   matchtime = 2,                -- .. time to show
-  scrolloff = 10,               -- ensure so many lines above/below the cursor
+  scrolloff = 8,               -- ensure so many lines above/below the cursor
+  sidescrolloff = 1,
   belloff = "all",              -- no bell, please!
   clipboard = "unnamedplus",    -- use clipboard that works with macOS
   inccommand = "split",         -- show the results of incremental search or replace in a split
   swapfile = false,             -- no swap file yo
   undofile = true,              -- persistent undo
-  writebackup = false,          -- don't write a backup file
+  backup = false,               -- backup files
+  writebackup = false,
   laststatus = 3,
   winbar = "%F",
+  showmode = false,             -- don't show mode like -- INSERT -- 
+  showtabline = 0,              -- hide tab line
+  termguicolors = true,
+  timeoutlen = 1000,
+  showcmd = false,
+  ruler = false,
 
   -- line numbers
   number = true,                -- enable line numbers
   relativenumber = true,        -- enable relative line numbers
+  numberwidth = 4,
   signcolumn = "yes",           -- always show the sign column
 
   -- search
@@ -35,13 +46,14 @@ local options = {
 
   -- indent & tabs
   autoindent = true,
+  smartindent = true,
   shiftwidth = 2,
   softtabstop = 2,
   tabstop = 2,
   expandtab = true,
 
   -- wrapping and line breaks
-  wrap = true,
+  wrap = false,
   breakindent = true,
   showbreak = string.rep(" ", 3),
   linebreak = true,
@@ -66,6 +78,15 @@ local options = {
   -- short message options
   shortmess = vim.opt.shortmess
     + "c",                      -- don't give |ins-completion-menu| messages
+
+  -- keys that moves to the next line on wrapped line
+  whichwrap = vim.opt.whichwrap
+    + "<"
+    + ">"
+    + "["
+    + "]"
+    + "h"
+    + "l",
 
   -- define what's considered a keyword
   iskeyword = vim.opt.iskeyword

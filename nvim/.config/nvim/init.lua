@@ -1,7 +1,3 @@
--- TODO
--- - vim-better-whitespace
--- - telescope
-
 require "user.globals"
 require "user.options"
 
