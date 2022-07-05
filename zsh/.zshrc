@@ -19,7 +19,7 @@ if ! zgenom saved; then
 fi
 
 export EDITOR=nvim
-export MANPAGER="col -bx | bat -l man -p"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 myhistory() { fc -Drlim "*$@*" 1 }
 alias history=myhistory
