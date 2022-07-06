@@ -1,5 +1,6 @@
 alacritty: ~
 autorandr: ~
+awesome: ~
 bat: ~
 bin: ~
 broot: ~
@@ -10,6 +11,7 @@ gtk: ~
 hammerspoon: ~
 hushlogin: ~
 i3: ~
+kitty: ~
 mako: ~
 mpv: ~
 nvim: ~
