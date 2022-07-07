@@ -11,9 +11,6 @@
 	editor = nvim
 	whitespace = space-before-tab,trailing-space
 
-[diff]
-	external = difft
-
 [filter "lfs"]
     clean = "git-lfs clean -- %f"
 	process = "git-lfs filter-process"
