@@ -49,7 +49,7 @@ alias gca="git commit -a";
 alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat";
 alias gl="git log --oneline --color=always | fzf --ansi --preview=\"echo {} | cut -d ' ' -f 1 | xargs -I @ sh -c 'git log --pretty=medium -n 1 @; git diff @^ @' | bat --color=always\" | cut -d ' ' -f 1 | xargs git log --pretty=short -n 1";
 alias gp="git pull";
-alias gpum="git pull upstream \$(git rev-parse --abbrev-ref HEAD)";
+alias gpum='git pull upstream $(git branch -r | grep -Po "HEAD -> origin/\K.*$")'
 alias gs="git status -sb";
 
 # exa
