@@ -123,9 +123,6 @@ export EDITOR=vim
 GPG_TTY=$(tty)
 export GPG_TTY
 
-# GO
-export GOROOT=$(go env GOROOT)
-
 # Work related aliases
 alias daily='cat ~/work/daily/daily-$(date "+%Y%m%d").txt'
 alias vidaily='vim ~/work/daily/daily-$(date "+%Y%m%d").txt'
@@ -175,4 +172,4 @@ se() {
 }
 
 # asdf-vm
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+. $HOME/.asdf/asdf.sh
