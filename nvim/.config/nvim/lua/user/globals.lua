@@ -36,3 +36,12 @@ R = function(name)
   return require(name)
 end
 
+INSTALLED = function(deps)
+  for _, v in pairs(deps) do
+    local ok, _ = pcall(require, v)
+    if not ok then
+      return false
+    end
+  end
+  return true
+end

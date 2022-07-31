@@ -52,3 +52,5 @@ keymap("n", "<leader>,fgg", "<cmd>Telescope git_files<cr>", opts)
 
 -- Remove whitespace
 keymap("n", "<leader>sws", [[:%s/\s\+$//e<CR>]])
+
+keymap('n', '<leader>e', vim.diagnostic.open_float, opts)

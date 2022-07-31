@@ -38,13 +38,20 @@ packer.init {
 return packer.startup {
   function(use)
     use "wbthomason/packer.nvim"        -- have packer manage itself
-    use "nvim-lua/popup.nvim"           -- Lua implementation of vim's popup api
+
     use "nvim-lua/plenary.nvim"         -- collection of useful lua functions
-    use "lewis6991/impatient.nvim"      -- speed up startup time by optimizing lua modules
-    use "windwp/nvim-autopairs"         -- Autopairs, integrates with both cmp and treesitter
-    use "numToStr/Comment.nvim"         -- Easy comment management
-    use "lukas-reineke/indent-blankline.nvim"
-    use "ahmedkhalf/project.nvim"
+    -- use "nvim-lua/popup.nvim"           -- Lua implementation of vim's popup api
+    -- use "lewis6991/impatient.nvim"      -- speed up startup time by optimizing lua modules
+    -- use "windwp/nvim-autopairs"         -- Autopairs, integrates with both cmp and treesitter
+    -- use "numToStr/Comment.nvim"         -- Easy comment management
+    -- use "lukas-reineke/indent-blankline.nvim"
+    -- use "ahmedkhalf/project.nvim"
+
+    -- Treesitter
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
+    }
 
     -- Color scheme
     use {
@@ -58,51 +65,57 @@ return packer.startup {
       end
     }
 
-    -- startup page
-    use {
-      "goolord/alpha-nvim",
-      requires = { 'kyazdani42/nvim-web-devicons' },
-      config = function ()
-        require'alpha'.setup(require'alpha.themes.startify'.config)
-      end
-    }
-
-    -- Statusline
-    use "nvim-lualine/lualine.nvim"
-
-    -- cmp plugins
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-cmdline"
-    use "saadparwaiz1/cmp_luasnip"
-    use "hrsh7th/cmp-nvim-lsp"
-
-    -- snippets
-    use "L3MON4D3/LuaSnip"
-    use "rafamadriz/friendly-snippets"
-
     -- LSP
     use "neovim/nvim-lspconfig"
+    use "nvim-lua/lsp_extensions.nvim"
     use "williamboman/nvim-lsp-installer"
-    use "tamago324/nlsp-settings.nvim"
-    use "jose-elias-alvarez/null-ls.nvim"
+    use({
+      "glepnir/lspsaga.nvim",
+      branch = "main",
+      config = function()
+        local saga = require("lspsaga")
+
+        saga.init_lsp_saga({
+          -- your configuration
+        })
+      end,
+    })
+    -- use "tamago324/nlsp-settings.nvim"
+    -- use "jose-elias-alvarez/null-ls.nvim"
+
+
+    -- startup page
+    -- use {
+    --   "goolord/alpha-nvim",
+    --   requires = { 'kyazdani42/nvim-web-devicons' },
+    --   config = function ()
+    --     require'alpha'.setup(require'alpha.themes.startify'.config)
+    --   end
+    -- }
+
+    -- Statusline
+    -- use "nvim-lualine/lualine.nvim"
+
+    -- cmp plugins
+    -- use "hrsh7th/nvim-cmp"
+    -- use "hrsh7th/cmp-buffer"
+    -- use "hrsh7th/cmp-path"
+    -- use "hrsh7th/cmp-cmdline"
+    -- use "saadparwaiz1/cmp_luasnip"
+    -- use "hrsh7th/cmp-nvim-lsp"
+
+    -- snippets
+    -- use "L3MON4D3/LuaSnip"
+    -- use "rafamadriz/friendly-snippets"
 
     -- Git
-    use "lewis6991/gitsigns.nvim"
+    -- use "lewis6991/gitsigns.nvim"
 
     -- Terminal
-    use "akinsho/toggleterm.nvim"
+    -- use "akinsho/toggleterm.nvim"
 
     -- Telescope
     use "nvim-telescope/telescope.nvim"
-
-    -- Treesitter
-    use {
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
-    }
-    use "JoosepAlviste/nvim-ts-context-commentstring"
 
   end,
   config = {},

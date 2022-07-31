@@ -18,7 +18,6 @@ local options = {
   backup = false,               -- backup files
   writebackup = false,
   laststatus = 3,
-  winbar = "%F",
   showmode = false,             -- don't show mode like -- INSERT -- 
   showtabline = 0,              -- hide tab line
   termguicolors = true,
