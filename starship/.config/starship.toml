@@ -1,5 +1,5 @@
 add_newline = false
-command_timeout = 200
+command_timeout = 500
 
 [directory]
 fish_style_pwd_dir_length = 1
