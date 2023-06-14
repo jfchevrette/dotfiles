@@ -1,0 +1,29 @@
+theme = "catppuccin_macchiato"
+
+[editor]
+auto-save = true
+color-modes = true
+completion-trigger-len = 1
+cursorline = true
+idle-timeout = 50
+rulers = [120]
+scroll-lines = 1
+true-color = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.indent-guides]
+character = "▏"
+render = true
+
+[editor.lsp]
+display-inlay-hints = true
+display-messages = true
+
+[editor.statusline]
+center = []
+left = ["mode", "spinner", "file-name", "file-type", "version-control"]
+right = ["diagnostics", "selections", "position"]
