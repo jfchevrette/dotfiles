@@ -1,4 +1,5 @@
 brew "age"
+brew "asdf"
 brew "awscli"
 brew "bash"
 brew "bat"

@@ -173,4 +173,4 @@ se() {
 }
 
 # asdf-vm
-. $HOME/.asdf/asdf.sh
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
