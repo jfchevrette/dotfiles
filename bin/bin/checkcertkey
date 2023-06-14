@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# This script checks the certificate and key files for the given domain
+# and returns the expiration date of the certificate and the modulus of the key.
+# It also checks if the certificate is valid for the given domain.
+# It is intended to be used with the checkcerts script.
+# It is called by the checkcerts script.
+# It is not intended to be called directly.
+# It is not intended to be called by the user.
+# It is not intended to be called from the command line.
+# It is not intended to be called from the web.
+# It is not intended to be called from the web server.
+
+echo "===================="
+echo $1
+openssl x509 -noout -dates -in $1
+openssl x509 -noout -subject -in $1
+openssl x509 -noout -issuer -in $1
+openssl x509 -noout -pubkey -in $1 | openssl md5
+echo "===================="
+echo $2
+openssl pkey -pubout -in $2 | openssl md5
+echo "===================="
+
