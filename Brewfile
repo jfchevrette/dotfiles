@@ -19,6 +19,7 @@ brew "hyperfine"
 brew "jq"
 brew "kubectl"
 brew 'neovim'
+brew 'ocm'
 brew "pinentry-mac"
 brew "ripgrep"
 brew "starship"
@@ -30,7 +31,6 @@ brew "zsh"
 
 tap "homebrew/cask"
 cask_args appdir: "/Applications"
-cask "brave-browser"
 cask "discord"
 cask "easy-move-plus-resize"
 cask "firefox"
@@ -41,10 +41,6 @@ cask "raycast"
 cask "slack"
 cask "tailscale"
 cask "visual-studio-code"
-
-tap "cblecker/tap"
-brew "cblecker/tap/ocm"
-#brew "cblecker/tap/openshift-cli"
 
 tap "homebrew/cask-fonts"
 cask "font-fira-code-nerd-font"
