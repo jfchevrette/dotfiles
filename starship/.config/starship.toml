@@ -8,3 +8,13 @@ truncation_length = 1
 
 [git_metrics]
 disabled = false
+
+[kubernetes]
+format = '\([⎈](bold fg:33) [$user](fg:10)@[$context](fg:166):[$namespace](dimmed green)\) '
+disabled = false
+
+[kubernetes.context_aliases]
+'.*\/api-(?P<var_cluster>.*)-[\w]{4}-p[0-9]-openshiftapps-com:6443\/(?P<var_user>.*)' = '$var_cluster'
+
+[kubernetes.user_aliases]
+'(?P<var_user>.*)\/.*' = '$var_user'
