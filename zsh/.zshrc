@@ -21,7 +21,7 @@ fi
 export EDITOR=nvim
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-myhistory() { fc -Drlim "*$@*" 1 }
+myhistory() { fc -Dlim "*$@*" 1 }
 alias history=myhistory
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
