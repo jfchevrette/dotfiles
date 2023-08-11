@@ -1,10 +1,2 @@
 # homebrew
 Brewfile.lock.json
-
-# nvim & vim-plug
-nvim/.config/nvim/autoload/plug.vim
-nvim/.config/nvim/autoload/plug.vim.old
-nvim/.config/nvim/plugged
-nvim/.config/nvim/tmp
-nvim/.config/nvim/undodir
-nvim/.config/nvim/plugin/packer_compiled.lua
