@@ -2,6 +2,23 @@
 #
 #
 # shellcheck disable=SC1090,SC2148
+#
+#
+# Homebrew
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Add ~/bin to PATH
+export PATH="${PATH}:${HOME}/bin"
+
+# Rust/Cargo
+if [[ -f $HOME/.cargo/env ]]; then
+    source "$HOME/.cargo/env"
+fi
+
+# LunarVim
+export PATH=/Users/jfchevrette/.local/bin:$PATH
 
 [[ ! -d $HOME/.zgenom ]] && git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"
 export ZGEN_RESET_ON_CHANGE=("${HOME}/.zshrc" "${HOME}/.zshenv")
@@ -174,3 +191,4 @@ se() {
 
 # asdf-vm
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
+
